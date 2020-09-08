@@ -1,4 +1,4 @@
-# Web App Starter Kit
+# MERN Stack Web App Starter Kit
 
 This is starter kit for developing web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder.
 

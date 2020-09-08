@@ -1,16 +1,11 @@
-import React from 'react';
+import React from "react";
 
 export default class Footer extends React.Component {
-
-    render() {
-        return (
-            <footer className="z-999">
-                <p className="test">
-                    Copyright 2020 © burak.com. Tüm hakları saklıdır. <br />
-                Burak Ticaret Kuruluşudur.
-                </p>
-
-            </footer>
-        );
-    }
+  render() {
+    return (
+      <footer className="z-999">
+        <p>Copyright 2020 © bekarasu.com Tüm hakları saklıdır</p>
+      </footer>
+    );
+  }
 }
