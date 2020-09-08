@@ -1,0 +1,11 @@
+.vscode
+.idea
+.env
+node_modules
+package-lock.json
+dist/server.js
+dist/main.js
+dist/public/app.js
+dist/public/admin.js
+dist/public/assets/css/admin.css
+dist/public/assets/css/app.css

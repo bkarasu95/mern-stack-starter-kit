@@ -1,0 +1,15 @@
+.quill {
+  height: 100%;
+  width: 100%;
+}
+.ql-container {
+  min-height: 400px;
+  max-height: 90vh;
+  overflow: auto;
+}
+.ql-editor {
+  min-height: 400px;
+}
+
+@import "/node_modules/react-quill/dist/quill.snow.css";
+
