@@ -19,26 +19,7 @@ class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
             label: trans("resource.add", { item: "Ürün" }),
             url: "/products/create",
             sort: 1,
-          },
-          {
-            name: "products3",
-            label: "Products3",
-            sort: 2,
-            items: [
-              {
-                name: "categories",
-                label: "Kategoriler",
-                url: "/products4",
-                sort: 1,
-              },
-              {
-                name: "products5",
-                label: "Products5",
-                url: "/products5",
-                sort: 2,
-              },
-            ],
-          },
+          },  
         ],
       },
     ];

@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  Navbar as BootstrapNavbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Nav, Navbar as BootstrapNavbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default class Navbar extends React.Component {
   render() {
@@ -16,8 +10,9 @@ export default class Navbar extends React.Component {
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/">Anasayfa</Nav.Link>
-            <Nav.Link href="/urunler">Ürünler</Nav.Link>
+            <Link to="/" className="nav-link">Anasayfa</Link>
+            <Link to="/urunler" className="nav-link">Ürünler</Link>
+            <Link to="/hakkimizda" className="nav-link">Hakkımızda</Link>
           </Nav>
         </BootstrapNavbar.Collapse>
       </BootstrapNavbar>

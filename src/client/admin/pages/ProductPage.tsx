@@ -1,17 +1,25 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import WYSIWYG from "../components/WYSIWYG";
-class ProductPage extends React.Component {
+import AddProductForm from "../forms/AddProductForm";
+class ProductPage extends React.Component<IProductPageProps> {
+  submit = (values) => {
+    // print the form values to the console
+    console.log(values);
+  };
   render() {
     return (
       <>
         <Helmet>
           <title>Add Product</title>
         </Helmet>
-        <WYSIWYG />
+        <AddProductForm onSubmit={this.submit} />
       </>
     );
   }
+}
+
+interface IProductPageProps {
+  submit: any;
 }
 
 export default ProductPage;

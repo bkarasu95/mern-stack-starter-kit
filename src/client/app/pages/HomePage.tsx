@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { Container, Row, Col } from "react-bootstrap";
 class HomePage extends React.Component {
   render() {
     return (
@@ -9,12 +10,17 @@ class HomePage extends React.Component {
           <title>Anasayfa</title>
           <meta property="og:title" content="Anasayfa" />
         </Helmet>
-        <main className="container my-5">
-          <div className="d-flex">
-            Anasayfaya Hoşgeldin
+        <Row>
+          <Col>Anasayfaya Hoşgeldiniz</Col>
+        </Row>
+        <Row>
+          <Col>
             <Link to="/urunler">Ürünler Sayfası</Link>
-          </div>
-        </main>
+          </Col>
+          <Col>
+            <Link to="/hakkimizda">Hakkımızda Sayfası</Link>
+          </Col>
+        </Row>
       </>
     );
   }

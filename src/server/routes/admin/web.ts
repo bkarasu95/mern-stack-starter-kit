@@ -17,7 +17,9 @@ adminWebRouter.use(cors());
 adminWebRouter.get("/*", (req: Request, res: Response) => {
   const html = `
     <html>
-        <head></head>
+        <head>
+          <link rel="stylesheet" href="/assets/css/admin.css">
+        </head>
         <body>
             <div id="app"></div>
             <script src="${fileSystem.publicUrl}admin.js"></script>

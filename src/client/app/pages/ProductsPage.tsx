@@ -37,7 +37,6 @@ class ProductsPage extends React.Component<
         ) : (
           <p>{trans("general.not_found", { item: "Ürün" })}</p>
         )}
-        <Link to="/">Anasayfa</Link>
       </>
     );
   }

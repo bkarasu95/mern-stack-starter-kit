@@ -69,11 +69,8 @@ I aimed the show the how to system works with real samples, so i added some file
 Project is close to completion, but i have some plans for better development.
 
 * Database Seeding System
-
 * Changable Language System
-
 * Testing Tools integrations and samples
-
 * Error logging on server side
-
 * App monitoring in admin panel
+* Content Editor and Dynamic and Configurable Forms

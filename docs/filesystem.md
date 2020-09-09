@@ -63,12 +63,12 @@
 │       ├───helpers/                    # helper functions
 │       ├───http/
 │       │   ├───controllers/            # Controllers in MVC pattern
-│       │   │   ├───admin/
-│       │   │   │   ├───api/
-│       │   │   │   └───web/
-│       │   │   └───app/
-│       │   │       ├───api/
-│       │   │       └───web/
+│       │   │   ├───admin/              # admin controllers
+│       │   │   │   ├───api/            # admin controllers for api
+│       │   │   │   └───web/            # admin controllers for web pages
+│       │   │   └───app/                # user controllers
+│       │   │       ├───api/            # user controllers for api
+│       │   │       └───web/            # user controllers for web pages
 │       │   └───middlewares/            # server side middlewares
 │       │       └───api/
 │       │       └───web/
