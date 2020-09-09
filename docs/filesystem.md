@@ -18,6 +18,7 @@
 │   │   │   ├───components/             # reusable components
 │   │   │   ├───layouts/                # component that almost every page
 │   │   │   ├───pages/                  # admin pages
+│   │   │   │   ├───crud/               # crud operation pages
 │   │   │   ├───scss/                   # scss files, it compiles and writes to react app file
 │   │   │   ├───store/                  # redux store
 │   │   │   │   ├───authenticate/       # example of redux store usage

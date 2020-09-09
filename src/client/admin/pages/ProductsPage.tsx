@@ -18,9 +18,6 @@ class ProductsPage extends React.Component {
           <title>List Products</title>
         </Helmet>
         <strong>Products</strong>
-        <ul>
-
-        </ul>
       </>
     );
   }

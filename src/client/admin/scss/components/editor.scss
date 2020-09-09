@@ -11,5 +11,8 @@
   min-height: 400px;
 }
 
-@import "/node_modules/react-quill/dist/quill.snow.css";
+.wysiwyg-editor .MuiFormControl-root {
+  margin: 5px 0;
+}
 
+@import "/node_modules/react-quill/dist/quill.snow.css";

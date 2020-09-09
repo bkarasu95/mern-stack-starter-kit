@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 class HomePage extends React.Component {
   render() {
     return (
