@@ -4,7 +4,7 @@ import axios from "axios";
 import * as React from "react";
 import { connect } from "react-redux";
 import { store } from "..";
-import { trans } from '../../../common/resources/lang/translate';
+import { trans } from "../../../common/resources/lang/translate";
 import { adminApiURL } from "../../resources/strings/apiURL";
 import { login } from "../store/authenticate/actions";
 const StyledButton = withStyles({
@@ -44,7 +44,8 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
     };
     await axios.post(adminApiURL + "login", formData).then(async (res) => {
       if (res.status === 200) {
-        store.dispatch(login(res.data.data.access_token));
+        localStorage.setItem("admin:accessToken", res.data.data.access_token);
+        store.dispatch(login(res.data.data.user));       
       }
     });
   }
@@ -54,19 +55,19 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
       <Grid container direction="column" justify="center" alignItems="center">
         <TextField
           name="username"
-          label={trans('forms.username')}
+          label={trans("forms.username")}
           value={this.state.username}
           onChange={this.setUsername}
         />
         <TextField
           name="password"
-          label={trans('forms.password')}
+          label={trans("forms.password")}
           value={this.state.password}
           onChange={this.setPassword}
           type="password"
         />
         <StyledButton onClick={this.handleLogin.bind(this)}>
-          {trans('forms.login')}
+          {trans("forms.login")}
         </StyledButton>
       </Grid>
     );

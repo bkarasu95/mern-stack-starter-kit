@@ -74,3 +74,4 @@ Project is close to completion, but i have some plans for better development.
 * Error logging on server side
 * App monitoring in admin panel
 * Content Editor and Dynamic and Configurable Forms
+* Admin Full Theme Support

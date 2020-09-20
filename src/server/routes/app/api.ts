@@ -31,7 +31,7 @@ appApiRouter.use(bodyParser.json());
  * Routes
  */
 appApiRouter.get('/products', ProductController.list);
-appApiRouter.get('/products/:id', ProductController.show);
+appApiRouter.get('/products/:slug', ProductController.show);
 
 /**
  * After Middleware

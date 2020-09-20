@@ -26,6 +26,6 @@ export const errorHandler = (error: HttpException, request: Request, response: R
     } else {
         message = (error.message !== "") ? error.message : "We are having some problems. This error logged.";
         data = { error: error.error };
-    }
+    }    
     return response.status(status).setMessage(message).customResponse(data);
 };

@@ -1,20 +1,20 @@
-import { LOG_OUT, LOG_IN } from '../../../resources/strings/actions';
-import { IUser } from './../../../../common/resources/types/user';
+import { LOG_IN, LOG_OUT } from "../../../resources/strings/actions";
 export interface Authenticate {
-    user?: IUser
+  user?: object;
 }
 
 // Action constants and shape
-export const SEND_MESSAGE = 'SEND_MESSAGE'
-export const DELETE_MESSAGE = 'DELETE_MESSAGE'
+export const SEND_MESSAGE = "SEND_MESSAGE";
+export const DELETE_MESSAGE = "DELETE_MESSAGE";
 
 interface LoginAction {
-    type: typeof LOG_IN
-    payload: Authenticate
+  type: typeof LOG_IN;
+  payload: Authenticate;
 }
 
 interface LogoutAction {
-    type: typeof LOG_OUT
+  type: typeof LOG_OUT;
+  payload: null;
 }
 
-export type AuthenticateActionTypes = LoginAction | LogoutAction
+export type AuthenticateActionTypes = LoginAction | LogoutAction;

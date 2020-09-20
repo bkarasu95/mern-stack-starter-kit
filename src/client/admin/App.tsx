@@ -4,8 +4,10 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { IUser } from "../../common/resources/types/user";
 import Authenticated from "./pages/Authenticated";
 import LoginPage from "./pages/LoginPage";
-import { login } from "./store/authenticate/actions";
+import { login, logout } from "./store/authenticate/actions";
 import { store } from ".";
+import ApiRequest from "./libraries/ApiRequest";
+import { AxiosError, AxiosResponse } from "axios";
 
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
@@ -14,11 +16,23 @@ class App extends React.Component<IAppProps, IAppState> {
       authorizing: true,
     };
   }
-  async componentDidMount() {
-    if (localStorage.getItem("admin:accessToken")) {
-      await store.dispatch(login(localStorage.getItem("admin:accessToken")));
-    }
-    this.setState({ authorizing: false });
+  componentDidMount() {
+    const requester = new ApiRequest();
+    requester
+      .get("auth-token")
+      .then((res: AxiosResponse) => {
+        if (res.status === 200) {
+          store.dispatch(login(res.data.data.user));
+        }
+      })
+      .catch((err: AxiosError) => {
+        if (err.response.status === 401) {
+          store.dispatch(logout());
+        }
+      })
+      .then(() => {
+        this.setState({ authorizing: false });
+      });
   }
 
   render() {
@@ -35,11 +49,15 @@ class App extends React.Component<IAppProps, IAppState> {
                   <Route exact path="/" component={Authenticated} />
                   <Route
                     exact
+                    path="/:model/:id/:action"
+                    component={Authenticated}
+                  />
+                  <Route
+                    exact
                     path="/:model/:action"
                     component={Authenticated}
                   />
                   <Route exact path="/:path" component={Authenticated} />
-                  
                 </>
               )}
             </Switch>

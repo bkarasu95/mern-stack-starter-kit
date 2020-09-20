@@ -12,11 +12,20 @@ export const localeTR: Language = {
   general: {
     notFound: ":item Bulunamadı",
   },
-  resource: { // useful for admin panel
+  resource: {
+    // useful for admin panel
     management: ":item Yönetimi",
     add: ":item Ekle",
     update: ":item Güncelle",
     list: ":item Listesi",
     edit: "Düzenle",
+  },
+  db: {
+    name: "Adı",
+    price: "Fiyatı",
+    sku: "Stok Kodu",
+    createdAt: "Oluşturulma Tarihi",
+    updatedAt: "Güncellenme Tarihi",
+    images:"Resimler"
   },
 };

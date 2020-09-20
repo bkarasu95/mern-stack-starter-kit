@@ -20,7 +20,12 @@ class WYSIWYG extends React.Component<IWYSIWYGProps, IWYSIWYGState> {
   }
   modules = {
     toolbar: {
-      container: [["bold", "italic", "underline", "strike"], ["image"]],
+      container: [
+        ["bold", "italic", "underline", "strike"],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link", "image"],
+      ],
       handlers: {
         image: () => {
           const { clientX, clientY } = window.event;
@@ -76,8 +81,6 @@ class WYSIWYG extends React.Component<IWYSIWYGProps, IWYSIWYGState> {
       }
       // upload img thing
       const uploadSuccess = true;
-      console.log(src);
-      console.log(file);
       if (uploadSuccess) {
         // insert img into editor manually
         this.ReactQuillImageUploaderRef.insertImg(src);

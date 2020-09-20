@@ -2,10 +2,10 @@ import * as React from "react";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { RouteConfigComponentProps } from "react-router-config";
-import { Link } from "react-router-dom";
 import { Store } from "redux";
 import { trans } from "../../../common/resources/lang/translate";
 import { IProduct } from "../../../common/resources/types/product";
+import ProductCard from "../components/ProductCard";
 import { store } from "../store";
 import { fetchProducts } from "../store/products/actions";
 class ProductsPage extends React.Component<
@@ -26,13 +26,13 @@ class ProductsPage extends React.Component<
         </Helmet>
         {this.props.products != null ? (
           this.props.products.map((product: IProduct, key: string) => (
-            <div className="product-card" key={key}>
-              {typeof product.images !== "undefined" &&
-              typeof product.images[0] !== "undefined" ? (
-                <img src={product.images[0].path} alt={product.name} />
-              ) : null}
-              <p>{product.name}</p>
-            </div>
+            <ProductCard
+              name={product.name}
+              images={product.images}
+              sku={product.sku}
+              key={key}
+              slug={product.slug}
+            />
           ))
         ) : (
           <p>{trans("general.not_found", { item: "Ürün" })}</p>

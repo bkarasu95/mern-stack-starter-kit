@@ -6,6 +6,7 @@ export interface ProductModel extends Document {
   name: string;
   price: number;
   sku: string;
+  slug: string;
   _id: string;
   images?: Array<IProductImage>;
 }
@@ -21,6 +22,11 @@ const ProductSchema = new Schema({
     required: true,
   },
   sku: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  slug: {
     type: String,
     required: true,
     unique: true,

@@ -1,26 +1,18 @@
-import { LOG_IN, LOG_OUT } from '../../../resources/strings/actions';
-import { Authenticate, AuthenticateActionTypes } from './types';
+import { LOG_IN, LOG_OUT } from "../../../resources/strings/actions";
+import { Authenticate, AuthenticateActionTypes } from "./types";
 
-export function login(accessToken: string): AuthenticateActionTypes {
-  localStorage.setItem('admin:accessToken', accessToken);
-  // TODO get user info
-  const user: Authenticate = {
-    user: {
-      email: "asdas@asd.com",
-      name: "Burak Eren",
-      surname: "Karasu"
-    }
-  };
+export function login(user: Authenticate): AuthenticateActionTypes {
   return {
     type: LOG_IN,
-    payload: user
-  }
+    payload: { user: user },
+  };
 }
 
 export function logout(): AuthenticateActionTypes {
   // TODO expire the token
-  localStorage.removeItem('admin:accessToken');
+  localStorage.removeItem("admin:accessToken");
   return {
-    type: LOG_OUT
-  }
+    type: LOG_OUT,
+    payload: null,
+  };
 }

@@ -19,4 +19,12 @@ export const localeEN: Language = {
     edit: "Edit :item",
     update: "Update",
   },
+  db: {
+    name: "Name",
+    price: "Price",
+    sku: "Stock Code",
+    createdAt: "Created Date",
+    updatedAt: "Updated Date",
+    images: "Images",
+  },
 };

@@ -18,6 +18,14 @@ export interface Language {
     edit: string;
     update: string;
   };
+  db: {
+    name: string;
+    price: string;
+    sku: string;
+    createdAt: string;
+    updatedAt: string;
+    images: string;
+  };
 }
 
 export type LanguageGroup = {

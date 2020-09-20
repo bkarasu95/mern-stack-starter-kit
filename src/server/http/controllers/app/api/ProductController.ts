@@ -14,11 +14,13 @@ class ProductController {
     }
     show = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const product = await ProductService.find(req.params.id);
+            console.log(req.params.slug);
+            
+            const product = await ProductService.find(req.params.slug);
             if (product.length === 0) {
                 throw new HttpException(400, "Product Not Found");
             }
-            res.setMessage("Product Fetched").customResponse(product);
+            res.setMessage("Product Fetched").customResponse(product[0]);
         } catch (e) {
             next(e)
         }

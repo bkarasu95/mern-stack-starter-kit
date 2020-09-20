@@ -1,8 +1,10 @@
 // MyCustomInput.js
-import React, { Component } from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, TextFieldProps } from "@material-ui/core";
+import React from "react";
 
-class CustomInput extends React.Component<ICustomInputProps> {
+class CustomTextInput extends React.Component<
+  TextFieldProps & ICustomTextInputProps
+> {
   render() {
     const {
       input: { onChange },
@@ -11,6 +13,7 @@ class CustomInput extends React.Component<ICustomInputProps> {
       <TextField
         label={this.props.label}
         value={this.props.value}
+        type={this.props.type}
         onChange={(e) => {
           onChange(e.target.value);
         }}
@@ -19,10 +22,8 @@ class CustomInput extends React.Component<ICustomInputProps> {
   }
 }
 
-interface ICustomInputProps {
+interface ICustomTextInputProps {
   input?: any;
-  label?: string;
-  value?: string;
 }
 
-export default CustomInput;
+export default CustomTextInput;

@@ -57,6 +57,7 @@ adminApiRouter.get("/", (req: Request, res: Response) => {
 });
 
 adminApiRouter.post("/login", AuthController.login);
+adminApiRouter.get("/auth-token", AuthController.getUserByToken);
 
 adminApiRouter.use(Auth);
 

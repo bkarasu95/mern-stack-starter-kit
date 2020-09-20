@@ -6,6 +6,7 @@ import { fileSystem } from "../../../../config/filesystem";
 import HttpException from "../../../../exceptions/api/http-exception";
 import "../../../../libraries/ApiResponse";
 import * as ProductService from "../../../../services/product.service";
+import { toURLConverter } from "../../../../helpers/route";
 
 class ProductController {
   list = async (req: Request, res: Response, next: NextFunction) => {
@@ -35,18 +36,27 @@ class ProductController {
           validation: validationError.mapped(),
         });
       }
+      // console.log('geçti');
+      req.body.product.slug =
+        req.body.product.slug ?? toURLConverter(req.body.product.name);
       let product: ProductModel = req.body.product;
-      // image processing
-      var files = Object.values(req.files);
-      product.images = [];
-      files.forEach((file: Express.Multer.File, index: number): void => {
-        if (typeof product.images != "undefined") {
-          const productImage: IProductImage = {
-            path: file.path.replace(fileSystem.uploadPath, fileSystem.assetUrl),
-          };
-          product.images.push(productImage);
-        }
-      });
+
+      if (typeof req.files != "undefined") {
+        // image processing
+        var files = Object.values(req.files);
+        product.images = [];
+        files.forEach((file: Express.Multer.File, index: number): void => {
+          if (typeof product.images != "undefined") {
+            const productImage: IProductImage = {
+              path: file.path.replace(
+                fileSystem.uploadPath,
+                fileSystem.assetUrl
+              ),
+            };
+            product.images.push(productImage);
+          }
+        });
+      }
       await ProductService.insert(product);
       res.setMessage("Product Added").customResponse(product);
     } catch (e) {
@@ -98,6 +108,13 @@ class ProductController {
           body("product.sku").custom(async (value) => {
             if (await ProductService.isExists("sku", value)) {
               return Promise.reject("Product Sku is already in use");
+            }
+          })
+        );
+        rules.push(
+          body("product.slug").custom(async (value) => {
+            if (await ProductService.isExists("slug", value)) {
+              return Promise.reject("Product Slug is already in use");
             }
           })
         );

@@ -1,21 +1,28 @@
+import { CSSProperties } from "@material-ui/core/styles/withStyles";
 import React from "react";
 import { Row } from "react-bootstrap";
 import { Route, Switch } from "react-router-dom";
-import CreatePage from "../pages/crud/CreatePage";
+import AddProductPage from "../pages/crud/products/AddProductPage";
+import ListProductPage from "../pages/crud/products/ListProductPage";
 import HomePage from "../pages/HomePage";
 
 export default class Content extends React.Component {
-  
   render() {
+    const styles: CSSProperties = {
+      padding: "0px 15px",
+      minHeight: "90vh",
+    };
     return (
       <>
         <Row>
           <p>Content Layout</p>
         </Row>
-        <Row>
+        <Row style={styles}>
           <Switch>
             <Route exact path="/dashboard" component={HomePage} />
-            <Route path="/products/create" component={CreatePage} />
+            <Route path="/products/create" component={AddProductPage} />
+            <Route path="/products" component={ListProductPage} />
+            <Route path="/products/:id/edit" component={AddProductPage} />
           </Switch>
         </Row>
       </>
