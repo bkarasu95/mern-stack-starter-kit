@@ -28,7 +28,7 @@ interface RouteParams {
   slug: string;
 }
 export interface IProductProps {
-  product?: IProduct;
+  product: IProduct;
 }
 const mapStateToProps = (state: any) => {
   return {

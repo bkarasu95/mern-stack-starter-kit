@@ -25,17 +25,14 @@ class App extends React.Component<IAppProps, IAppState> {
           store.dispatch(login(res.data.data.user));
         }
       })
-      .catch((err: AxiosError) => {
-        if (err.response.status === 401) {
-          store.dispatch(logout());
-        }
-      })
       .then(() => {
         this.setState({ authorizing: false });
       });
   }
 
   render() {
+    console.log(this.state.authorizing);
+    
     return (
       <>
         {this.state.authorizing ? null : (

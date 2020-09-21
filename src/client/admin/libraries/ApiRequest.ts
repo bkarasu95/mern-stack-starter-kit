@@ -26,9 +26,10 @@ class ApiRequest {
           resolve(res);
         })
         .catch((res) => {
-          if (res.status === 401) {
+          if (res.response.status === 401) {
             store.dispatch(logout());
           }
+          resolve(res);
         });
     });
   }

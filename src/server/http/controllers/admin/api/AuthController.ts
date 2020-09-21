@@ -2,7 +2,7 @@ import { IAdminUser } from "./../../../../../common/resources/types/user";
 import bcrypt from "bcryptjs";
 import * as dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
-import jwt, { Secret } from "jsonwebtoken";
+import jwt, { Secret, VerifyErrors } from "jsonwebtoken";
 import HttpException from "../../../../exceptions/api/http-exception";
 import "../../../../libraries/ApiResponse";
 import * as AdminUserService from "../../../../services/admin_users.service";
@@ -39,24 +39,29 @@ class AuthController {
     if (typeof token !== "undefined" && token.startsWith("Bearer ")) {
       token = token.slice(7, token.length); // Remove Bearer from string
     }
+    if(typeof process.env.JWT_SECRET === 'undefined'){
+      throw new HttpException(500, "JWT Secret Token Not Defined");
+    }
     const JWT_SECRET:Secret = process.env.JWT_SECRET;
-    return jwt.verify(
+    jwt.verify(
       token,
       JWT_SECRET,
-      (err, decoded: object): Response => {
+      (err: VerifyErrors | null, decoded: object|undefined): void => {
         if (err) {
-          return response
-            .status(401)
-            .setMessage("Unauthenticated")
-            .customResponse();
-        } else {
-          return response
+          response
+          .status(401)
+          .setMessage("Unauthenticated")
+          .customResponse();
+        }else{
+          response
             .status(200)
             .setMessage("Authorized")
             .customResponse({ user: decoded });
         }
+       
       }
     );
+    return response;
   }
 }
 

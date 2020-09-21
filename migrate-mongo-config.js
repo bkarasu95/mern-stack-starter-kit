@@ -1,10 +1,15 @@
 // In this file you can configure migrate-mongo
+const dotenv = require("dotenv");
+dotenv.config();
 
 const config = {
   mongodb: {
-    url: "mongodb://127.0.0.1:27017",
+    url: "mongodb://" +
+    process.env.DB_HOST +
+    ":" +
+    process.env.DB_PORT,
 
-    databaseName: "mernt",
+    databaseName: process.env.DB_DATABASE,
 
     options: {
       useNewUrlParser: true, // removes a deprecation warning when connecting
