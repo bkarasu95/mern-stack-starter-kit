@@ -34,6 +34,11 @@ class AddProductPage extends React.Component {
         type: "wysiwyg",
         label: "Content",
       },
+      {
+        name: "product[images]",
+        type: "image",
+        label: "Images",
+      }
     ];
     return <CreatePage items={items} apiURL="products" name="Ürün" />;
   }

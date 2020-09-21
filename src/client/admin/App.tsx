@@ -31,8 +31,6 @@ class App extends React.Component<IAppProps, IAppState> {
   }
 
   render() {
-    console.log(this.state.authorizing);
-    
     return (
       <>
         {this.state.authorizing ? null : (

@@ -15,4 +15,11 @@
   margin: 5px 0;
 }
 
+.multi-preview{
+  img{
+    width: 100px;
+    margin: 0 10px;
+  }
+}
+
 @import "/node_modules/react-quill/dist/quill.snow.css";

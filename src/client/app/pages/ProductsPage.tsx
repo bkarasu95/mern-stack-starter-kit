@@ -58,5 +58,7 @@ async function loadData(store: Store) {
   return store.dispatch(await fetchProducts());
 }
 
-export { loadData };
-export default connect(mapStateToProps)(ProductsPage);
+export default {
+  loadData,
+  component: connect(mapStateToProps)(ProductsPage),
+};

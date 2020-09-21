@@ -9,17 +9,28 @@ import { IProduct } from "../../../common/resources/types/product";
 class ProductPage extends React.Component<
   RouteComponentProps<RouteParams> & IProductProps
 > {
+  componentDidUpdate(prevProps: any) {
+    if (this.props.location !== prevProps.location) {
+      loadData(store, this.props.match.params);
+    }
+  }
   componentDidMount() {
     if (this.props.product == null) {
-      loadData(store, this.props.match.params.slug);
+      loadData(store, this.props.match.params);
     }
   }
   render() {
     return (
       <>
-        <p>{this.props.product.name}</p>
-        <p>{this.props.product.sku}</p>
-        <p>{this.props.product.price} ₺</p> 
+        {this.props.product == null ? (
+          <p>Ürün Yükleniyor...</p>
+        ) : (
+          <>
+            <p>{this.props.product.name}</p>
+            <p>{this.props.product.sku}</p>
+            <p>{this.props.product.price} ₺</p>
+          </>
+        )}
       </>
     );
   }
@@ -32,12 +43,15 @@ export interface IProductProps {
 }
 const mapStateToProps = (state: any) => {
   return {
-    product: state.products.products[0],
+    product: state.products.product,
   };
 };
 
-async function loadData(store: Store, slug: string) {
-  return store.dispatch(await fetchProduct(slug));
+async function loadData(store: Store, params: any) {
+  return store.dispatch(await fetchProduct(params.slug));
 }
-export { loadData };
-export default connect(mapStateToProps)(ProductPage);
+
+export default {
+  loadData,
+  component: connect(mapStateToProps)(ProductPage),
+};

@@ -10,8 +10,8 @@ export default function productReducer(state = initialState, action: any) {
       return {
         products: action.payload,
       };
-    case FETCH_PRODUCT:
-      return action.payload;
+    case FETCH_PRODUCT:      
+      return { product: action.payload };
     default:
       return state;
   }

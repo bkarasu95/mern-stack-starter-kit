@@ -5,7 +5,7 @@ import * as ProductService from '../../../../services/product.service';
 
 class ProductController {
     list = async (req: Request, res: Response, next: NextFunction) => {
-        try {
+        try {            
             const products = await ProductService.findAll();
             res.setMessage("Products Fetched").customResponse(products);
         } catch (e) {
@@ -13,9 +13,7 @@ class ProductController {
         }
     }
     show = async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            console.log(req.params.slug);
-            
+        try {           
             const product = await ProductService.find(req.params.slug);
             if (product.length === 0) {
                 throw new HttpException(400, "Product Not Found");

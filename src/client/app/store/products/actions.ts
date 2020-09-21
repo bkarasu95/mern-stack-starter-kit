@@ -11,7 +11,15 @@ export async function fetchProducts() {
 }
 
 export async function fetchProduct(name: string) {
-  const res = await axios.get(appApiURL + "products/" + name); 
+  const res = await axios
+    .get(appApiURL + "products/" + name)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      throw new Error(err);
+    })
+    
   return {
     type: FETCH_PRODUCT,
     payload: res.data.data,

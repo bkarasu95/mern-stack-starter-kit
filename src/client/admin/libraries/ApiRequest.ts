@@ -5,10 +5,11 @@ import querystring, { ParsedUrlQueryInput } from "querystring";
 import { logout } from "../store/authenticate/actions";
 
 class ApiRequest {
-  headers: { Authorization: string };
+  headers: { Authorization: string; "Content-type"?: string };
   constructor() {
     this.headers = {
       Authorization: "Bearer " + localStorage.getItem("admin:accessToken"),
+      "Content-type": "multipart/form-data; boundary=" + Date.now(),
     };
   }
   async post(url: string, body: object) {

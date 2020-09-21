@@ -19,9 +19,7 @@ export const find = async (slug: string) => {
         throw new HttpException(500, error.message);
       }
     }
-  );
-  console.log(product);
-  
+  );  
   return product;
 };
 

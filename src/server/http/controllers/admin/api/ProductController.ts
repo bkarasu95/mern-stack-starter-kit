@@ -36,13 +36,11 @@ class ProductController {
           validation: validationError.mapped(),
         });
       }
-      // console.log('geçti');
       req.body.product.slug =
         req.body.product.slug ?? toURLConverter(req.body.product.name);
       let product: ProductModel = req.body.product;
-
       if (typeof req.files != "undefined") {
-        // image processing
+        // image processing        
         var files = Object.values(req.files);
         product.images = [];
         files.forEach((file: Express.Multer.File, index: number): void => {

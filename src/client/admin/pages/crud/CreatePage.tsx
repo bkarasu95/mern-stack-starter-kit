@@ -7,6 +7,7 @@ import { trans } from "../../../../common/resources/lang/translate";
 import { adminApiURL } from "../../../resources/strings/apiURL";
 import CustomSwitch from "../../components/form/CustomSwitch";
 import CustomTextInput from "../../components/form/CustomTextInput";
+import ImageUploader from "../../components/form/ImageUploader";
 import WYSIWYG from "../../components/form/WYSIWYG";
 import ApiRequest from "../../libraries/ApiRequest";
 import { ICrudPageProps } from "./types";
@@ -53,6 +54,16 @@ const CreateForm = (props) => {
                 />
               </FormControl>
             );
+          case "image":
+            return (
+              <FormControl key={item.name}>
+                <Field
+                  name={item.name}
+                  label={item.label}
+                  component={ImageUploader}
+                />
+              </FormControl>
+            );
           default:
             return "Invalid Field Type: " + item.type;
         }
@@ -76,7 +87,8 @@ let CreateFormRedux: any = reduxForm({
 class CreatePage extends React.Component<ICreatePageProps & ICrudPageProps> {
   submit = (values: object) => {
     const requester = new ApiRequest();
-    requester.post(this.props.apiURL, values);
+    let fd = jsonToFormData(values);
+    requester.post(this.props.apiURL, fd);
   };
   render() {
     return (
@@ -98,6 +110,35 @@ export interface FieldItem {
   label: string;
   type: string;
   name: string;
+}
+
+function buildFormData(formData, data, parentKey?) {
+  if (
+    data &&
+    typeof data === "object" &&
+    !(data instanceof Date) &&
+    !(data instanceof File)
+  ) {
+    Object.keys(data).forEach((key) => {
+      buildFormData(
+        formData,
+        data[key],
+        parentKey ? `${parentKey}[${key}]` : key
+      );
+    });
+  } else {
+    const value = data == null ? "" : data;
+
+    formData.append(parentKey, value);
+  }
+}
+
+function jsonToFormData(data) {
+  const formData = new FormData();
+
+  buildFormData(formData, data);
+
+  return formData;
 }
 
 export default CreatePage;
