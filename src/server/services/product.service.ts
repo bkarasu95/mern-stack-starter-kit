@@ -4,7 +4,7 @@ import { Product, ProductModel } from "../models/product.model";
 export const findAll = () => {
   const products = Product.find(
     {},
-    { _id: 0, __v: 0, images: { _id: 0 } },
+    { _id: 0, __v: 0 },
     (error: Error) => {
       if (error) {
         throw new HttpException(500, error.message);
@@ -17,7 +17,7 @@ export const findAll = () => {
 export const find = async (slug: string) => {
   const product = Product.find(
     { slug: slug },
-    { _id: 0, __v: 0, images: { _id: 0 } },
+    { _id: 0, __v: 0 },
     (error: Error) => {
       if (error) {
         throw new HttpException(500, error.message);
