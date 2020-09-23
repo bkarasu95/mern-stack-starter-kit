@@ -1,25 +1,29 @@
-import { MongooseDocument } from "mongoose";
-import { Product, ProductModel } from "../models/product.model";
 import HttpException from "../exceptions/api/http-exception";
+import { Product, ProductModel } from "../models/product.model";
 
 export const findAll = () => {
-  const products = Product.find({}, (error: Error) => {
-    if (error) {
-      throw new HttpException(500, error.message);
+  const products = Product.find(
+    {},
+    { _id: 0, __v: 0, images: { _id: 0 } },
+    (error: Error) => {
+      if (error) {
+        throw new HttpException(500, error.message);
+      }
     }
-  });
+  );
   return products;
 };
 
 export const find = async (slug: string) => {
   const product = Product.find(
     { slug: slug },
-    (error: Error, product: MongooseDocument) => {
+    { _id: 0, __v: 0, images: { _id: 0 } },
+    (error: Error) => {
       if (error) {
         throw new HttpException(500, error.message);
       }
     }
-  );  
+  );
   return product;
 };
 

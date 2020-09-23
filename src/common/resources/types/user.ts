@@ -10,7 +10,5 @@ export interface IUser {
 export interface IAdminUser {
   name: string;
   username: string;
-  password: string;
-  status: boolean;
   avatar?: string;
 }

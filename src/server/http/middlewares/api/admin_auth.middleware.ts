@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { VerifyErrors } from "jsonwebtoken";
 import HttpException from "../../../exceptions/api/http-exception";
 import "../../../libraries/ApiResponse";
 import "../../../libraries/ApiRequest";
@@ -23,7 +23,7 @@ export const Auth = (req: Request, response: Response, next: NextFunction) => {
   let tokenVerified: any = jwt.verify(
     token,
     process.env.JWT_SECRET,
-    (err): boolean => {
+    (err: VerifyErrors | null): boolean => {
       if (err) {
         return false;
       } else {

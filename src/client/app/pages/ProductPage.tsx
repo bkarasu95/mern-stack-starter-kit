@@ -1,10 +1,16 @@
 import * as React from "react";
+import { Col, Row } from "react-bootstrap";
+import { Helmet } from "react-helmet";
+import ImageGallery from "react-image-gallery";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { Store } from "redux";
-import { fetchProduct } from "../store/products/actions";
+import {
+  IProduct,
+  IProductImage,
+} from "../../../common/resources/types/product";
 import { store } from "../store";
-import { IProduct } from "../../../common/resources/types/product";
+import { fetchProduct } from "../store/products/actions";
 
 class ProductPage extends React.Component<
   RouteComponentProps<RouteParams> & IProductProps
@@ -20,15 +26,52 @@ class ProductPage extends React.Component<
     }
   }
   render() {
+    let images: any[] = [];
+    const style: React.CSSProperties = {
+      marginTop: "20px",
+    };
+    if (typeof this.props.product != "undefined") {
+      if (typeof this.props.product.images != "undefined") {
+        this.props.product.images.map((image: IProductImage) => {
+          images.push({
+            original: image.path,
+            thumbnail: image.path,
+            originalAlt: this.props.product.name,
+            thumbnailAlt: this.props.product.name,
+          });
+        });
+      }
+    }
     return (
       <>
         {this.props.product == null ? (
           <p>Ürün Yükleniyor...</p>
         ) : (
           <>
-            <p>{this.props.product.name}</p>
-            <p>{this.props.product.sku}</p>
-            <p>{this.props.product.price} ₺</p>
+            <Helmet>
+              <title>Ürünler</title>
+              <meta property="og:title" content="Ürünler" />
+              {images.length > 0 ? (
+                <meta property="og:image" content={images[0].original} />
+              ) : null}
+            </Helmet>
+            <Row style={style}>
+              <Col md="6">
+                {images.length > 0 ? (
+                  <ImageGallery
+                    showPlayButton={false}
+                    items={images}
+                    showNav={false}
+                    useBrowserFullscreen={false}
+                  />
+                ) : null}
+              </Col>
+              <Col md="6">
+                <p>{this.props.product.name}</p>
+                <p>{this.props.product.sku}</p>
+                <p>{this.props.product.price} ₺</p>
+              </Col>
+            </Row>
           </>
         )}
       </>
