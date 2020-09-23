@@ -31,6 +31,9 @@
     }
   }
 }
+.image-gallery-icon:focus {
+  outline: none;
+}
 
 .image-gallery-icon.image-gallery-right-nav,
 .image-gallery-icon.image-gallery-left-nav {
