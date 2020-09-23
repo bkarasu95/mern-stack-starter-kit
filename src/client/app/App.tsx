@@ -10,12 +10,13 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <ScrollToTop />
-        <Navbar />
-        <Container className="min-vh-100">
-          <div>{renderRoutes(Routes)}</div>
-        </Container>
-        <Footer />
+        <ScrollToTop>
+          <Navbar />
+          <Container className="min-vh-100">
+            <div>{renderRoutes(Routes)}</div>
+          </Container>
+          <Footer />
+        </ScrollToTop>
       </>
     );
   }
