@@ -19,6 +19,7 @@ export default (url: string, store: Store): string => {
     <html>
         <head>
           <link rel="stylesheet" href="/assets/css/app.css">
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
           ${helmet.title.toString()}
           ${helmet.meta.toString()}
         </head>

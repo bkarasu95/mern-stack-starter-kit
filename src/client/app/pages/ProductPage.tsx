@@ -49,7 +49,7 @@ class ProductPage extends React.Component<
         ) : (
           <>
             <Helmet>
-              <title>Ürünler</title>
+              <title>{this.props.product.name}</title>
               <meta property="og:title" content="Ürünler" />
               {images.length > 0 ? (
                 <meta property="og:image" content={images[0].original} />
