@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { RouteConfigComponentProps } from "react-router-config";
 import { Store } from "redux";
+import { IProduct } from "../../../../@types/common/product";
 import { trans } from "../../../common/resources/lang/translate";
-import { IProduct } from "../../../common/resources/types/product";
-import ProductCard from "../components/ProductCard";
+ import ProductCard from "../components/ProductCard";
 import { store } from "../store";
 import { fetchProducts } from "../store/products/actions";
 class ProductsPage extends React.Component<

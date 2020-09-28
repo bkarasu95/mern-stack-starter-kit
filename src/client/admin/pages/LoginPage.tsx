@@ -4,6 +4,7 @@ import axios from "axios";
 import * as React from "react";
 import { connect } from "react-redux";
 import { store } from "..";
+import { ILoginPageProps, ILoginPageState } from "../../../../@types/client/admin/pages";
 import { trans } from "../../../common/resources/lang/translate";
 import { adminApiURL } from "../../resources/strings/apiURL";
 import { login } from "../store/authenticate/actions";
@@ -74,12 +75,6 @@ class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
   }
 }
 
-export interface ILoginPageProps {}
-
-export interface ILoginPageState {
-  username: string;
-  password: string;
-}
 
 const mapStateToProps = (state: any) => {
   return {

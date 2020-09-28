@@ -1,10 +1,8 @@
-import { IAdminUser } from "./../../../../../common/resources/types/user";
 import bcrypt from "bcryptjs";
 import * as dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
 import jwt, { Secret, VerifyErrors } from "jsonwebtoken";
 import HttpException from "../../../../exceptions/api/http-exception";
-import "../../../../libraries/ApiResponse";
 import * as AdminUserService from "../../../../services/admin_users.service";
 dotenv.config();
 

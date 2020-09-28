@@ -15,7 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["es2017", "dom"],
     "strict": true,
-    "types": ["node", "express"]
+    "types": ["node", "express", "./@types/server"]
   },
   "include": ["src/server/**/*"],
   "exclude": ["node_modules"]

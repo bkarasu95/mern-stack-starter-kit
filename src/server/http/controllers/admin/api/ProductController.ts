@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import { ProductModel } from "../../../../models/product.model";
-import { IProductImage } from "../../../../../common/resources/types/product";
 import { fileSystem } from "../../../../config/filesystem";
 import HttpException from "../../../../exceptions/api/http-exception";
 import "../../../../libraries/ApiResponse";
 import * as ProductService from "../../../../services/product.service";
 import { toURLConverter } from "../../../../helpers/route";
+import { IProductImage } from "../../../../../../@types/common/product";
 
 class ProductController {
   list = async (req: Request, res: Response, next: NextFunction) => {

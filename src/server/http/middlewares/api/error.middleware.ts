@@ -2,8 +2,6 @@ import HttpException from "../../../exceptions/api/http-exception";
 import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import { promisify } from "util";
-import '../../../libraries/ApiResponse';
-
 
 const unlinkAsync = promisify(fs.unlink);
 

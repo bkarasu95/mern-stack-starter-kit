@@ -1,7 +1,7 @@
-import { LanguageGroup } from "../types/lang";
 import app from "../../config/app.json";
 import { localeTR } from "./tr";
 import { localeEN } from "./en";
+import { LanguageGroup } from "../../../../@types/common/lang";
 
 // define your valid languages in there
 let locale: LanguageGroup = {

@@ -1,8 +1,8 @@
-import { store } from "./../index";
-import { adminApiURL } from "./../../resources/strings/apiURL";
 import axios from "axios";
 import querystring, { ParsedUrlQueryInput } from "querystring";
 import { logout } from "../store/authenticate/actions";
+import { adminApiURL } from "./../../resources/strings/apiURL";
+import { store } from "./../index";
 
 class ApiRequest {
   headers: { Authorization: string; "Content-type"?: string };
@@ -14,6 +14,11 @@ class ApiRequest {
   }
   async post(url: string, body: object) {
     return await axios.post(adminApiURL + url, body, {
+      headers: this.headers,
+    });
+  }
+  async put(url: string, body: object) {
+    return await axios.put(adminApiURL + url, body, {
       headers: this.headers,
     });
   }

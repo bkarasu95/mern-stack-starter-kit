@@ -7,21 +7,27 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
-import { CSSProperties } from "@material-ui/core/styles/withStyles";
+import withStyles, {
+  CSSProperties,
+  StyledComponentProps,
+} from "@material-ui/core/styles/withStyles";
 import * as React from "react";
 import { Helmet } from "react-helmet";
+import {
+  IListPageProps,
+  IListPageState,
+} from "../../../../../@types/client/admin/pages";
 import { trans } from "../../../../common/resources/lang/translate";
-import { adminApiURL } from "../../../resources/strings/apiURL";
 import ApiRequest from "../../libraries/ApiRequest";
-import { ICrudPageProps } from "./types";
 class ListPage extends React.Component<
-  ICrudPageProps & IListPageProps,
+  IListPageProps & StyledComponentProps,
   IListPageState
 > {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
+      fetching: true,
     };
   }
   componentDidMount() {
@@ -31,12 +37,6 @@ class ListPage extends React.Component<
     });
   }
   render() {
-    const rowStyle: Array<CSSProperties> = [
-      {},
-      {
-        background: "#9c27b0",
-      },
-    ];
     return (
       <>
         <Helmet>
@@ -64,7 +64,7 @@ class ListPage extends React.Component<
               {typeof this.state.items !== "undefined" &&
               this.state.items.length > 0
                 ? this.state.items.map((item, key) => (
-                    <TableRow key={key} style={rowStyle[key % 2]}>
+                    <TableRow key={key} className={this.props.classes.row}>
                       {this.props.fields.map((field, index) => {
                         return (
                           <TableCell key={index} align="center">
@@ -87,12 +87,11 @@ class ListPage extends React.Component<
   }
 }
 
-interface IListPageProps {
-  fields: Array<string>; // for showing data fields
-}
+const styles = (theme) => ({
+  row: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+  },
+});
 
-interface IListPageState {
-  items: Array<any>; // data from server
-}
-
-export default ListPage;
+export default withStyles(styles)(ListPage);

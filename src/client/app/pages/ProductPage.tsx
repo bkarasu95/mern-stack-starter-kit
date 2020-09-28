@@ -5,10 +5,7 @@ import ImageGallery from "react-image-gallery";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { Store } from "redux";
-import {
-  IProduct,
-  IProductImage,
-} from "../../../common/resources/types/product";
+import { IProduct, IProductImage } from "../../../../@types/common/product";
 import { store } from "../store";
 import { fetchProduct } from "../store/products/actions";
 

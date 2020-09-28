@@ -1,8 +1,10 @@
 import React from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { FieldItem } from "../../../../../../@types/client/admin/form";
-import CreatePage from "../CreatePage";
+import UpdatePage from "../UpdatePage";
 
-class AddProductPage extends React.Component {
+class UpdateProductPage extends React.Component<
+ RouteComponentProps<RouteParams>> {
   render() {
     const items: Array<FieldItem> = [
       {
@@ -39,10 +41,21 @@ class AddProductPage extends React.Component {
         name: "product[images]",
         type: "image",
         label: "Images",
-      }
+      },
     ];
-    return <CreatePage items={items} apiURL="products" name="Ürün" />;
+    return (
+      <UpdatePage
+        items={items}
+        apiURL="products"
+        name="Ürün"
+        id={this.props.match.params.id}
+      />
+    );
   }
 }
 
-export default AddProductPage;
+interface RouteParams {
+    id: string;
+  }
+  
+export default UpdateProductPage;

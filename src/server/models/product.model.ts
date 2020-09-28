@@ -1,5 +1,5 @@
-import { IProductImage } from "./../../common/resources/types/product";
 import mongoose, { Schema, Document } from "mongoose";
+import { IProductImage } from "../../../@types/common/product";
 
 // useful for sql actions
 export interface ProductModel extends Document {

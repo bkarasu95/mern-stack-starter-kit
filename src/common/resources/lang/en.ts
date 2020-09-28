@@ -1,4 +1,5 @@
-import { Language } from "../types/lang";
+import { Language } from "../../../../@types/common/lang";
+
 export const localeEN: Language = {
   forms: {
     login: "Login",

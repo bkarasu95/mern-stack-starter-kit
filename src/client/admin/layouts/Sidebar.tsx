@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { IUser } from "../../../common/resources/types/user";
+import { IUser } from "../../../../@types/common/user";
 import { trans } from "../../../common/resources/lang/translate";
 import NestedList from "../components/NestedList";
 
