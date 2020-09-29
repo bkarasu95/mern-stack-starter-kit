@@ -1,4 +1,4 @@
-import { FieldItem } from "./form";
+import { FieldItem, IListActions } from "./form";
 
 export interface ILoginPageProps {}
 
@@ -28,6 +28,7 @@ interface IUpdatePageState {
 
 interface IListPageProps extends ICrudPageProps {
   fields: Array<string>; // for showing data fields
+  actions: IListActions;
 }
 
 interface IListPageState {

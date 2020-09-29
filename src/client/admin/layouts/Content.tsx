@@ -20,7 +20,8 @@ export default class Content extends React.Component {
             <Route exact path="/dashboard" component={HomePage} />
             <Route path="/products/create" component={AddProductPage} />
             <Route path="/products/:id/edit" component={UpdateProductPage} />
-            <Route path="/products" component={ListProductPage} />
+            <Route path="/products/:id/show" component={UpdateProductPage} />
+            <Route exact path="/products" component={ListProductPage} />
           </Switch>
         </Row>
       </>

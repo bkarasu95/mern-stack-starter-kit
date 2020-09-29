@@ -1,6 +1,5 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { RouteComponentProps } from "react-router-dom";
 import { reduxForm } from "redux-form";
 import {
   IUpdatePageProps,
@@ -30,27 +29,41 @@ class UpdatePage extends React.Component<IUpdatePageProps, IUpdatePageState> {
   }
   componentDidMount() {
     const requester = new ApiRequest();
-    requester.get(this.props.apiURL + "/" + this.props.id).then((res: any) => {
-      let data: object = res.data.data;
-      let items = this.state.items;
-      for (let key in data) {
-        items[key].default = data[key];
-      }
-      this.setState({ fetching: false, items: items });
-    });
+    let items = null;
+    requester
+      .get(this.props.apiURL + "/" + this.props.id)
+      .then((res: any) => {
+        let data: object = res.data.data;
+        items = this.state.items;
+        for (let key in data) {
+          for (let item in items) {
+            if (items[item].name === key) {
+              items[item].initialValue = data[key];
+              break;
+            }
+          }
+        }
+      })
+      .then(() => {
+        this.setState({ fetching: false, items: items });
+      });
   }
   submit = (values: object) => {
     const requester = new ApiRequest();
     let fd = jsonToFormData(values);
     requester.put(this.props.apiURL, fd);
   };
-  render() {
+  render() {   
     return (
       <>
         <Helmet>
           <title>{trans("resource.update", { item: this.props.name })}</title>
         </Helmet>
-        <UpdateFormRedux onSubmit={this.submit} items={this.props.items} />
+        {this.state.fetching ? (
+          <p>Yükleniyor... </p>
+        ) : (
+          <UpdateFormRedux onSubmit={this.submit} items={this.state.items} />
+        )}
       </>
     );
   }

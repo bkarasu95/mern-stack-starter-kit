@@ -22,6 +22,7 @@ class CustomForm extends React.Component<ICustomFormProps> {
       marginTop: "10px",
     };
     return (
+      
       <form
         className="wysiwyg-editor"
         style={formStyle}
@@ -37,13 +38,14 @@ class CustomForm extends React.Component<ICustomFormProps> {
                     name={item.name}
                     label={item.label}
                     component={CustomTextInput}
+                    {...item}
                   />
                 </FormControl>
               );
             case "wysiwyg":
               return (
                 <FormControl key={item.name}>
-                  <Field name={item.name} component={WYSIWYG} />
+                  <Field name={item.name} component={WYSIWYG} {...item} />
                 </FormControl>
               );
             case "switch":
@@ -53,6 +55,7 @@ class CustomForm extends React.Component<ICustomFormProps> {
                     name={item.name}
                     label={item.label}
                     component={CustomSwitch}
+                    {...item}
                   />
                 </FormControl>
               );
@@ -63,6 +66,7 @@ class CustomForm extends React.Component<ICustomFormProps> {
                     name={item.name}
                     label={item.label}
                     component={ImageUploader}
+                    {...item}
                   />
                 </FormControl>
               );

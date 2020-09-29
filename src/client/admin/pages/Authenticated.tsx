@@ -17,11 +17,13 @@ export default function Authenticated() {
   const palletType = darkState ? "dark" : "light";
   const mainPrimaryColor = darkState ? purple[500] : blue[500];
   const mainSecondaryColor = darkState ? purple[900] : blue[900];
+  const textColor = darkState ? "#eeeeee" : "#000000";
   const darkTheme: Theme = createMuiTheme({
     palette: {
       type: palletType,
       primary: {
         main: mainPrimaryColor,
+        contrastText: textColor,
       },
       secondary: {
         main: mainSecondaryColor,

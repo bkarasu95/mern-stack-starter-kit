@@ -1,7 +1,8 @@
+import { StyledComponentProps, withStyles } from "@material-ui/core";
 import React from "react";
 
-export default class ImageUploader extends React.Component<
-  IImageUploaderProps,
+class ImageUploader extends React.Component<
+  IImageUploaderProps & StyledComponentProps,
   IImageUploaderState
 > {
   fileObj = [];
@@ -35,6 +36,9 @@ export default class ImageUploader extends React.Component<
       border: "1px dashed #BBB",
       cursor: "pointer",
       margin: "20px 0",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     };
     const inputStyle: React.CSSProperties = {
       height: "0px",
@@ -50,8 +54,14 @@ export default class ImageUploader extends React.Component<
         </div>
 
         <div className="form-group">
-          <div id="yourBtn" style={buttonStyle} onClick={this.openFileDialog}>
-            Click to upload!
+          {/* <label>{this.props.lab}</label> */}
+          <div
+            id="btnUploadImage"
+            style={buttonStyle}
+            className={this.props.classes.imageUploader}
+            onClick={this.openFileDialog}
+          >
+            Resim Yükleyin
           </div>
 
           <div style={inputStyle}>
@@ -77,3 +87,12 @@ interface IImageUploaderProps {
 }
 
 interface IImageUploaderState {}
+
+const styles = (theme) => ({
+  imageUploader: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+  },
+});
+
+export default withStyles(styles)(ImageUploader);

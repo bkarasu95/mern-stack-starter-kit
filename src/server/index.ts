@@ -47,4 +47,5 @@ if (process.env.DB_CONNECTION === "mongodb") {
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 server.listen(PORT);
-if (process.env.NODE_ENV === "development") console.log("listening " + PORT);
+if (process.env.NODE_ENV === "development")
+  console.log("listening " + process.env.URL + ":" + PORT);

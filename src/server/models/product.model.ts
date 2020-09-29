@@ -30,11 +30,22 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    index:true
+  },
+  status: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  content: {
+    type: String,
+    required: true,
   },
   images: [
     {
+      
       path: {
-        type: String,
+        type: String
       },
     },
   ],

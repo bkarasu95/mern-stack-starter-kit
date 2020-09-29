@@ -69,6 +69,10 @@ adminApiRouter
     ProductController.validate("create"),
     ProductController.insert
   );
+  
+adminApiRouter
+.route("/products/:id")
+.get(ProductController.show);
 adminApiRouter.put(
   "/products/:id",
   ProductController.validate("update"),

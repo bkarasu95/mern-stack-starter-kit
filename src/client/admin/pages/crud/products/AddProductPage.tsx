@@ -6,37 +6,37 @@ class AddProductPage extends React.Component {
   render() {
     const items: Array<FieldItem> = [
       {
-        name: "product[name]",
+        name: "name",
         type: "text",
         label: "Title",
       },
       {
-        name: "product[slug]",
+        name: "slug",
         type: "text",
         label: "URL",
       },
       {
-        name: "product[price]",
+        name: "price",
         type: "number",
         label: "Price",
       },
       {
-        name: "product[sku]",
+        name: "sku",
         type: "text",
         label: "SKU",
       },
       {
-        name: "product[status]",
+        name: "status",
         type: "switch",
         label: "Status",
       },
       {
-        name: "product[content]",
+        name: "content",
         type: "wysiwyg",
         label: "Content",
       },
       {
-        name: "product[images]",
+        name: "images",
         type: "image",
         label: "Images",
       }

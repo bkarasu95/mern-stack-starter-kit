@@ -1,13 +1,13 @@
+import { AxiosResponse } from "axios";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { store } from ".";
+import { IUser } from "../../../@types/common/user";
+import ApiRequest from "./libraries/ApiRequest";
 import Authenticated from "./pages/Authenticated";
 import LoginPage from "./pages/LoginPage";
-import { login, logout } from "./store/authenticate/actions";
-import { store } from ".";
-import ApiRequest from "./libraries/ApiRequest";
-import { AxiosError, AxiosResponse } from "axios";
-import { IUser } from "../../../@types/common/user";
+import { login } from "./store/authenticate/actions";
 
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {

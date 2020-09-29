@@ -1,29 +1,21 @@
 import HttpException from "../exceptions/api/http-exception";
 import { Product, ProductModel } from "../models/product.model";
 
-export const findAll = () => {
-  const products = Product.find(
-    {},
-    { _id: 0, __v: 0 },
-    (error: Error) => {
-      if (error) {
-        throw new HttpException(500, error.message);
-      }
+export const findAll = (where?: any, select?: any) => {
+  const products = Product.find(where, select, (error: Error) => {
+    if (error) {
+      throw new HttpException(500, error.message);
     }
-  );
+  });
   return products;
 };
 
-export const find = async (slug: string) => {
-  const product = Product.find(
-    { slug: slug },
-    { _id: 0, __v: 0 },
-    (error: Error) => {
-      if (error) {
-        throw new HttpException(500, error.message);
-      }
+export const find = async (where?: any, select?: any) => {
+  const product = Product.find(where, select, (error: Error) => {
+    if (error) {
+      throw new HttpException(500, error.message);
     }
-  );
+  });
   return product;
 };
 
