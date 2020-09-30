@@ -1,6 +1,10 @@
 # MERN Stack Web App Starter Kit
 
-This is starter kit for developing web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder.
+This is starter kit for developing web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder. 
+
+## Caution
+
+This project hasn't finished yet. So some features may has bug, project structure can change etc. It would be better to wait for the release.
 
 Additional integrations are provided:
 
@@ -59,10 +63,6 @@ You can start the pm2 at the project's root directory:
 ```shellscript
     pm2 start
 ```
-
-## About Examples
-
-I aimed the show the how to system works with real samples, so i added some files that may you don't need them. You can safely delete these files:
 
 ## Roadmap
 
