@@ -2,9 +2,7 @@
 
 This is starter kit for developing web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder. 
 
-## Caution
-
-This project hasn't finished yet. So some features may has bug, project structure can change etc. It would be better to wait for the release.
+**Caution:** This project hasn't finished yet. So some features may has bug, project structure can change etc. It would be better to wait for the release.
 
 Additional integrations are provided:
 
