@@ -8,40 +8,39 @@ class AddProductPage extends React.Component {
       {
         name: "name",
         type: "text",
-        label: "Title",
+        initialValue: Math.random() + Date.now()
       },
       {
         name: "slug",
         type: "text",
-        label: "URL",
+        initialValue: Math.random() + Date.now()
       },
       {
         name: "price",
         type: "number",
-        label: "Price",
+        initialValue: Math.floor(Math.random() * 100)
       },
       {
         name: "sku",
         type: "text",
-        label: "SKU",
+        initialValue: Math.random() + Date.now()
       },
       {
         name: "status",
         type: "switch",
-        label: "Status",
+        initialValue: Date.now() % 2
       },
       {
         name: "content",
         type: "wysiwyg",
-        label: "Content",
+        initialValue: Math.random() + Date.now()
       },
       {
         name: "images",
-        type: "image",
-        label: "Images",
+        type: "image"
       }
     ];
-    return <CreatePage items={items} apiURL="products" name="Ürün" />;
+    return <CreatePage items={items} resource="products" name="Ürün" />;
   }
 }
 

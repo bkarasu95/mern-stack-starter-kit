@@ -12,9 +12,18 @@ class ApiRequest {
       "Content-type": "multipart/form-data; boundary=" + Date.now(),
     };
   }
-  async post(url: string, body: object) {
-    return await axios.post(adminApiURL + url, body, {
-      headers: this.headers,
+  post(url: string, body: object) {
+    return new Promise((resolve, reject) => {
+      axios.post(adminApiURL + url, body, {
+        headers: this.headers,
+      }).then(res => {       
+        resolve(res);
+      }).catch((res) => {
+        if (res.response.status === 401) {
+          store.dispatch(logout());
+        }
+        resolve(res.response);
+      });
     });
   }
   async put(url: string, body: object) {

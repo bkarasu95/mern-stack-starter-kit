@@ -20,6 +20,8 @@ export const localeTR: Language = {
     update: ":item Güncelle",
     list: ":item Listesi",
     edit: "Düzenle",
+    show: "Göster",
+    delete: "Sil",
   },
   db: {
     name: "Adı",
@@ -27,6 +29,7 @@ export const localeTR: Language = {
     sku: "Stok Kodu",
     createdAt: "Oluşturulma Tarihi",
     updatedAt: "Güncellenme Tarihi",
-    images:"Resimler"
+    images: "Resimler",
+    status: "Durum",
   },
 };

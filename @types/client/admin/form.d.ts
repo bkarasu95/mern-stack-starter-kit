@@ -1,7 +1,8 @@
 import { FormEvent } from "react";
+import { Message } from "./redux";
 
 export interface FieldItem {
-  label: string;
+  label?: string;
   type: string;
   name: string;
   required?: boolean;
@@ -29,4 +30,8 @@ export interface IActionMenuState {
 export interface IActionMenuProps {
   url: string;
   actions: IListActions;
+}
+
+export interface IResultMessageBoxProps {
+  result: Message | null
 }

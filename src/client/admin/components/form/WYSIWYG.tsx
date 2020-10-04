@@ -1,8 +1,7 @@
-import ReactQuill from "react-quill";
-import ReactQuillImageUploader, {
-  saveImageSrc,
-} from "react-quill-image-uploader";
 import React from "react";
+import ReactQuill from "react-quill";
+import ReactQuillImageUploader from "react-quill-image-uploader";
+import { FieldItem } from "../../../../../@types/client/admin/form";
 
 declare global {
   interface Event {
@@ -11,12 +10,17 @@ declare global {
   }
 }
 
-class WYSIWYG extends React.Component<IWYSIWYGProps, IWYSIWYGState> {
+class WYSIWYG extends React.Component<IWYSIWYGProps & FieldItem, IWYSIWYGState> {
   constructor(props) {
     super(props);
     this.state = {
-      quill: {},
+      quill: {
+        root: {
+          innerHTML: this.props.initialValue
+        }
+      },
     };
+
   }
   modules = {
     toolbar: {
@@ -41,9 +45,13 @@ class WYSIWYG extends React.Component<IWYSIWYGProps, IWYSIWYGState> {
   quill: any;
   quillRef: any;
   componentDidMount() {
+    this.quillRef.getEditor().root.innerHTML = this.props.initialValue ?? "";
     this.quill = this.quillRef.getEditor();
     this.setState({ quill: this.quill });
-
+    const {
+      input: { onChange },
+    } = this.props;
+    onChange(this.quill.root.innerHTML);
     // add new one to history
     // from version 0.0.1
     // ReactQuillImageUploader.saveImageSrc("https://iph.href.lu/100x100")
@@ -57,6 +65,7 @@ class WYSIWYG extends React.Component<IWYSIWYGProps, IWYSIWYGState> {
 
     // es6
     // import {setHistory} from 'react-quill-image-uploader'
+    // import { FieldItem } from './../../../../../@types/client/admin/form.d';
     // setHistory([{
     //   name: "demo.jpg",
     //   src: "https://iph.href.lu/100x100"
@@ -111,7 +120,7 @@ class WYSIWYG extends React.Component<IWYSIWYGProps, IWYSIWYGState> {
     });
   };
   render() {
-    const { quill = {} } = this.state;
+    const { quill } = this.state;
     const {
       input: { onChange },
     } = this.props;

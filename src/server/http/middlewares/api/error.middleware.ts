@@ -21,7 +21,7 @@ export const errorHandler = (error: HttpException, request: Request, response: R
     if (process.env.NODE_ENV === 'production') {
         message = "We are having some problems. This error logged."
         data = { error: error.error };
-    } else {
+    } else {        
         message = (error.message !== "") ? error.message : "We are having some problems. This error logged.";
         data = { error: error.error };
     }    

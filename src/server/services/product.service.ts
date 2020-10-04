@@ -1,5 +1,6 @@
+import { ProductModel } from "../../../@types/server/models";
 import HttpException from "../exceptions/api/http-exception";
-import { Product, ProductModel } from "../models/product.model";
+import { Product } from "../models/product.model";
 
 export const findAll = (where?: any, select?: any) => {
   const products = Product.find(where, select, (error: Error) => {

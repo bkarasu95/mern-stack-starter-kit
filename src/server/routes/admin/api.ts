@@ -13,6 +13,7 @@ import { errorHandler } from "../../http/middlewares/api/error.middleware";
 import { notFoundHandler } from "../../http/middlewares/api/notFound.middleware";
 import "../../libraries/ApiResponse";
 import { Restful } from "../../http/middlewares/api/restful.middleware";
+import { Product } from "../../models/product.model";
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, fileSystem.imagesPath + "/uploads");
@@ -69,10 +70,15 @@ adminApiRouter
     ProductController.validate("create"),
     ProductController.insert
   );
-  
+
 adminApiRouter
-.route("/products/:id")
-.get(ProductController.show);
+  .route("/products/:id")
+  .get(ProductController.show)
+  .put(
+    upload.any(),
+    ProductController.validate("update"),
+    ProductController.update
+  );
 adminApiRouter.put(
   "/products/:id",
   ProductController.validate("update"),

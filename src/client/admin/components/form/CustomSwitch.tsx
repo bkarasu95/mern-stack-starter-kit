@@ -30,7 +30,7 @@ class CustomSwitch extends React.Component<
   render() {
     return (
       <>
-        <span>Status</span>
+        <span>{this.props.label}</span>
         <Switch
           value={this.state.value}
           checked={

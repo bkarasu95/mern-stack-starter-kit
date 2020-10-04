@@ -17,6 +17,8 @@ export interface Language {
     list: string;
     edit: string;
     update: string;
+    show: string;
+    delete: string;
   };
   db: {
     name: string;
@@ -25,9 +27,14 @@ export interface Language {
     createdAt: string;
     updatedAt: string;
     images: string;
+    status: string;
   };
 }
 
 export type LanguageGroup = {
   [key: string]: Language;
+};
+
+export type LanguageParams = {
+  [key: string]: string;
 };

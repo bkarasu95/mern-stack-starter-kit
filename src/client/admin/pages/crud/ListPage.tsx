@@ -18,11 +18,12 @@ import {
 } from "../../../../../@types/client/admin/pages";
 import { trans } from "../../../../common/resources/lang/translate";
 import ActionMenu from "../../components/form/ActionMenu";
+import ResultMessageBox from "../../components/form/ResultMessageBox";
 import ApiRequest from "../../libraries/ApiRequest";
 class ListPage extends React.Component<
   IListPageProps & StyledComponentProps,
   IListPageState
-> {
+  > {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +33,7 @@ class ListPage extends React.Component<
   }
   componentDidMount() {
     const requester = new ApiRequest();
-    requester.get(this.props.apiURL).then((res: any) => {
+    requester.get(this.props.resource).then((res: any) => {
       this.setState({ items: res.data.data });
     });
   }
@@ -42,6 +43,7 @@ class ListPage extends React.Component<
         <Helmet>
           <title>{trans("resource.list", { item: this.props.name })}</title>
         </Helmet>
+        <ResultMessageBox />
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
@@ -71,34 +73,40 @@ class ListPage extends React.Component<
             </TableHead>
             <TableBody>
               {typeof this.state.items !== "undefined" &&
-              this.state.items.length > 0
+                this.state.items.length > 0
                 ? this.state.items.map((item, key) => (
-                    <TableRow
-                      key={key}
-                      className={key % 2 === 0 ? this.props.classes.row : null}
-                    >
-                      <>
-                        {this.props.fields.map((field, index) => {
-                          return (
-                            <TableCell key={index} align="center">
-                              {item[field] != null &&
+                  <TableRow
+                    key={key}
+                    className={key % 2 === 0 ? this.props.classes.row : null}
+                  >
+                    <>
+                      {this.props.fields.map((field, index) => {
+                        return (
+                          <TableCell key={index} align="center">
+                            {item[field] != null &&
                               !Array.isArray(item[field]) &&
                               typeof item[field] !== "object"
-                                ? item[field]
-                                : ""}
-                            </TableCell>
-                          );
-                        })}
-                        <TableCell align="center">
-                          <ActionMenu
-                            url={this.props.apiURL + "/" + item._id}
-                            actions={this.props.actions}
-                          />
-                        </TableCell>
-                      </>
-                    </TableRow>
-                  ))
-                : null}
+                              ? item[field]
+                              : ""}
+                          </TableCell>
+                        );
+                      })}
+                      <TableCell align="center">
+                        <ActionMenu
+                          url={this.props.resource + "/" + item._id}
+                          actions={this.props.actions}
+                        />
+                      </TableCell>
+                    </>
+                  </TableRow>
+                ))
+                : (
+                  <TableRow>
+                    <TableCell>
+                      <strong>Veri Bulunamadı</strong>
+                    </TableCell>
+                  </TableRow>
+                )}
             </TableBody>
           </Table>
         </TableContainer>

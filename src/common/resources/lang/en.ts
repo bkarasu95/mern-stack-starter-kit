@@ -19,6 +19,8 @@ export const localeEN: Language = {
     list: ":item List",
     edit: "Edit :item",
     update: "Update",
+    show: "Show",
+    delete: "Delete",
   },
   db: {
     name: "Name",
@@ -27,5 +29,6 @@ export const localeEN: Language = {
     createdAt: "Created Date",
     updatedAt: "Updated Date",
     images: "Images",
+    status: "Status",
   },
 };
