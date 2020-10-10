@@ -39,7 +39,7 @@ class UpdateProductPage extends React.Component<
     return (
       <UpdatePage
         items={items}
-        apiURL="products"
+        resource="products"
         name="Ürün"
         id={this.props.match.params.id}
       />

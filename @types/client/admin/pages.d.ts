@@ -1,19 +1,33 @@
 import { FieldItem, IListActions } from "./form";
+import { Message } from "./redux";
 
-export interface ILoginPageProps {}
+export interface ILoginPageProps { }
 
 export interface ILoginPageState {
   username: string;
   password: string;
 }
 
+export interface IAuthenticatedPageProps{
+  result: Message | null
+
+}
+
 export interface ICrudPageProps {
   name: string;
-  apiURL: string;
+  resource: string;
+}
+
+export interface ICrudPageState {
+  redirectURL: string | null
 }
 
 interface ICreatePageProps extends ICrudPageProps {
   items: Array<FieldItem>;
+}
+
+interface ICreatePageState extends ICrudPageState {
+
 }
 
 interface IUpdatePageProps extends ICrudPageProps {

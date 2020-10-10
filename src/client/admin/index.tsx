@@ -5,7 +5,7 @@ import App from './App';
 import { configureStore } from './store';
 import { Provider } from 'react-redux';
 
-export const store = configureStore();
+export const store = configureStore(); // store variable for using in whole admin panel app 
 
 render(
     <BrowserRouter basename="/admin">

@@ -9,7 +9,7 @@ class ListProductPage extends React.Component {
     return (
       <ListPage
         actions={actions}
-        apiURL="products"
+        resource="products"
         name="Ürün"
         fields={fields}
       />

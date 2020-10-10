@@ -41,7 +41,7 @@ class App extends React.Component<IAppProps, IAppState> {
                 <Route exact path="/" component={LoginPage} />
               ) : (
                 <>
-                  <Route exact path="/" component={Authenticated} />
+                  {/* <Route exact path="/" component={Authenticated} />
                   <Route
                     exact
                     path="/:model/:id/:action"
@@ -51,8 +51,8 @@ class App extends React.Component<IAppProps, IAppState> {
                     exact
                     path="/:model/:action"
                     component={Authenticated}
-                  />
-                  <Route exact path="/:path" component={Authenticated} />
+                  /> */}
+                  <Route exact path="/*" component={Authenticated} />
                 </>
               )}
             </Switch>

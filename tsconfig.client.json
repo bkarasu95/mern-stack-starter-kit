@@ -13,6 +13,5 @@
     "typeRoots": ["./@types/client/**/*"],
     "types": ["@types/node"]
   },
-  "include": ["./src/client/models/*", "./src/client/app/index.tsx"],
   "exclude": ["node_modules"]
 }

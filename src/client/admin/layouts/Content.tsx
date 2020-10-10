@@ -7,7 +7,7 @@ import ListProductPage from "../pages/crud/products/ListProductPage";
 import UpdateProductPage from "../pages/crud/products/UpdateProductPage";
 import HomePage from "../pages/HomePage";
 
-export default class Content extends React.Component {
+class Content extends React.Component {
   render() {
     const styles: CSSProperties = {
       padding: "0px 15px",
@@ -17,14 +17,15 @@ export default class Content extends React.Component {
       <>
         <Row style={styles}>
           <Switch>
-            <Route exact path="/dashboard" component={HomePage} />
+            <Route path="/dashboard" component={HomePage} />
             <Route path="/products/create" component={AddProductPage} />
             <Route path="/products/:id/edit" component={UpdateProductPage} />
-            <Route path="/products/:id/show" component={UpdateProductPage} />
-            <Route exact path="/products" component={ListProductPage} />
+            {/* <Route path="/products/:id/show" component={UpdateProductPage} /> */}
+            <Route path="/products" component={ListProductPage} />
           </Switch>
         </Row>
       </>
     );
   }
 }
+export default Content;

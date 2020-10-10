@@ -1,17 +1,14 @@
 # MERN Stack Web App Starter Kit
 
-This is starter kit for developing web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder. 
+This is starter kit for developing content based web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder. 
 
 **Caution:** This project hasn't finished yet. So some features may has bug, project structure can change etc. It would be better to wait for the release.
 
 Additional integrations are provided:
 
 * Typescript
-
-* Server Side Rendering for User side
-
+* Server Side Rendering for User App side
 * React Router
-
 * React Redux
 
 Install all dependencies
@@ -73,3 +70,4 @@ Project is close to completion, but i have some plans for better development.
 * App monitoring in admin panel
 * Content Editor and Dynamic and Configurable Forms
 * Admin Full Theme Support
+* SEO support for contents

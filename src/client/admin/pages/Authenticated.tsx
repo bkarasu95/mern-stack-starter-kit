@@ -1,16 +1,22 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Theme } from "@material-ui/core";
 import { blue, purple } from "@material-ui/core/colors";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { Theme } from "@material-ui/core";
 import Switch from "@material-ui/core/Switch";
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { RouteConfigComponentProps } from "react-router-config";
+import { withRouter } from "react-router-dom";
 import Content from "../layouts/Content";
 import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
 import Sidebar from "../layouts/Sidebar";
+import { clearResult } from "../store/result/actions";
+import { store } from './../index';
+import { IAuthenticatedPageProps } from './../../../../@types/client/admin/pages.d';
 
-export default function Authenticated() {
+
+function AuthenticatedApp() {
   const [darkState, setDarkState] = useState(
     localStorage.getItem("admin:theme") === "true"
   );
@@ -58,3 +64,24 @@ export default function Authenticated() {
     </ThemeProvider>
   );
 }
+
+class Authenticated extends React.Component<RouteConfigComponentProps<{}> & IAuthenticatedPageProps> {
+  componentWillReceiveProps(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      if (this.props.result.showed) {
+        store.dispatch(clearResult()) // TODO fix this issue
+      }
+    }
+  }
+  render() {
+    return (<><AuthenticatedApp /></>)
+  }
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    result: state.result,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(Authenticated));

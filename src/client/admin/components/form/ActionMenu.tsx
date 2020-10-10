@@ -16,7 +16,7 @@ import { trans } from "../../../../common/resources/lang/translate";
 class ActionMenu extends React.Component<
   IActionMenuProps & StyledComponentProps,
   IActionMenuState
-> {
+  > {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,7 +55,7 @@ class ActionMenu extends React.Component<
                     <Link
                       className={this.props.classes.link}
                       style={LinkStyle}
-                      to={this.props.url + "/" + action}
+                      to={"/" + this.props.url + "/" + action}
                     >
                       {trans("resource." + action)}
                     </Link>
