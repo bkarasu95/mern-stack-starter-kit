@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 
 export interface FieldItem {
-  label: string;
+  label?: string;
   type: string;
   name: string;
   required?: boolean;

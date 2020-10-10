@@ -12,6 +12,7 @@ import {
   IActionMenuState,
 } from "../../../../../@types/client/admin/form";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { trans } from "../../../../common/resources/lang/translate";
 class ActionMenu extends React.Component<
   IActionMenuProps & StyledComponentProps,
   IActionMenuState
@@ -56,10 +57,11 @@ class ActionMenu extends React.Component<
                       style={LinkStyle}
                       to={this.props.url + "/" + action}
                     >
-                      {action}
+                      {trans("resource." + action)}
                     </Link>
                   ) : (
-                    <p>Delete</p>
+                    
+                    <p>Delete</p> /* add the delete support */
                   )}
                 </MenuItem>
               );

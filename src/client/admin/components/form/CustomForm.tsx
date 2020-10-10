@@ -5,6 +5,7 @@ import {
   FieldItem,
   ICustomFormProps,
 } from "../../../../../@types/client/admin/form";
+import { trans } from "../../../../common/resources/lang/translate";
 import CustomSwitch from "./CustomSwitch";
 import CustomTextInput from "./CustomTextInput";
 import ImageUploader from "./ImageUploader";
@@ -22,7 +23,6 @@ class CustomForm extends React.Component<ICustomFormProps> {
       marginTop: "10px",
     };
     return (
-      
       <form
         className="wysiwyg-editor"
         style={formStyle}
@@ -36,7 +36,11 @@ class CustomForm extends React.Component<ICustomFormProps> {
                 <FormControl key={item.name}>
                   <Field
                     name={item.name}
-                    label={item.label}
+                    label={
+                      item.label
+                        ? trans("db." + item.label)
+                        : trans("db." + item.name)
+                    }
                     component={CustomTextInput}
                     {...item}
                   />
@@ -45,7 +49,16 @@ class CustomForm extends React.Component<ICustomFormProps> {
             case "wysiwyg":
               return (
                 <FormControl key={item.name}>
-                  <Field name={item.name} component={WYSIWYG} {...item} />
+                  <Field
+                    name={item.name}
+                    component={WYSIWYG}
+                    label={
+                      item.label
+                        ? trans("db." + item.label)
+                        : trans("db." + item.name)
+                    }
+                    {...item}
+                  />
                 </FormControl>
               );
             case "switch":
@@ -53,7 +66,11 @@ class CustomForm extends React.Component<ICustomFormProps> {
                 <FormControl key={item.name}>
                   <Field
                     name={item.name}
-                    label={item.label}
+                    label={
+                      item.label
+                        ? trans("db." + item.label)
+                        : trans("db." + item.name)
+                    }
                     component={CustomSwitch}
                     {...item}
                   />
@@ -64,7 +81,11 @@ class CustomForm extends React.Component<ICustomFormProps> {
                 <FormControl key={item.name}>
                   <Field
                     name={item.name}
-                    label={item.label}
+                    label={
+                      item.label
+                        ? trans("db." + item.label)
+                        : trans("db." + item.name)
+                    }
                     component={ImageUploader}
                     {...item}
                   />

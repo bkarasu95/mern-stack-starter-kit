@@ -9,39 +9,32 @@ class UpdateProductPage extends React.Component<
     const items: Array<FieldItem> = [
       {
         name: "name",
-        type: "text",
-        label: "Title"
+        type: "text"
       },
       {
         name: "slug",
-        type: "text",
-        label: "URL",
+        type: "text"
       },
       {
         name: "price",
-        type: "number",
-        label: "Price",
+        type: "number"
       },
       {
         name: "sku",
-        type: "text",
-        label: "SKU",
+        type: "text"
       },
       {
         name: "status",
-        type: "switch",
-        label: "Status",
+        type: "switch"
       },
       {
         name: "content",
-        type: "wysiwyg",
-        label: "Content",
+        type: "wysiwyg"
       },
       {
         name: "images",
-        type: "image",
-        label: "Images",
-      },
+        type: "image"
+      }
     ];
     return (
       <UpdatePage

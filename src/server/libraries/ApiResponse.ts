@@ -1,7 +1,7 @@
 import { response } from "express";
 
 // app specified response
-response.customResponse = function (data?) {
+response.customResponse = function (data: object) {
   if (this.message == null) {
     this.message = "";
   }
@@ -9,7 +9,7 @@ response.customResponse = function (data?) {
 };
 
 // app specified message
-response.setMessage = function (message) {
+response.setMessage = function (message: object | string) {
   this.message = message;
   return this;
 };
