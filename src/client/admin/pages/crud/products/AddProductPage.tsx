@@ -28,7 +28,7 @@ class AddProductPage extends React.Component {
       {
         name: "status",
         type: "switch",
-        initialValue: Date.now() % 2
+        initialValue: Date.now() % 2 == 1
       },
       {
         name: "content",

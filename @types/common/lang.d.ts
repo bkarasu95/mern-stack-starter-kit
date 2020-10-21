@@ -29,6 +29,7 @@ export interface Language {
     images: string;
     status: string;
   };
+  
 }
 
 export type LanguageGroup = {

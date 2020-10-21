@@ -2,12 +2,14 @@ import { ProductModel } from "../../../@types/server/models";
 import HttpException from "../exceptions/api/http-exception";
 import { Product } from "../models/product.model";
 
-export const findAll = (where: any = {}, select: any = {}) => {
-  const products = Product.find(where, select, (error: Error) => {
+export const findAll = (where: object = {}, select: object = {}, limit: number | null = null, offset: number | null = null) => {
+  let products = Product.find(where, select, (error: Error) => {
     if (error) {
       throw new HttpException(500, error.message);
     }
-  });
+  })
+
+  if (limit !== null && offset !== null && !isNaN(limit) && !isNaN(offset)) products.limit(limit).skip(offset);
   return products;
 };
 
@@ -37,6 +39,12 @@ export const remove = async (id: string) => {
   });
   return true;
 };
+
+export const count = async () => {
+  return Product.count({}, function (err) {
+    if (err) throw new HttpException(500, err.message);
+  })
+}
 
 export const isExists = async (
   key: string,

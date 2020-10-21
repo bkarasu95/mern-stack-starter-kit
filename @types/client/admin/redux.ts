@@ -26,3 +26,10 @@ export interface SetShowedResult {
 }
 
 export type ResultTypes = ServerResult | ClearResult | SetShowedResult;
+
+
+export const SET_THEME = "set_theme";
+export interface SetTheme {
+    type: typeof SET_THEME;
+    payload: any
+}

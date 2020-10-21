@@ -20,7 +20,7 @@ class Content extends React.Component {
             <Route path="/dashboard" component={HomePage} />
             <Route path="/products/create" component={AddProductPage} />
             <Route path="/products/:id/edit" component={UpdateProductPage} />
-            {/* <Route path="/products/:id/show" component={UpdateProductPage} /> */}
+            <Route path="/products/:id/show" component={UpdateProductPage} />
             <Route path="/products" component={ListProductPage} />
           </Switch>
         </Row>

@@ -9,11 +9,11 @@ import {
 class CustomSwitch extends React.Component<
   SwitchProps & ICustomSwitchProps & FieldItem,
   IFieldItemState
-> {
+  > {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.initialValue == "true",
+      value: this.props.initialValue == "true" || this.props.initialValue,
     };
     const {
       input: { onChange },

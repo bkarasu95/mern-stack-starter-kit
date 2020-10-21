@@ -15,7 +15,3 @@ If you want create new migration, run
 ```
 
 We don't/can't migrate the schema, because nature of mongodb. So use migration only for data changing in exists schema or new data inserting(only required recommended) to collection.
-
-## Seeding
-
-If you want the populate your database, use seed.

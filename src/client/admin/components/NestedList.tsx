@@ -37,6 +37,9 @@ class MultiLevel extends React.Component<ListItemProps, MultiLevelState> {
     this.setState({ opened: !this.state.opened });
   }
   render() {
+    const innerListStyle: React.CSSProperties = {
+      paddingLeft: "15px"
+    }
     return (
       <React.Fragment>
         <ListItem
@@ -48,7 +51,7 @@ class MultiLevel extends React.Component<ListItemProps, MultiLevelState> {
           {this.state.opened ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </ListItem>
         <Collapse in={this.state.opened} timeout="auto" unmountOnExit>
-          <List>
+          <List style={innerListStyle}>
             {this.props.items.map((child: any, key: string) => (
               <MenuItem key={key} item={child} />
             ))}
@@ -87,12 +90,12 @@ class MenuItem extends React.Component<MenuItemProps> {
         items={this.props.item.items}
       />
     ) : (
-      <SingleLevel
-        name={this.props.item.name}
-        label={this.props.item.label}
-        url={this.props.item.url}
-      />
-    );
+        <SingleLevel
+          name={this.props.item.name}
+          label={this.props.item.label}
+          url={this.props.item.url}
+        />
+      );
   }
 }
 
@@ -133,6 +136,6 @@ export interface INestedListProps {
   items: any; // TODO use typescript, define the object's structure
 }
 
-export interface INestedListState {}
+export interface INestedListState { }
 
 export default NestedList;

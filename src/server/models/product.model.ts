@@ -50,4 +50,5 @@ ProductSchema.pre<ProductModel>("update", function (next) {
   this.updatedAt = new Date();
   next();
 });
+// TODO add the deleted_at support generally
 export const Product = mongoose.model<ProductModel>("Product", ProductSchema);

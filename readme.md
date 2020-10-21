@@ -66,7 +66,7 @@ Project is close to completion, but i have some plans for better development.
 * Database Seeding System
 * Changable Language System
 * Testing Tools integrations and samples
-* Error logging on server side
+* Error logging and showing in admin panel
 * App monitoring in admin panel
 * Content Editor and Dynamic and Configurable Forms
 * Admin Full Theme Support

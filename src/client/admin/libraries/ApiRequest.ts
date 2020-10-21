@@ -1,5 +1,4 @@
 import axios from "axios";
-import querystring, { ParsedUrlQueryInput } from "querystring";
 import { logout } from "../store/authenticate/actions";
 import { adminApiURL } from "./../../resources/strings/apiURL";
 import { store } from "./../index";
@@ -16,7 +15,7 @@ class ApiRequest {
     return new Promise((resolve, reject) => {
       axios.post(adminApiURL + url, body, {
         headers: this.headers,
-      }).then(res => {       
+      }).then(res => {
         resolve(res);
       }).catch((res) => {
         if (res.response.status === 401) {
@@ -31,11 +30,12 @@ class ApiRequest {
       headers: this.headers,
     });
   }
-  get(url: string, params?: ParsedUrlQueryInput) {
+  get(url: string, params?: object) {
     return new Promise((resolve, reject) => {
       axios
-        .get(adminApiURL + url + querystring.stringify(params), {
+        .get(adminApiURL + url, {
           headers: this.headers,
+          params: params
         })
         .then((res) => {
           resolve(res);

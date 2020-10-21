@@ -1,4 +1,4 @@
-import { FieldItem, IListActions } from "./form";
+import { FieldItem, IListActions,IResourceGetRequestParams } from "./form";
 import { Message } from "./redux";
 
 export interface ILoginPageProps { }
@@ -8,9 +8,9 @@ export interface ILoginPageState {
   password: string;
 }
 
-export interface IAuthenticatedPageProps{
+export interface IAuthenticatedPageProps {
   result: Message | null
-
+  theme: any
 }
 
 export interface ICrudPageProps {
@@ -48,4 +48,10 @@ interface IListPageProps extends ICrudPageProps {
 interface IListPageState {
   items: Array<any>; // data from server
   fetching: boolean;
+  requestParams: IResourceGetRequestParams
+}
+
+
+export interface IResourceRouteProps {
+  resource: string
 }

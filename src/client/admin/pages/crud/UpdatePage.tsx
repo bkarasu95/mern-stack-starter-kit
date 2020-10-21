@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { reduxForm } from "redux-form";
 import {
   IUpdatePageProps,
-  IUpdatePageState,
+  IUpdatePageState
 } from "../../../../../@types/client/admin/pages";
 import { trans } from "../../../../common/resources/lang/translate";
 import { jsonToFormData } from "../../../resources/helpers/form";

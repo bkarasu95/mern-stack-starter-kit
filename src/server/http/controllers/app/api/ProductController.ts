@@ -6,7 +6,9 @@ import * as ProductService from "../../../../services/product.service";
 class ProductController {
   list = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const products = await ProductService.findAll();
+      let limit: number | null = Number.parseInt(req.get('limit') ?? "");
+      let offset: number | null = Number.parseInt(req.get('offset') ?? "");
+      const products = await ProductService.findAll({}, {}, limit, offset); //
       res.setMessage("Products Fetched").customResponse(products);
     } catch (e) {
       next(e);

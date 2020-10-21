@@ -35,3 +35,10 @@ export interface IActionMenuProps {
 export interface IResultMessageBoxProps {
   result: Message | null
 }
+
+export interface IResourceGetRequestParams {
+  limit?: number;
+  start?: number;
+  orderBy?: string;
+  search?: string;
+}

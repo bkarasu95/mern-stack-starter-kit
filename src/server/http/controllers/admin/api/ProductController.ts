@@ -1,77 +1,20 @@
-import { NextFunction, Request, Response } from "express";
-import { body, validationResult } from "express-validator";
+import { Request } from "express";
+import { body } from "express-validator";
+import { IProductImage } from "../../../../../../@types/common/product";
 import { fileSystem } from "../../../../config/filesystem";
 import HttpException from "../../../../exceptions/api/http-exception";
 import "../../../../libraries/ApiResponse";
+import { Product } from "../../../../models/product.model";
+import ModelService from "../../../../services/ModelService.service";
 import * as ProductService from "../../../../services/product.service";
-import { toURLConverter } from "../../../../helpers/route";
-import { IProductImage } from "../../../../../../@types/common/product";
-import { ProductModel } from "../../../../../../@types/server/models";
+import ResourceController from "./ResourceController";
 
-class ProductController {
-  list = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const products = await ProductService.findAll();
-      res.setMessage("Products Fetched").customResponse(products);
-    } catch (e) {
-      next(e);
-    }
-  };
-  show = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const product = await ProductService.find({ _id: req.params.id });
-      if (product.length === 0) {
-        throw new HttpException(400, "Product Not Found");
-      }
-      res.setMessage("Product Fetched").customResponse(product[0]);
-    } catch (e) {
-      next(e);
-    }
-  };
-  insert = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const validationError = validationResult(req);
-      if (!validationError.isEmpty()) {
-        throw new HttpException(422, "Validation Failed", {
-          validation: validationError.mapped(),
-        });
-      }
-      req.body.slug = req.body.slug ?? toURLConverter(req.body.name);
-      let product: ProductModel = req.body;
-      product.images = this.processImages(req);
-      await ProductService.insert(product);
-      res.setMessage("Product Added").customResponse(product);
-    } catch (e) {
-      next(e);
-    }
-  };
-  update = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const validationError = validationResult(req);
-      if (!validationError.isEmpty()) {
-        throw new HttpException(422, "Validation Failed", {
-          validation: validationError.mapped(),
-        });
-      }
-      const product: ProductModel = req.body;
-      product.images = this.processImages(req);
-      await ProductService.update(req.params.id, product);
-      res.setMessage("Product Updated").customResponse(product);
-    } catch (e) {
-      next(e);
-    }
-  };
-
-  delete = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      if (!ProductService.remove(req.params.id)) {
-        throw new HttpException(400, "Product Couldn't Deleted");
-      }
-      res.setMessage("Product Deleted").customResponse();
-    } catch (e) {
-      next(e);
-    }
-  };
+class ProductController extends ResourceController {
+  protected service: ModelService;
+  constructor() {
+    super();
+    this.service = new ModelService(Product);
+  }
 
   processImages(req: Request): Array<IProductImage> {
     if (typeof req.files != "undefined") {
@@ -92,7 +35,7 @@ class ProductController {
     }
   }
 
-  validate = (method: string) => {
+  validate = (method: string): Array<any> => {
     let rules = new Array();
     switch (method) {
       case "create":
