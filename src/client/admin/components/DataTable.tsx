@@ -13,18 +13,33 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
       fetching: true, // is fetching from server
       requestParams: { // get query params
         limit: 30,
-        start: 5,
+        start: 0,
         orderBy: null
-      }
+      },
+      refreshDate: null
     };
   }
+  forceRefresh(refresh: boolean): void {
+    if (refresh) {
+      this.setState({ refreshDate: Date.now().toString() });
+    }
+  }
   componentDidMount() {
+    this.getData();
+  }
+  componentDidUpdate() {
+    if (this.state.refreshDate) {
+      this.getData();
+    }
+  }
+  getData() {
     const requester = new ApiRequest();
     requester.get(this.props.resourceURL, this.state.requestParams).then((res: any) => {
       this.setState({ items: res.data.data.items });
     });
   }
   render() {
+
     return (
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
@@ -75,6 +90,7 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
                       <ActionMenu
                         url={this.props.resourceURL + "/" + item._id}
                         actions={this.props.actions}
+                        forceRefresh={this.forceRefresh.bind(this)}
                       />
                     </TableCell>
                   </>
@@ -98,6 +114,8 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
                     <Grid item md={4}>
                       {/** TODO add lang support */}
                       <p>Veri Bulunamadı</p>
+                      <p>{this.state.refreshDate}</p>
+
                     </Grid>
                     <Grid item md={7}>
 

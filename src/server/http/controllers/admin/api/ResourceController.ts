@@ -40,9 +40,11 @@ abstract class ResourceController {
                 });
             }
             req.body.slug = req.body.slug ?? toURLConverter(req.body.name);
-            let model: Document = req.body;
-            // TODO make compatible
-            // model.images = this.processImages(req);
+            let model = req.body;
+            model.images = this.processImages(req);
+            if (model.images.length === 0) {
+                delete model.images;
+            }
             await this.service.insert(model);
             res.setMessage("Record Added").customResponse(model);
         } catch (e) {
@@ -69,7 +71,7 @@ abstract class ResourceController {
 
     delete = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            if (!this.service.remove(req.params.id)) {
+            if (!this.service.delete(req.params.id)) {
                 throw new HttpException(400, "Record Couldn't Deleted");
             }
             res.setMessage("Record Deleted").customResponse();
@@ -77,7 +79,16 @@ abstract class ResourceController {
             next(e);
         }
     };
+    /**
+     * 
+     * @param method 
+     */
     abstract validate(method: string): Array<any>;
+    /**
+     * 
+     * @param request 
+     */
+    abstract processImages(request: Request): Array<any>;
 
     // TODO think about add afterUpdate, afterSave, beforeUpdate, beforeSave
 }

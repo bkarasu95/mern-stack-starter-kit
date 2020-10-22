@@ -11,7 +11,7 @@ import { fetchProduct } from "../store/products/actions";
 
 class ProductPage extends React.Component<
   RouteComponentProps<RouteParams> & IProductProps
-> {
+  > {
   componentDidUpdate(prevProps: any) {
     if (this.props.location !== prevProps.location) {
       loadData(store, this.props.match.params);
@@ -44,33 +44,37 @@ class ProductPage extends React.Component<
         {this.props.product == null ? (
           <p>Ürün Yükleniyor...</p>
         ) : (
-          <>
-            <Helmet>
-              <title>{this.props.product.name}</title>
-              <meta property="og:title" content="Ürünler" />
-              {images.length > 0 ? (
-                <meta property="og:image" content={images[0].original} />
-              ) : null}
-            </Helmet>
-            <Row style={style}>
-              <Col md="6">
+            <>
+              <Helmet>
+                <title>{this.props.product.name}</title>
+                <meta property="og:title" content="Ürünler" />
                 {images.length > 0 ? (
-                  <ImageGallery
-                    showPlayButton={false}
-                    items={images}
-                    showNav={false}
-                    useBrowserFullscreen={false}
-                  />
+                  <meta property="og:image" content={images[0].original} />
                 ) : null}
-              </Col>
-              <Col md="6">
-                <p>{this.props.product.name}</p>
-                <p>{this.props.product.sku}</p>
-                <p>{this.props.product.price} ₺</p>
-              </Col>
-            </Row>
-          </>
-        )}
+              </Helmet>
+              <Row style={style}>
+                <Col md="6">
+                  {images.length > 0 ? (
+                    <ImageGallery
+                      showPlayButton={false}
+                      items={images}
+                      showNav={false}
+                      useBrowserFullscreen={false}
+                    />
+                  ) : null}
+                </Col>
+                <Col md="6">
+                  <p>{this.props.product.name}</p>
+                  <p>{this.props.product.sku}</p>
+                  <p>{this.props.product.price} ₺</p>
+                </Col>
+              </Row>
+              <Row>
+                <div dangerouslySetInnerHTML={{ __html: this.props.product.content }}></div>
+              </Row>
+            </>
+          )
+        }
       </>
     );
   }

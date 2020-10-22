@@ -26,10 +26,12 @@ export interface IListActions {
 
 export interface IActionMenuState {
   opened: any;
+  dialogOpened: boolean;
 }
 export interface IActionMenuProps {
   url: string;
   actions: IListActions;
+  forceRefresh: (refresh: boolean) => void
 }
 
 export interface IResultMessageBoxProps {

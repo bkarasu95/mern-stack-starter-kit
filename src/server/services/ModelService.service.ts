@@ -7,6 +7,7 @@ class ModelService {
         this.model = model
     }
     findAll = (where: object = {}, select: object = {}, limit: number | null = null, offset: number | null = null) => {
+        where['deletedAt'] = { $eq: null };
         let data = this.model.find(where, select, (error: Error) => {
             if (error) {
                 throw new HttpException(500, error.message);
@@ -17,6 +18,7 @@ class ModelService {
         return data;
     }
     find = async (where?: any, select?: any) => {
+        where['deletedAt'] = { $eq: null };
         const item = this.model.find(where, select, (error: Error) => {
             if (error) {
                 throw new HttpException(500, error.message);
@@ -34,12 +36,32 @@ class ModelService {
         await this.model.findByIdAndUpdate(id, updatedModel);
     };
 
-    remove = async (id: string) => {
+    delete = async (id: string) => {
+        let model = await this.model.find({ _id: id, deletedAt: { $exists: true } }).catch((err) => { // check the deletedAt field for soft deleting
+            if (err) throw new HttpException(500, err.message);
+        });
+        if (typeof model[0] === "undefined") { // model won't be null even records not found 
+            await this.model.deleteOne({ _id: id }).catch((err) => {
+                if (err) throw new HttpException(500, err.message);
+            });
+        } else {
+            let updatedField = {
+                deletedAt: Date.now()
+            }
+            await this.model.updateOne({ _id: id }, { $set: updatedField }).catch((err) => {
+                if (err) throw new HttpException(500, err.message);
+            });
+        }
+        return true;
+    };
+
+    forceDelete = async (id: string) => { // force the deleting model even it has deletedAt field
         await this.model.findOneAndDelete({ _id: id }).catch((err) => {
             if (err) throw new HttpException(500, err.message);
         });
         return true;
-    };
+    }
+
 
     count = async () => {
         return this.model.count({}, function (err) {

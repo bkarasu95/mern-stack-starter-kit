@@ -48,6 +48,28 @@ class ApiRequest {
         });
     });
   }
+/**
+ * 
+ * @param url 
+ * @param id if id is not in url param, set the id from there
+ */
+  delete(url: string, id: string = "") {
+    return new Promise((resolve, reject) => {
+      axios
+        .delete(adminApiURL + url + id, {
+          headers: this.headers,
+        })
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((res) => {
+          if (res.response.status === 401) {
+            store.dispatch(logout());
+          }
+          resolve(res);
+        });
+    });
+  }
 }
 
 export default ApiRequest;

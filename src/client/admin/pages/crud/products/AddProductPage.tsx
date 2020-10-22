@@ -1,29 +1,28 @@
 import React from "react";
 import { FieldItem } from "../../../../../../@types/client/admin/form";
 import CreatePage from "../CreatePage";
-
+import faker from "faker";
 class AddProductPage extends React.Component {
   render() {
     const items: Array<FieldItem> = [
       {
         name: "name",
         type: "text",
-        initialValue: Math.random() + Date.now()
+        initialValue: process.env.NODE_ENV === "production" ? null : faker.commerce.productName()
       },
       {
         name: "slug",
         type: "text",
-        initialValue: Math.random() + Date.now()
       },
       {
         name: "price",
         type: "number",
-        initialValue: Math.floor(Math.random() * 100)
+        initialValue: process.env.NODE_ENV === "production" ? null : faker.commerce.price()
       },
       {
         name: "sku",
         type: "text",
-        initialValue: Math.random() + Date.now()
+        initialValue: process.env.NODE_ENV === "production" ? null : faker.lorem.word()
       },
       {
         name: "status",
@@ -33,7 +32,7 @@ class AddProductPage extends React.Component {
       {
         name: "content",
         type: "wysiwyg",
-        initialValue: Math.random() + Date.now()
+        initialValue: process.env.NODE_ENV === "production" ? null : faker.commerce.productDescription()
       },
       {
         name: "images",

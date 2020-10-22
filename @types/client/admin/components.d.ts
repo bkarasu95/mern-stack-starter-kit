@@ -19,5 +19,12 @@ export interface IDataTableProps {
 export interface IDataTableState {
     items: Array<any>; // data from server
     fetching: boolean;
-    requestParams: IResourceGetRequestParams
+    requestParams: IResourceGetRequestParams,
+    refreshDate: string | null
+}
+
+export interface IConfirmationDialogProps {
+    opened: boolean;
+    actionFunction: () => void;
+    closeFunction: () => void;
 }

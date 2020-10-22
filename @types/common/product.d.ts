@@ -9,6 +9,7 @@ export interface IProduct {
   _id: string;
   slug: string;
   price: number;
+  content: string;
   brand?: number;
   discount?: number;
   images?: Array<IProductImage>;

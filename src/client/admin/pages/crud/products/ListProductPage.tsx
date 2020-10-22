@@ -5,7 +5,7 @@ import ListPage from "../ListPage";
 class ListProductPage extends React.Component {
   render() {
     const fields = ["name", "price", "sku"];
-    const actions: IListActions = ["edit", "show"];
+    const actions: IListActions = ["edit", "show", "delete"];
     return (
       <ListPage
         actions={actions}

@@ -16,15 +16,22 @@ import DataTable from "../../components/DataTable";
 import ResultMessageBox from "../../components/form/ResultMessageBox";
 class ListPage extends React.Component<IListPageProps & StyledComponentProps> {
   render() {
+    const buttonContainerStyle: React.CSSProperties = {
+      margin: "10px 0px",
+      float: "right"
+    }
     return (
       <>
         <Helmet>
           <title>{trans("resource.list", { item: this.props.name })}</title>
         </Helmet>
         <ResultMessageBox />
-        <Button component={Link} className={this.props.classes.row} to={this.props.resource + "/create"}>
-          {trans("resource.add", { item: '' })}
-        </Button>
+        <div className="button-container" style={buttonContainerStyle}>
+          <Button component={Link} className={this.props.classes.row} to={this.props.resource + "/create"}>
+            {trans("resource.add", { item: '' })}
+          </Button>
+        </div>
+
         <DataTable resourceURL={this.props.resource} themeClass={this.props.classes.row} fields={this.props.fields} actions={this.props.actions} />
       </>
     );

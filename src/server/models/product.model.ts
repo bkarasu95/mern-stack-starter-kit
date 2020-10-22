@@ -39,8 +39,13 @@ const ProductSchema = new Schema(
         },
       },
     ],
+    deletedAt: {
+      type: Date,
+      default: null
+    }
   },
-  { timestamps: true }
+  { timestamps: true },
+
 );
 ProductSchema.pre<ProductModel>("save", function (next) {
   this.createdAt = new Date();

@@ -74,7 +74,7 @@ class ProductController extends ResourceController {
             }
           })
         );
-        rules.push(body("price").isInt().withMessage("Price must be price"));
+        rules.push(body("price").isNumeric().withMessage("Price must be price"));
         rules.push(
           body("status").isBoolean().withMessage("Status must be true or false")
         );
