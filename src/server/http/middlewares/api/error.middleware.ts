@@ -2,6 +2,7 @@ import HttpException from "../../../exceptions/api/http-exception";
 import { Request, Response, NextFunction } from "express";
 import fs from "fs";
 import { promisify } from "util";
+import { sysLog } from './../../../helpers/logger';
 
 const unlinkAsync = promisify(fs.unlink);
 
@@ -21,9 +22,17 @@ export const errorHandler = (error: HttpException, request: Request, response: R
     if (process.env.NODE_ENV === 'production') {
         message = "We are having some problems. This error logged."
         data = { error: error.error };
-    } else {        
+    } else {
         message = (error.message !== "") ? error.message : "We are having some problems. This error logged.";
         data = { error: error.error };
-    }    
+    }
+
+    sysLog({
+        message: error.message,
+        log: { error: error.error },
+        statusCode: status,
+        url: request.originalUrl,
+        type: "error"
+    })
     return response.status(status).setMessage(message).customResponse(data);
 };

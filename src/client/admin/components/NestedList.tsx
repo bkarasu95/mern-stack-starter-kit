@@ -8,7 +8,7 @@ class SingleLevel extends React.Component<ListItemProps> {
   render() {
     return (
       <ListItem
-        key={this.props.name}
+        key={this.props.name}  /** add the  multiple language support */
         button
         component={Link}
         to={this.props.url}
@@ -47,7 +47,7 @@ class MultiLevel extends React.Component<ListItemProps, MultiLevelState> {
           onClick={this.handleClick.bind(this)}
           key={this.props.name}
         >
-          <ListItemText primary={this.props.label} />
+          <ListItemText primary={this.props.label} />{ /** add the  multiple language support */}
           {this.state.opened ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </ListItem>
         <Collapse in={this.state.opened} timeout="auto" unmountOnExit>

@@ -1,9 +1,11 @@
-import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@material-ui/core";
+import { Paper, Snackbar, Table, TableContainer } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import React from "react";
 import { IDataTableProps, IDataTableState } from "../../../../@types/client/admin/components";
-import { trans } from "../../../common/resources/lang/translate";
 import ApiRequest from "../libraries/ApiRequest";
-import ActionMenu from "./form/ActionMenu";
+import DataTableBody from "./DataTable/DataTableBody";
+import DataTableFooter from './DataTable/DataTableFooter';
+import DataTableHead from "./DataTable/DataTableHead";
 
 class DataTable extends React.Component<IDataTableProps, IDataTableState>{
   constructor(props) {
@@ -16,118 +18,40 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
         start: 0,
         orderBy: null
       },
-      refreshDate: null
+      dataCount: null,
+      deleteResult: null
     };
   }
-  forceRefresh(refresh: boolean): void {
-    if (refresh) {
-      this.setState({ refreshDate: Date.now().toString() });
-    }
+  actionResult(result: boolean): void {
+    this.getData();
+    this.setState({ deleteResult: result ? "success" : "error" });
   }
   componentDidMount() {
     this.getData();
   }
-  componentDidUpdate() {
-    if (this.state.refreshDate) {
-      this.getData();
-    }
-  }
+
   getData() {
     const requester = new ApiRequest();
     requester.get(this.props.resourceURL, this.state.requestParams).then((res: any) => {
-      this.setState({ items: res.data.data.items });
+      this.setState({ items: res.data.data.items, dataCount: res.data.data.total });
     });
   }
   render() {
 
     return (
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              {this.state.items.length > 0 && (
-                <>
-                  {Object.keys(this.state.items[0]).map(
-                    (key: string) =>
-                      this.props.fields.includes(key) && (
-                        <TableCell key={key} align="center">
-                          <strong>
-                            {trans("db." + key) != ""
-                              ? trans("db." + key)
-                              : key.toUpperCase()}
-                          </strong>
-                        </TableCell>
-                      )
-                  )}
-                  <TableCell align="center" size="small" padding="none">
-                    <strong>{"Aksiyonlar"}</strong>
-                    {/* {trans("form.actions")} */}
-                  </TableCell>
-                </>
-              )}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.items.length > 0
-              ? this.state.items.map((item, key) => (
-                <TableRow
-                  key={key}
-                  className={key % 2 === 0 ? this.props.themeClass : null} // better coloring
-                >
-                  <>
-                    {this.props.fields.map((field, index) => {
-                      return (
-                        <TableCell key={index} align="center">
-                          {item[field] != null &&
-                            !Array.isArray(item[field]) &&
-                            typeof item[field] !== "object"
-                            ? item[field]
-                            : ""}
-                        </TableCell>
-                      );
-                    })}
-                    <TableCell align="center" size="small" padding="none">
-                      <ActionMenu
-                        url={this.props.resourceURL + "/" + item._id}
-                        actions={this.props.actions}
-                        forceRefresh={this.forceRefresh.bind(this)}
-                      />
-                    </TableCell>
-                  </>
-                </TableRow>
-
-              ))
-              : (
-                <TableRow>
-                  <TableCell>
-                    {/** TODO add lang support */}
-                    <strong>Veri Bulunamadı</strong>
-                  </TableCell>
-                </TableRow>
-              )}
-          </TableBody>
-          {this.state.items.length > 0 && (
-            <TableFooter>
-              <TableRow>
-                <TableCell>
-                  <Grid container direction="row">
-                    <Grid item md={4}>
-                      {/** TODO add lang support */}
-                      <p>Veri Bulunamadı</p>
-                      <p>{this.state.refreshDate}</p>
-
-                    </Grid>
-                    <Grid item md={7}>
-
-                    </Grid>
-                  </Grid>
-                </TableCell>
-              </TableRow>
-            </TableFooter>
-          )}
-        </Table>
-      </TableContainer>
-
+      <>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <DataTableHead {...this.props} items={this.state.items} />
+            <DataTableBody items={this.state.items} {...this.props} actionResult={this.actionResult.bind(this)} />
+            <DataTableFooter dataCount={this.state.dataCount} {...this.props} />
+          </Table>
+        </TableContainer>
+        {/** TODO make it  */}
+        <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} open={this.state.deleteResult != null} autoHideDuration={5000} onClose={() => { this.setState({ deleteResult: null }) }}>
+          <Alert severity={"success"}>Record Deleted</Alert>
+        </Snackbar>
+      </>
     );
   }
 }

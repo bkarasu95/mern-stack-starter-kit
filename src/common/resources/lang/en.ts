@@ -21,6 +21,9 @@ export const localeEN: Language = {
     update: "Update",
     show: "Show",
     delete: "Delete",
+    dataNotFound: "Data Not Found",
+    recordDeleted: ":data Deleted",
+    countRecordsFound: ":count Record Found"
   },
   db: {
     name: "Name",

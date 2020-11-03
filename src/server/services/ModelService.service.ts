@@ -26,7 +26,7 @@ class ModelService {
         });
         return item;
     };
-    insert = async (newItem: Document) => {
+    insert = async (newItem: any) => {
         let model = new this.model(newItem);
         await model.save().catch((err: Error) => {
             throw new HttpException(400, err.message);
@@ -37,6 +37,7 @@ class ModelService {
     };
 
     delete = async (id: string) => {
+        // TODO maybe we can check the model has deletedAt
         let model = await this.model.find({ _id: id, deletedAt: { $exists: true } }).catch((err) => { // check the deletedAt field for soft deleting
             if (err) throw new HttpException(500, err.message);
         });
@@ -63,8 +64,10 @@ class ModelService {
     }
 
 
-    count = async () => {
-        return this.model.count({}, function (err) {
+    count = async (where: object = {}) => {
+        where['deletedAt'] = { $eq: null };
+
+        return this.model.countDocuments(where, function (err) {
             if (err) throw new HttpException(500, err.message);
         })
     }

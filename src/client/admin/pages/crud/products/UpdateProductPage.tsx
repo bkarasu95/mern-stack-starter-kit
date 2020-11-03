@@ -1,7 +1,7 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { FieldItem } from "../../../../../../@types/client/admin/form";
-import UpdatePage from "../UpdatePage";
+import UpdatePage from "../../UpdatePage";
 
 class UpdateProductPage extends React.Component<
  RouteComponentProps<RouteParams>> {

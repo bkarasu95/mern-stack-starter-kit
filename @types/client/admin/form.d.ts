@@ -3,7 +3,7 @@ import { Message } from "./redux";
 
 export interface FieldItem {
   label?: string;
-  type: string;
+  type: "number" | "text" | "switch" | "image" | "wysiwyg";
   name: string;
   required?: boolean;
   initialValue?: any;
@@ -16,6 +16,10 @@ export interface IFieldItemState {
 export interface ICustomFormProps {
   items: Array<FieldItem>;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+}
+
+export interface ICustomFormState {
+  dontRedirect: boolean
 }
 
 export type ListAction = "edit" | "delete" | "show";
@@ -31,7 +35,7 @@ export interface IActionMenuState {
 export interface IActionMenuProps {
   url: string;
   actions: IListActions;
-  forceRefresh: (refresh: boolean) => void
+  actionResult: (result: boolean) => void
 }
 
 export interface IResultMessageBoxProps {

@@ -3,10 +3,10 @@ import { body } from "express-validator";
 import { IProductImage } from "../../../../../../@types/common/product";
 import { fileSystem } from "../../../../config/filesystem";
 import HttpException from "../../../../exceptions/api/http-exception";
+import { toURLConverter } from "../../../../helpers/route";
 import "../../../../libraries/ApiResponse";
 import { Product } from "../../../../models/product.model";
 import ModelService from "../../../../services/ModelService.service";
-import * as ProductService from "../../../../services/product.service";
 import ResourceController from "./ResourceController";
 
 class ProductController extends ResourceController {
@@ -39,29 +39,21 @@ class ProductController extends ResourceController {
     let rules = new Array();
     switch (method) {
       case "create":
+      case "update":
         rules.push(
           body("sku").custom(async (value) => {
-            if (await ProductService.isExists("sku", value)) {
+            if (await this.service.isExists("sku", value)) {
               return Promise.reject("Sku is already in use");
             }
           })
         );
         rules.push(
           body("name").custom(async (value) => {
-            if (await ProductService.isExists("name", value)) {
+            if (await this.service.isExists("name", value)) {
               return Promise.reject("Name is already in use");
             }
           })
         );
-        rules.push(
-          body("slug").custom(async (value) => {
-            if (await ProductService.isExists("slug", value)) {
-              return Promise.reject("Slug is already in use");
-            }
-          })
-        );
-      case "create":
-      case "update":
         rules.push(
           body("name")
             .isLength({ min: 5 })
@@ -69,8 +61,10 @@ class ProductController extends ResourceController {
         );
         rules.push(
           body("slug").custom(async (value) => {
-            if (await ProductService.isExists("slug", value)) {
-              return Promise.reject("Slug is already in use");
+            if (typeof value !== "undefined") { // it is optional so check the value is exists first
+              if (await this.service.isExists("slug", toURLConverter(value))) {
+                return Promise.reject("Slug is already in use");
+              }
             }
           })
         );

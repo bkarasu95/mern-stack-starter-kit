@@ -71,3 +71,5 @@ Project is close to completion, but i have some plans for better development.
 * Content Editor and Dynamic and Configurable Forms
 * Admin Full Theme Support
 * SEO support for contents
+* Thumbnail Image Making
+* DB transaction support

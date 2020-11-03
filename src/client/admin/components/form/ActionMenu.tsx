@@ -22,23 +22,23 @@ class ActionMenu extends React.Component<
   constructor(props) {
     super(props);
     this.state = {
-      opened: false,
-      dialogOpened: false,
+      opened: false, // is menu opened
+      dialogOpened: false, // is confirmation dialog opened
     };
   }
-  handleClick = (event) => {
+  handleClick = (event) => { // handle menu button clicking
     this.setState({ opened: event.currentTarget });
   };
 
-  handleClose = () => {
+  handleClose = () => { // handle menu closing
     this.setState({ opened: null });
   };
 
-  handleDialogShow = () => {
+  handleDialogShow = () => { // close confirmation dialog
     this.setState({ dialogOpened: true });
   }
 
-  handleDialogClose = () => {
+  handleDialogClose = () => { // close confirmation dialog
     this.setState({ dialogOpened: false });
   };
 
@@ -47,7 +47,7 @@ class ActionMenu extends React.Component<
     apiRequest.delete(this.props.url).then((res: any) => {
       if (res.status === 200) {
         this.handleDialogClose();
-        this.props.forceRefresh(true);
+        this.props.actionResult(true);
       }
     });
   }
@@ -72,17 +72,22 @@ class ActionMenu extends React.Component<
             (action: string, index: number) => {
               return (
                 <MenuItem key={index}>
-                  {action != "delete" ? (
-                    <Link
-                      className={this.props.classes.link}
-                      style={LinkStyle}
-                      to={"/" + this.props.url + "/" + action}
-                    >
-                      {trans("resource." + action)}
-                    </Link>
-                  ) : (
+                  {action != "delete" // delete action dont have its page so it must be
+                    ? (
+                      <Link
+                        className={this.props.classes.link}
+                        style={LinkStyle}
+                        to={"/" + this.props.url + "/" + action}
+                      >
+                        {trans("resource." + action)}
+                      </Link>
+                    ) : (
                       <div>
-                        <Button onClick={() => { this.handleDialogShow(); this.handleClose() }}>
+                        <Button onClick={() => {
+                          // close the menu and show the confirmation dialog
+                          this.handleDialogShow();
+                          this.handleClose();
+                        }}>
                           {trans("resource." + action)}
                         </Button>
                         <ConfirmationDialog opened={this.state.dialogOpened} closeFunction={this.handleDialogClose} actionFunction={this.handleDelete} />

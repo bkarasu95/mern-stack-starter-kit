@@ -7,13 +7,10 @@ import withStyles, {
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import {
-  IListPageProps,
-  IListPageState
-} from "../../../../../@types/client/admin/pages";
-import { trans } from "../../../../common/resources/lang/translate";
-import DataTable from "../../components/DataTable";
-import ResultMessageBox from "../../components/form/ResultMessageBox";
+import { IListPageProps } from "../../../../@types/client/admin/pages";
+import { trans } from "../../../common/resources/lang/translate";
+import ResultMessageBox from "../components/form/ResultMessageBox";
+import DataTable from './../components/DataTable';
 class ListPage extends React.Component<IListPageProps & StyledComponentProps> {
   render() {
     const buttonContainerStyle: React.CSSProperties = {

@@ -22,6 +22,9 @@ export const localeTR: Language = {
     edit: "Düzenle",
     show: "Göster",
     delete: "Sil",
+    dataNotFound: "Veri Bulunamadı",
+    recordDeleted: ":data Silindi",
+    countRecordsFound: ":count Kayıt Bulundu"
   },
   db: {
     name: "Adı",

@@ -1,6 +1,6 @@
 import React from "react";
 import { IListActions } from "../../../../../../@types/client/admin/form";
-import ListPage from "../ListPage";
+import ListPage from "../../ListPage";
 
 class ListProductPage extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class ListProductPage extends React.Component {
       <ListPage
         actions={actions}
         resource="products"
-        name="Ürün"
+        name="Ürün" /** add the  multiple language support */
         fields={fields}
       />
     );

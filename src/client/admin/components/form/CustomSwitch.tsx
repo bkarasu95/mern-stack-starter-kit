@@ -13,7 +13,9 @@ class CustomSwitch extends React.Component<
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.initialValue == "true" || this.props.initialValue,
+      value: typeof this.props.initialValue === "boolean" // check the type, if you set the value directly, it won't work properly.
+        ? this.props.initialValue
+        : this.props.initialValue == "true"
     };
     const {
       input: { onChange },
@@ -34,7 +36,7 @@ class CustomSwitch extends React.Component<
         <Switch
           value={this.state.value}
           checked={
-            typeof this.state.value === "boolean"
+            typeof this.state.value === "boolean" // check the type, if you set the value directly, it won't work properly.
               ? this.state.value
               : this.state.value == "true"
           }

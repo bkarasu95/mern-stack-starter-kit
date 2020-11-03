@@ -19,8 +19,11 @@ export interface Language {
     update: string;
     show: string;
     delete: string;
+    dataNotFound: string;
+    recordDeleted: string;
+    countRecordsFound: string;
   };
-  db: {
+  db: { // db columns
     name: string;
     price: string;
     sku: string;
@@ -28,8 +31,9 @@ export interface Language {
     updatedAt: string;
     images: string;
     status: string;
+
   };
-  
+
 }
 
 export type LanguageGroup = {

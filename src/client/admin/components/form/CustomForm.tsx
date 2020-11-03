@@ -1,17 +1,22 @@
-import { FormControl, Button } from "@material-ui/core";
-import React from "react";
-import { Field } from "redux-form";
+import { Button, Checkbox, FormControlLabel, Grid } from "@material-ui/core";
+import React, { ChangeEvent } from "react";
 import {
   FieldItem,
   ICustomFormProps,
+  ICustomFormState
 } from "../../../../../@types/client/admin/form";
-import { trans } from "../../../../common/resources/lang/translate";
-import CustomSwitch from "./CustomSwitch";
-import CustomTextInput from "./CustomTextInput";
-import ImageUploader from "./ImageUploader";
-import WYSIWYG from "./WYSIWYG";
+import FormFieldLoader from "./FormFieldLoader";
 
-class CustomForm extends React.Component<ICustomFormProps> {
+class CustomForm extends React.Component<ICustomFormProps, ICustomFormState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dontRedirect: false
+    }
+  }
+  handleContinueCheck(event: ChangeEvent<HTMLInputElement>): void {
+    this.setState({ dontRedirect: !this.state.dontRedirect })
+  }
   render() {
     const formStyle: React.CSSProperties = {
       width: "100%",
@@ -29,80 +34,26 @@ class CustomForm extends React.Component<ICustomFormProps> {
         onSubmit={this.props.handleSubmit}
       >
         {this.props.items.map((item: FieldItem) => {
-          switch (item.type) {
-            case "text":
-            case "number":
-              return (
-                <FormControl key={item.name}>
-                  <Field
-                    name={item.name}
-                    label={
-                      item.label
-                        ? trans("db." + item.label)
-                        : trans("db." + item.name)
-                    }
-                    component={CustomTextInput}
-                    {...item}
-                  />
-                </FormControl>
-              );
-            case "wysiwyg":
-              return (
-                <FormControl key={item.name}>
-                  <Field
-                    name={item.name}
-                    component={WYSIWYG}
-                    label={
-                      item.label
-                        ? trans("db." + item.label)
-                        : trans("db." + item.name)
-                    }
-                    {...item}
-                  />
-                </FormControl>
-              );
-            case "switch":
-              return (
-                <FormControl key={item.name}>
-                  <Field
-                    name={item.name}
-                    label={
-                      item.label
-                        ? trans("db." + item.label)
-                        : trans("db." + item.name)
-                    }
-                    component={CustomSwitch}
-                    {...item}
-                  />
-                </FormControl>
-              );
-            case "image":
-              return (
-                <FormControl key={item.name}>
-                  <Field
-                    name={item.name}
-                    label={
-                      item.label
-                        ? trans("db." + item.label)
-                        : trans("db." + item.name)
-                    }
-                    component={ImageUploader}
-                    {...item}
-                  />
-                </FormControl>
-              );
-            default:
-              return "Invalid Field Type: " + item.type;
-          }
+          return <FormFieldLoader key={item.name} item={item} />
         })}
-        <Button
-          type="submit"
-          style={submitStyle}
-          variant="contained"
-          color="primary"
-        >
-          Ürün Ekle
-        </Button>
+        <Grid container alignContent="flex-end">
+          {/** TODO add the functionality, it has no effect for now */}
+          <FormControlLabel
+            value="continue"
+            control={<Checkbox color="primary" checked={this.state.dontRedirect} onChange={(e) => this.handleContinueCheck(e)} />}
+            label="Oluşturmaya Devam Et"
+            labelPlacement="start"
+          />
+          <Button
+            type="submit"
+            style={submitStyle}
+            variant="contained"
+            color="primary"
+          >
+            Ürün Ekle
+          </Button>
+        </Grid>
+
       </form>
     );
   }

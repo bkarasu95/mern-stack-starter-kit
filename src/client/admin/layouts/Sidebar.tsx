@@ -1,31 +1,46 @@
 import React from "react";
 import { connect } from "react-redux";
+import { ISidebarElement } from "../../../../@types/client/admin/components";
 import { IUser } from "../../../../@types/common/user";
 import { trans } from "../../../common/resources/lang/translate";
 import NestedList from "../components/NestedList";
 
 class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
   render() {
-    const items = [
+    const items: Array<ISidebarElement> = [
       // TODO get this on server via api
-      { name: "dashboard", label: "Dashboard", url: "/dashboard", sort: 1 },
+      { name: "dashboard", label: "Dashboard", url: "/dashboard" },
       {
         name: "product_management",
         label: trans("resource.management", { item: "Ürün" }),
-        sort: 2,
+        url: "/products",
+      },
+      {
+        name: "app_management",
+        label: trans("resource.management", { item: "Uygulama" }),
         items: [
           {
-            name: "add_product",
-            label: trans("resource.add", { item: "Ürün" }),
-            url: "/products/create",
-            sort: 1,
-          },
-          {
-            name: "list_product",
-            label: trans("resource.list", { item: "Ürün" }),
-            url: "/products",
-            sort: 2,
-          }, 
+            name: "logs",
+            label: "Kayıtlar",
+            items: [
+              {
+                name: "app_logs",
+                label: "Uygulama Kayıtları",
+                url: "/logs/app"
+              },
+              {
+                name: "panel_logs",
+                label: "Admin Panel Kayıtları",
+                url: "/logs/admin"
+              },
+              {
+                name: "error_logs",
+                label: "Hata Kayıtları",
+                url: "/logs/error"
+              },
+            ]
+          }
+
         ],
       },
     ];
@@ -42,7 +57,7 @@ export interface ISidebarProps {
   user: IUser;
 }
 
-export interface ISidebarState {}
+export interface ISidebarState { }
 
 const mapStateToProps = (state: any) => {
   return {

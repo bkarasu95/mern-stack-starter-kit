@@ -1,14 +1,11 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { reduxForm } from "redux-form";
-import {
-  IUpdatePageProps,
-  IUpdatePageState
-} from "../../../../../@types/client/admin/pages";
-import { trans } from "../../../../common/resources/lang/translate";
-import { jsonToFormData } from "../../../resources/helpers/form";
-import CustomForm from "../../components/form/CustomForm";
-import ApiRequest from "../../libraries/ApiRequest";
+import { IUpdatePageProps, IUpdatePageState } from "../../../../@types/client/admin/pages";
+import { trans } from "../../../common/resources/lang/translate";
+import { jsonToFormData } from "../../resources/helpers/form";
+import CustomForm from "../components/form/CustomForm";
+import ApiRequest from "../libraries/ApiRequest";
 
 const UpdateForm = (props) => {
   const { handleSubmit, items } = props;
