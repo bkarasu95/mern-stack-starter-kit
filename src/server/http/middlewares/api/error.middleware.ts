@@ -6,7 +6,7 @@ import { sysLog } from './../../../helpers/logger';
 
 const unlinkAsync = promisify(fs.unlink);
 
-export const errorHandler = (error: HttpException, request: Request, response: Response, next: NextFunction): Response => {
+export const errorHandler = (error: HttpException, request: Request, response: Response, next: NextFunction): Express.Response => {
     const status = error.statusCode || 500;
     let message = "";
     let data = {};

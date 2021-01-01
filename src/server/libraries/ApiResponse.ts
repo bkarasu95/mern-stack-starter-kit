@@ -5,7 +5,8 @@ response.customResponse = function (data: object) {
   if (this.message == null) {
     this.message = "";
   }
-  return this.json({ message: this.message, data: data });
+  this.json({ message: this.message, data: data });
+  return this;
 };
 
 // app specified message
