@@ -45,12 +45,12 @@ class UpdatePage extends React.Component<IUpdatePageProps, IUpdatePageState> {
         this.setState({ fetching: false, items: items });
       });
   }
-  submit = (values: object) => {
+  submit(values: object) {
     const requester = new ApiRequest();
     let fd = jsonToFormData(values);
     requester.put(this.props.resource + "/" + this.props.id, fd);
   };
-  render() {   
+  render() {
     return (
       <>
         <Helmet>
@@ -59,8 +59,8 @@ class UpdatePage extends React.Component<IUpdatePageProps, IUpdatePageState> {
         {this.state.fetching ? (
           <p>Yükleniyor... </p>
         ) : (
-          <UpdateFormRedux onSubmit={this.submit} items={this.state.items} />
-        )}
+            <UpdateFormRedux onSubmit={this.submit} items={this.state.items} />
+          )}
       </>
     );
   }

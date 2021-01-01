@@ -1,4 +1,3 @@
-import { Auth } from "../../http/middlewares/api/admin_auth.middleware";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express, { Request, Response } from "express";
@@ -8,12 +7,13 @@ import path from "path";
 import { fileSystem } from "../../config/filesystem";
 import HttpException from "../../exceptions/api/http-exception";
 import AuthController from "../../http/controllers/admin/api/AuthController";
+import LogController from "../../http/controllers/admin/api/LogController";
 import ProductController from "../../http/controllers/admin/api/ProductController";
+import { Auth } from "../../http/middlewares/api/admin_auth.middleware";
 import { errorHandler } from "../../http/middlewares/api/error.middleware";
 import { notFoundHandler } from "../../http/middlewares/api/notFound.middleware";
-import "../../libraries/ApiResponse";
 import { Restful } from "../../http/middlewares/api/restful.middleware";
-import { Product } from "../../models/product.model";
+import "../../libraries/ApiResponse";
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, fileSystem.imagesPath + "/uploads");
@@ -86,6 +86,9 @@ adminApiRouter.put(
 );
 adminApiRouter.delete("/products/:id", ProductController.delete);
 
+adminApiRouter
+  .route("/logs")
+  .get(LogController.list);
 /**
  * After Middleware
  */

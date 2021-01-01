@@ -5,32 +5,55 @@ import { toURLConverter } from "../../../../helpers/route";
 import ModelService from "../../../../services/ModelService.service";
 
 abstract class ResourceController {
-    protected abstract service: ModelService;
+    protected abstract service: ModelService; // use the service layer for db proccesses. don't access db directly
+
+    /**
+     * 
+     * @param req ExressJS Request object
+     * @param res ExressJS Response object
+     * @param next ExressJS Next function
+     */
     list = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let limitParam: string = typeof req.query.limit != "undefined" ? req.query.limit.toString() : "";
             let offsetParam: string = typeof req.query.start != "undefined" ? req.query.start.toString() : "";
-            let count = await this.service.count(); // total data count
+            let where: object = typeof req.query.where != "undefined" ? this.whereStringToObject(req.query.where.toString()) : {};
+            let fields: object = typeof req.query.fields != "undefined" ? {} : {};
 
+            let count = await this.service.count(where); // total data count, useful for pagination 
             let limit: number | null = Number.parseInt(limitParam);
             let offset: number | null = Number.parseInt(offsetParam);
-            const data = await this.service.findAll({}, {}, limit, offset);
+            const data = await this.service.findAll(where, fields, limit, offset);
             res.setMessage("Records Fetched").customResponse({ items: data, total: count });
         } catch (e) {
-            next(e);
+            next(e); // if you take an error, pass the function and go to middleware
         }
     };
+
+    /**
+     * 
+     * @param req ExressJS Request object
+     * @param res ExressJS Response object
+     * @param next ExressJS Next function
+     */
     show = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const item = await this.service.find({ _id: req.params.id });
             if (item.length === 0) {
                 throw new HttpException(400, "Record Not Found");
             }
-            res.setMessage("Record Fetched").customResponse(item[0]);
+            res.setMessage("Record Fetched").customResponse(item);
         } catch (e) {
-            next(e);
+            next(e); // if you take an error, pass the function and go to middleware
         }
     };
+
+    /**
+     * 
+     * @param req ExressJS Request object
+     * @param res ExressJS Response object
+     * @param next ExressJS Next function
+     */
     insert = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const validationError = validationResult(req);
@@ -55,6 +78,13 @@ abstract class ResourceController {
             next(e);
         }
     };
+
+    /**
+     * 
+     * @param req ExressJS Request object
+     * @param res ExressJS Response object
+     * @param next ExressJS Next function
+     */
     update = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const validationError = validationResult(req);
@@ -73,6 +103,12 @@ abstract class ResourceController {
         }
     };
 
+    /**
+     * 
+     * @param req ExressJS Request object
+     * @param res ExressJS Response object
+     * @param next ExressJS Next function
+     */
     delete = async (req: Request, res: Response, next: NextFunction) => {
         try {
             if (!this.service.delete(req.params.id)) {
@@ -84,17 +120,41 @@ abstract class ResourceController {
         }
     };
     /**
-     * 
+     * TODO make a structure that can impelemetable
      * @param method 
      */
     abstract validate(method: string): Array<any>;
     /**
-     * 
+     * TODO make a structure that can impelemetable
      * @param request 
      */
     abstract processImages(request: Request): Array<any>;
 
     // TODO think about add afterUpdate, afterSave, beforeUpdate, beforeSave
+
+
+    /**
+     * convert the "where" param in url query to compatible for mongoose where query
+     * @param where 
+     */
+    private whereStringToObject(where: string): object {
+        let whereObject = {};
+        let whereFields = where.split(','); // split the query by ',' 
+        if (whereFields.length > 1) {
+            for (let key in whereFields) {
+                const field = whereFields[key];
+                // TODO add the > , < etc. operators  
+                let condition = field.split('=');
+                whereObject[condition[0]] = condition[1];
+            }
+        } else {
+            // TODO add the > , < etc. operators
+            let condition = where.split('='); // left side would field, right side would value
+            whereObject[condition[0]] = condition[1];
+        }
+        return whereObject;
+    }
 }
+
 
 export default ResourceController;

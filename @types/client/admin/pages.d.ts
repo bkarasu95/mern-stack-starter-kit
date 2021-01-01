@@ -1,4 +1,4 @@
-import { FieldItem, IListActions,IResourceGetRequestParams } from "./form";
+import { FieldItem, IListActions, IResourceGetRequestParams } from "./form";
 import { Message } from "./redux";
 
 export interface ILoginPageProps { }
@@ -43,6 +43,7 @@ interface IUpdatePageState {
 interface IListPageProps extends ICrudPageProps {
   fields: Array<string>; // for showing data fields
   actions: IListActions;
+  disableAdd?: boolean; // disables the Add button in list
 }
 
 interface IListPageState {

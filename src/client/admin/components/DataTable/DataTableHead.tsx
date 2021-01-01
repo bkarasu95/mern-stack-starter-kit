@@ -7,7 +7,7 @@ class DataTableHead extends React.Component<IDataTableHeadProps>{
     render() {
         return (
             <TableHead>
-                <TableRow>
+                {/* <TableRow>
                     {this.props.items.length > 0 && (
                         <>
                             {Object.keys(this.props.items[0]).map(
@@ -22,6 +22,27 @@ class DataTableHead extends React.Component<IDataTableHeadProps>{
                                         </TableCell>
                                     )
                             )}
+                            <TableCell align="center" size="small" padding="none">
+                                <strong>{"Aksiyonlar"}</strong>
+                                {trans("form.actions")}
+                            </TableCell>
+                        </>
+                    )}
+                </TableRow> */}
+                <TableRow>
+                    {this.props.items.length > 0 && (
+                        <>
+                            {this.props.fields.map((field: string) => {
+                                return Object.keys(this.props.items[0]).includes(field) && (
+                                    <TableCell key={field} align="center">
+                                        <strong>
+                                            {trans("db." + field) != ""
+                                                ? trans("db." + field)
+                                                : field.toUpperCase()}
+                                        </strong>
+                                    </TableCell>
+                                )
+                            })}
                             <TableCell align="center" size="small" padding="none">
                                 <strong>{"Aksiyonlar"}</strong>
                                 {/* {trans("form.actions")} */}

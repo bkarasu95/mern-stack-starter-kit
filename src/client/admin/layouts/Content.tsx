@@ -6,6 +6,7 @@ import AddProductPage from "../pages/crud/products/AddProductPage";
 import ListProductPage from "../pages/crud/products/ListProductPage";
 import UpdateProductPage from "../pages/crud/products/UpdateProductPage";
 import HomePage from "../pages/HomePage";
+import ListLogsPage from './../pages/crud/logs/ListLogsPage';
 
 class Content extends React.Component {
   render() {
@@ -22,6 +23,7 @@ class Content extends React.Component {
             <Route path="/products/:id/edit" component={UpdateProductPage} />
             <Route path="/products/:id/show" component={UpdateProductPage} />
             <Route path="/products" component={ListProductPage} />
+            <Route path="/logs/:type" component={ListLogsPage} />
           </Switch>
         </Row>
       </>

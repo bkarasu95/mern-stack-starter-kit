@@ -25,6 +25,7 @@ export interface IDataTableState {
     dataCount: number;
 }
 export interface IDataTableComponentProps extends IDataTableProps {
+    fetching?: boolean
 }
 export interface IDataTableHeadProps extends IDataTableComponentProps {
     items: Array<any>; // data from server

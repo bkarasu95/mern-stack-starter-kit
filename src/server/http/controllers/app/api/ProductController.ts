@@ -30,8 +30,10 @@ class ProductController {
         status: true,
         slug: req.params.slug
       };
+      
       const product = await this.service.find(where);
-      if (product.length === 0) {
+      
+      if (product.length !== 0) {
         throw new HttpException(400, "Product Not Found");
       }
       res.setMessage("Product Fetched").customResponse(product[0]);

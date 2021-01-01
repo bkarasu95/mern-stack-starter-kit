@@ -8,44 +8,49 @@ class DataTableBody extends React.Component<IDataTableBodyProps> {
     render() {
         return (
             <TableBody>
-                {this.props.items.length > 0
-                    ? this.props.items.map((item, key) => (
-                        <TableRow
-                            key={key}
-                            className={key % 2 === 0 ? this.props.themeClass : null} // better coloring
-                        >
-                            <>
-                                {this.props.fields.map((field, index) => {
-                                    return (
-                                        <TableCell key={index} align="center">
-                                            {item[field] != null &&
-                                                !Array.isArray(item[field]) &&
-                                                typeof item[field] !== "object"
-                                                ? item[field]
-                                                : ""}
-                                        </TableCell>
-                                    );
-                                })}
-                                <TableCell align="center" size="small" padding="none">
-                                    <ActionMenu
-                                        url={this.props.resourceURL + "/" + item._id}
-                                        actions={this.props.actions}
-                                        actionResult={this.props.actionResult}
-                                    />
+                {this.props.fetching ?
+                    <TableRow>
+                        <TableCell>
+                            <strong>{trans('resource.fetching')}</strong>
+                        </TableCell>
+                    </TableRow> :
+                    (this.props.items.length > 0
+                        ? this.props.items.map((item, key) => (
+                            <TableRow
+                                key={key}
+                                className={key % 2 === 0 ? this.props.themeClass : null} // better coloring
+                            >
+                                <>
+                                    {this.props.fields.map((field, index) => {
+                                        return (
+                                            <TableCell key={index} align="center">
+                                                {item[field] != null &&
+                                                    !Array.isArray(item[field]) &&
+                                                    typeof item[field] !== "object"
+                                                    ? item[field]
+                                                    : ""}
+                                            </TableCell>
+                                        );
+                                    })}
+                                    <TableCell align="center" size="small" padding="none">
+                                        <ActionMenu
+                                            url={this.props.resourceURL + "/" + item._id}
+                                            actions={this.props.actions}
+                                            actionResult={this.props.actionResult}
+                                        />
+                                    </TableCell>
+                                </>
+                            </TableRow>
+
+                        ))
+                        : (
+                            <TableRow>
+                                <TableCell>
+                                    <strong>{trans('resource.dataNotFound')}</strong>
                                 </TableCell>
-                            </>
-                        </TableRow>
-
-                    ))
-                    : (
-                        <TableRow>
-                            <TableCell>
-                                <strong>{trans('resource.dataNotFound')}</strong>
-                            </TableCell>
-                        </TableRow>
-                    )}
+                            </TableRow>
+                        ))}
             </TableBody>
-
         )
     }
 }

@@ -23,7 +23,8 @@ export const localeEN: Language = {
     delete: "Delete",
     dataNotFound: "Data Not Found",
     recordDeleted: ":data Deleted",
-    countRecordsFound: ":count Record Found"
+    countRecordsFound: ":count Record Found",
+    fetching: "Data Fetching"
   },
   db: {
     name: "Name",

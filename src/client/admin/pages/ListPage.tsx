@@ -16,19 +16,20 @@ class ListPage extends React.Component<IListPageProps & StyledComponentProps> {
     const buttonContainerStyle: React.CSSProperties = {
       margin: "10px 0px",
       float: "right"
-    }
+    }    
     return (
       <>
         <Helmet>
           <title>{trans("resource.list", { item: this.props.name })}</title>
         </Helmet>
         <ResultMessageBox />
-        <div className="button-container" style={buttonContainerStyle}>
-          <Button component={Link} className={this.props.classes.row} to={this.props.resource + "/create"}>
-            {trans("resource.add", { item: '' })}
-          </Button>
-        </div>
-
+        {!this.props.disableAdd && (
+          <div className="button-container" style={buttonContainerStyle}>
+            <Button component={Link} className={this.props.classes.row} to={this.props.resource + "/create"}>
+              {trans("resource.add", { item: '' })}
+            </Button>
+          </div>
+        )}
         <DataTable resourceURL={this.props.resource} themeClass={this.props.classes.row} fields={this.props.fields} actions={this.props.actions} />
       </>
     );
