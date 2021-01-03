@@ -1,6 +1,8 @@
 {
   "name": "mernt-starter-kit",
-  "version": "0.0.1",
+  "author": "Burak Eren Karasu",
+  "license": "MIT",
+  "version": "0.0.4",
   "description": "This is the starter kit for my projects",
   "main": "dist/server.js",
   "keywords": [
@@ -12,10 +14,9 @@
     "express",
     "node",
     "mongodb",
-    "ssr"
+    "ssr",
+    "cli"
   ],
-  "author": "Burak Eren Karasu",
-  "license": "MIT",
   "scripts": {
     "watch:build": "npx webpack  -w",
     "watch:server": "nodemon dist/server.js",
@@ -23,6 +24,7 @@
     "dev": "npm-run-all --parallel watch:*",
     "build": "webpack --progress"
   },
+  "bin": "./cli.js",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -58,7 +60,8 @@
     "redux": "4.0.5",
     "redux-form": "^8.3.6",
     "redux-thunk": "^2.3.0",
-    "serialize-javascript": "^4.0.0"
+    "serialize-javascript": "^4.0.0",
+    "yargs": "^13.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -84,6 +87,7 @@
     "@types/redux-form": "^8.3.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/serialize-javascript": "^4.0.0",
+    "@types/yargs": "^15.0.12",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.1.0",
     "babel-preset-react": "^6.24.1",
@@ -98,6 +102,7 @@
     "sass-loader": "^9.0.3",
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.2",
+    "ts-node": "^9.1.1",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",

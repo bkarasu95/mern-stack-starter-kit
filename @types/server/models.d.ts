@@ -17,12 +17,15 @@ export interface IProduct {
 
 }
 
+
+
 export interface LogModel extends Document {
-  type: string
-  url: string
+  type: 'rest' | 'cli'
+  endpoint: string
   log: object
   message: string
-  statusCode: number
+  status: "error" | "warning" | "success"
+  statusCode?: number
   createdAt?: Date
   updatedAt?: Date
   deletedAt?: Date
@@ -30,10 +33,11 @@ export interface LogModel extends Document {
 
 export interface ILog {
   type: LogModel['type']
-  url: LogModel['url']
+  endpoint: LogModel['endpoint']
   log: LogModel['log']
   message: LogModel['message']
-  statusCode: LogModel['statusCode']
+  status: LogModel['status']
+  statusCode?: LogModel['statusCode']
   createdAt?: LogModel['createdAt']
   updatedAt?: LogModel['updatedAt']
   deletedAt?: LogModel['deletedAt']

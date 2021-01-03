@@ -29,10 +29,11 @@ export const errorHandler = (error: HttpException, request: Request, response: R
 
     sysLog({
         message: error.message,
-        log: { error: error.error },
+        log: { error: error },
         statusCode: status,
-        url: request.originalUrl,
-        type: "error"
+        endpoint: request.originalUrl,
+        type: "rest",
+        status: "error"
     })
     return response.status(status).setMessage(message).customResponse(data);
 };

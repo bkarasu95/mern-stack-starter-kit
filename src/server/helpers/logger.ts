@@ -5,10 +5,11 @@ import ModelService from "../services/ModelService.service";
 export const sysLog = (log: ILog) => {
     const logService = new ModelService(Log);
     const logModel: ILog = {
-        url: log.url,
+        endpoint: log.endpoint,
         type: log.type,
         message: log.message,
         log: log.log,
+        status: log.status,
         statusCode: log.statusCode
     };
     logService.insert(logModel);

@@ -32,7 +32,6 @@ export interface Language {
     updatedAt: string;
     images: string;
     status: string;
-
   };
 
 }

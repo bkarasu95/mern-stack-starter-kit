@@ -2,7 +2,7 @@
 
 ## Migrating
 
-we use migrating for better data structure. so if you have newly installed the starter kit, i recommend the migrate.
+We use migrating for better data structure.
 
 ```shellscript
     migrate-mongo up
@@ -14,11 +14,27 @@ If you want create new migration, run
     migrate-mongo create "<your_migration>"
 ```
 
-We don't/can't migrate the schema, because nature of mongodb. So use migration only for data changing in exists schema or new data inserting(only required recommended) to collection.
+## Seeding
+
+You can generate the seed file by the cli:
+
+```shellscript
+    node cli make:seed <class>
+```
+
+You can create the seed without using cli for sure, but I don't recommend it because of you may miss some rules that needs for works correctly.
+
+You can run the seed by using cli:
+
+```shellscript
+    node cli db:seed <class>
+```
+
+Seed classes gets from server/database/seeds folder.
 
 ## Model Structure
 
-By default some features would do its jobs automatically. But you have to follow some rules. 
+By default some features would do its jobs automatically. But you have to follow some rules.
 
 1. Automatic URL: If there is **slug** and **name** fields in your model, system assigns the slug from name as seo friendly url, you can set the slug manually if you want.
 2. Images: If there is **images** field in your request.body object, system processes the image, moves the files to server folder and saves child as **images** field to its model.

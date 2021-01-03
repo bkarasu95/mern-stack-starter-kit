@@ -6,9 +6,9 @@ const LogsSchema: Schema = new Schema(
         type: {
             type: String,
             required: true,
-            enum: ['error', 'app', 'admin'],
+            enum: ['rest', 'cli'],
         },
-        url: {
+        endpoint: {
             type: String,
             required: true,
         },
@@ -18,11 +18,15 @@ const LogsSchema: Schema = new Schema(
         },
         message: {
             type: String,
-            required: true,
+            required: true
+        },
+        status: {
+            type: String,
+            enum: ["error", "warning", "success"],
+            required: true
         },
         statusCode: {
-            type: Number,
-            required: true,
+            type: Number
         },
         deletedAt: {
             type: Date,

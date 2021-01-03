@@ -1,8 +1,8 @@
 # MERN Stack Web App Starter Kit
 
-This is starter kit for developing content based web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder. 
+This is starter kit for developing content based web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder.
 
-**Caution:** This project hasn't finished yet. So some features may has bug, project structure can change etc. It would be better to wait for the release.
+**Caution:** This project hasn't finished yet. So some features may be buggy, project structure can change etc
 
 Additional integrations are provided:
 
@@ -10,6 +10,7 @@ Additional integrations are provided:
 * Server Side Rendering for User App side
 * React Router
 * React Redux
+* CLI
 
 Install all dependencies
 
@@ -17,15 +18,14 @@ Install all dependencies
     npm install  
 ```
 
-Required npm packages globally:
+Required npm packages globally for every environments:
 
 1. migrate-mongo - migrating data for mongodb
 2. pm2 - deploying nodejs application
 
-For development, we use some npm packages globally that helps the development:
+For development environment, we use some npm packages globally that helps the development:
 
 1. nodemon
-2. tree-extended - generating the project's folder structure, run in project's root directory
 
 Migrate the database:
 
@@ -42,6 +42,24 @@ You can easily start the web app. Start the listeners
 ```shellscript
     npm run dev  
 ```
+
+## CLI
+
+This kit includes its cli system.
+
+You may execute with:
+
+```shellscript
+    node cli <command>
+```
+
+To view a list of all available commands, you may use the list command:
+
+```shellscript
+    node cli --help
+```
+
+You may generate your own commands. For more detail, see the cli.md file in docs folder.
 
 ## DEPLOYMENT
 
@@ -61,14 +79,14 @@ You can start the pm2 at the project's root directory:
 
 ## Roadmap
 
-Project is close to completion, but i have some plans for better development.
+Project is close to completion, but I have some plans for better development.
 
-* Database Seeding System
+* ~~Database Seeding System~~
 * Changable Language System
 * Testing Tools integrations and samples
-* Error logging and showing in admin panel
+* Error,system etc. logging and showing in admin panel
 * App monitoring in admin panel
-* Content Editor and Dynamic and Configurable Forms
+* ~~Content Editor and Dynamic and Configurable Forms~~
 * Admin Full Theme Support
 * SEO support for contents
 * Thumbnail Image Making

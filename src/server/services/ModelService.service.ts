@@ -60,7 +60,6 @@ class ModelService {
      * @param id - delete the document by id
      */
     delete = async (id: string) => {
-        // TODO maybe we can check the model has deletedAt
         let model = await this.model.find({ _id: id, deletedAt: { $exists: true } }).catch((err) => { // check the deletedAt field for soft deleting
             if (err) throw new HttpException(500, err.message);
         });
