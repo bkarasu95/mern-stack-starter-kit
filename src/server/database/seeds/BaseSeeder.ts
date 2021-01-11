@@ -4,7 +4,7 @@ dotenv.config();
 
 
 export default abstract class BaseSeeder {
-    private db?: MongoClient;
+    private db?: MongoClient | null;
     protected dbo?;
     constructor() {
         this.db = null;
@@ -26,7 +26,9 @@ export default abstract class BaseSeeder {
         });
     }
     closeDB() {
-        this.db.close();
+        if (this.db != null) {
+            this.db.close();
+        }
     }
     /**
      * @throws {Error}

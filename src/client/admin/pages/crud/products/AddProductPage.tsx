@@ -2,6 +2,7 @@ import React from "react";
 import { FieldItem } from "../../../../../../@types/client/admin/form";
 import CreatePage from "../../CreatePage";
 import faker from "faker";
+
 class AddProductPage extends React.Component {
   render() {
     const items: Array<FieldItem> = [

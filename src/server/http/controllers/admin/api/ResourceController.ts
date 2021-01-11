@@ -17,9 +17,8 @@ abstract class ResourceController {
         try {
             let limitParam: string = typeof req.query.limit != "undefined" ? req.query.limit.toString() : "";
             let offsetParam: string = typeof req.query.start != "undefined" ? req.query.start.toString() : "";
-            let where: object = typeof req.query.where != "undefined" ? this.whereStringToObject(req.query.where.toString()) : {};
+            let where: object = typeof req.query.search != "undefined" ? this.whereStringToObject(req.query.search.toString()) : {};            
             let fields: object = typeof req.query.fields != "undefined" ? {} : {};
-
             let count = await this.service.count(where); // total data count, useful for pagination 
             let limit: number | null = Number.parseInt(limitParam);
             let offset: number | null = Number.parseInt(offsetParam);
@@ -138,7 +137,7 @@ abstract class ResourceController {
      * @param where 
      */
     private whereStringToObject(where: string): object {
-        let whereObject = {};
+        let whereObject = {};        
         let whereFields = where.split(','); // split the query by ',' 
         if (whereFields.length > 1) {
             for (let key in whereFields) {
@@ -148,10 +147,10 @@ abstract class ResourceController {
                 whereObject[condition[0]] = condition[1];
             }
         } else {
-            // TODO add the > , < etc. operators
-            let condition = where.split('='); // left side would field, right side would value
+            // TODO add the > , < etc. operators            
+            let condition = where.split('='); // left side would field, right side would value            
             whereObject[condition[0]] = condition[1];
-        }
+        }       
         return whereObject;
     }
 }

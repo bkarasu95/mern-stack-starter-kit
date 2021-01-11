@@ -40,21 +40,10 @@ class App extends React.Component<IAppProps, IAppState> {
               {this.props.user == null ? (
                 <Route exact path="/" component={LoginPage} />
               ) : (
-                <>
-                  {/* <Route exact path="/" component={Authenticated} />
-                  <Route
-                    exact
-                    path="/:model/:id/:action"
-                    component={Authenticated}
-                  />
-                  <Route
-                    exact
-                    path="/:model/:action"
-                    component={Authenticated}
-                  /> */}
-                  <Route exact path="/*" component={Authenticated} />
-                </>
-              )}
+                  <>
+                    <Route exact path="/*" component={Authenticated} />
+                  </>
+                )}
             </Switch>
           </div>
         )}

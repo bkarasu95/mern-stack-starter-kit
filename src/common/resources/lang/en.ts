@@ -20,6 +20,7 @@ export const localeEN: Language = {
     edit: "Edit :item",
     update: "Update",
     show: "Show",
+    filter: "Filter",
     delete: "Delete",
     dataNotFound: "Data Not Found",
     recordDeleted: ":data Deleted",

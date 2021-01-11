@@ -1,7 +1,19 @@
+import { FilterField, IFilter } from "./form";
+
 export const SERVER_RESULT = "server_result";
 export const CLEAR_RESULT = "clear_result";
 export const SET_SHOWED_RESULT = "set_showed_result";
+export const SET_FILTER = "set_filter";
 export type result = 'error' | 'info' | 'success' | 'warning' | null;
+
+export interface IFilterRedux {
+    type: "set_filter"
+    payload: IFilterFields
+}
+
+export interface IFilterFields {
+    fields: Array<IFilter>
+}
 
 export interface Message {
     message: string | null

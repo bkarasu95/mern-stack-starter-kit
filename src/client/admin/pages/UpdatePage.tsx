@@ -9,7 +9,8 @@ import ApiRequest from "../libraries/ApiRequest";
 
 const UpdateForm = (props) => {
   const { handleSubmit, items } = props;
-  return <CustomForm handleSubmit={handleSubmit} items={items} />;
+  // TODO add footerComponent
+  return <CustomForm  handleSubmit={handleSubmit} items={items} />;
 };
 
 let UpdateFormRedux: any = reduxForm({
@@ -30,6 +31,7 @@ class UpdatePage extends React.Component<IUpdatePageProps, IUpdatePageState> {
     requester
       .get(this.props.resource + "/" + this.props.id)
       .then((res: any) => {
+        // pass the values that fetched from server to each input fields
         let data: object = res.data.data;
         items = this.state.items;
         for (let key in data) {

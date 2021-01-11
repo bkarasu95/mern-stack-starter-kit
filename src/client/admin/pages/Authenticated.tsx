@@ -1,5 +1,4 @@
 import { CssBaseline, Grid } from "@material-ui/core";
-// import  from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
 import { connect } from "react-redux";
@@ -30,6 +29,8 @@ class Authenticated extends React.Component<RouteConfigComponentProps<{}> & IAut
       padding: "20px 10px"
     };
     return (
+      // TODO add redirect support via redux
+
       typeof this.props.theme.palette !== "undefined" &&
       <ThemeProvider theme={this.props.theme}>
         <CssBaseline />

@@ -19,6 +19,7 @@ export interface Language {
     update: string;
     show: string;
     delete: string;
+    filter: string;
     dataNotFound: string;
     recordDeleted: string;
     countRecordsFound: string;

@@ -27,7 +27,8 @@ exec('npx ts-node ./src/cli/cli.ts' + argumentAsString, (error, stdout, stderr) 
       log: {
         output: stdout
       },
-      status: "success"
+      status: "success",
+      createdAt: new Date()
     }
     dbLog(log);
   } catch (e) {

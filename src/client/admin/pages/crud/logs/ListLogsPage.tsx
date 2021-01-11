@@ -5,12 +5,12 @@ import ListPage from "../../ListPage";
 
 class ListLogsPage extends React.Component<RouteConfigComponentProps> {
     render() {
-        const fields = ["url", "message", "type", "createdAt"];
+        const fields = ["endpoint", "message", "type", "createdAt"];
         const actions: IListActions = ["show"];
         return (
             <ListPage
                 actions={actions}
-                resource={"logs?where=type=" + this.props.match.params.type}
+                resource={"/logs"}
                 name="Kayıtlar" /** add the  multiple language support */
                 fields={fields}
                 disableAdd

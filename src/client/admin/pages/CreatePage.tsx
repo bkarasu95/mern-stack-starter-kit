@@ -1,3 +1,4 @@
+import { Button, Checkbox, FormControlLabel } from "@material-ui/core";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Redirect } from "react-router-dom";
@@ -11,9 +12,37 @@ import ResultMessageBox from "../components/form/ResultMessageBox";
 import ApiRequest from "../libraries/ApiRequest";
 import { showServerResult } from '../store/result/actions';
 
+class CreateFormFooter extends React.Component {
+  render() {
+    const submitStyle: React.CSSProperties = {
+      marginLeft: "auto",
+      marginTop: "10px",
+    };
+    return (
+      <>
+        {/** TODO add the functionality, it has no effect for now */}
+        <FormControlLabel
+          value="continue"
+          control={<Checkbox color="primary" checked={false} />}
+          label="Oluşturmaya Devam Et"
+          labelPlacement="start"
+        />
+        <Button
+          type="submit"
+          style={submitStyle}
+          variant="contained"
+          color="primary"
+        >
+          {trans("resource.add", { item: "Ürün" })}
+        </Button>
+      </>
+    );
+  }
+}
+
 const CreateForm = (props) => {
   const { handleSubmit, items } = props;
-  return <CustomForm handleSubmit={handleSubmit} items={items} />;
+  return <CustomForm footerComponent={<CreateFormFooter />} handleSubmit={handleSubmit} items={items} />;
 };
 
 let CreateFormRedux: any = reduxForm({
@@ -24,11 +53,9 @@ class CreatePage extends React.Component<ICreatePageProps, ICreatePageState> {
   constructor(props) {
     super(props);
     this.state = {
+      // TODO make this redirecting global using redux.
       redirectURL: null
     }
-  }
-  changeRedirectURL(url: string | null) {
-    this.setState({ redirectURL: url })
   }
   submit = (values: object) => {
     const requester = new ApiRequest();
@@ -53,7 +80,6 @@ class CreatePage extends React.Component<ICreatePageProps, ICreatePageState> {
               <title>{trans("resource.add", { item: this.props.name })}</title >
             </Helmet >
             <ResultMessageBox />
-
             <CreateFormRedux onSubmit={this.submit} items={this.props.items} />
           </>)
         }

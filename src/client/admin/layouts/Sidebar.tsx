@@ -22,25 +22,8 @@ class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
           {
             name: "logs",
             label: "Kayıtlar",
-            items: [
-              {
-                name: "app_logs",
-                label: "Uygulama Kayıtları",
-                url: "/logs/app"
-              },
-              {
-                name: "panel_logs",
-                label: "Admin Panel Kayıtları",
-                url: "/logs/admin"
-              },
-              {
-                name: "error_logs",
-                label: "Hata Kayıtları",
-                url: "/logs/error"
-              },
-            ]
+            url: "/logs"
           }
-
         ],
       },
     ];

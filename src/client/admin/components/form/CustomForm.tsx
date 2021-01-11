@@ -1,59 +1,31 @@
-import { Button, Checkbox, FormControlLabel, Grid } from "@material-ui/core";
-import React, { ChangeEvent } from "react";
-import {
-  FieldItem,
-  ICustomFormProps,
-  ICustomFormState
-} from "../../../../../@types/client/admin/form";
+import { Grid } from "@material-ui/core";
+import React from "react";
+import { FieldItem, ICustomFormProps } from "../../../../../@types/client/admin/form";
 import FormFieldLoader from "./FormFieldLoader";
 
-class CustomForm extends React.Component<ICustomFormProps, ICustomFormState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dontRedirect: false
-    }
-  }
-  handleContinueCheck(event: ChangeEvent<HTMLInputElement>): void {
-    this.setState({ dontRedirect: !this.state.dontRedirect })
-  }
+class CustomForm extends React.Component<ICustomFormProps> {
+
   render() {
     const formStyle: React.CSSProperties = {
       width: "100%",
       display: "flex",
       flexDirection: "column",
     };
-    const submitStyle: React.CSSProperties = {
-      marginLeft: "auto",
-      marginTop: "10px",
-    };
+    const fieldStyle: React.CSSProperties = {
+      margin: "10px 0",
+    }
     return (
-      <form
-        className="wysiwyg-editor"
-        style={formStyle}
-        onSubmit={this.props.handleSubmit}
-      >
+      <form style={formStyle} onSubmit={this.props.handleSubmit}>
         {this.props.items.map((item: FieldItem) => {
-          return <FormFieldLoader key={item.name} item={item} />
+          // render the form input fields
+          return <FormFieldLoader style={fieldStyle} key={item.name} item={item} />
         })}
-        <Grid container alignContent="flex-end">
-          {/** TODO add the functionality, it has no effect for now */}
-          <FormControlLabel
-            value="continue"
-            control={<Checkbox color="primary" checked={this.state.dontRedirect} onChange={(e) => this.handleContinueCheck(e)} />}
-            label="Oluşturmaya Devam Et"
-            labelPlacement="start"
-          />
-          <Button
-            type="submit"
-            style={submitStyle}
-            variant="contained"
-            color="primary"
-          >
-            Ürün Ekle
-          </Button>
-        </Grid>
-
+        {/* TODO this grid shouldnt be here, think about there */}
+        {this.props.footerComponent != null && (
+          <Grid container direction="row" justify="space-between" alignContent="center" style={fieldStyle}>
+            {this.props.footerComponent}
+          </Grid>
+        )}
       </form>
     );
   }

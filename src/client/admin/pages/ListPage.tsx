@@ -16,7 +16,7 @@ class ListPage extends React.Component<IListPageProps & StyledComponentProps> {
     const buttonContainerStyle: React.CSSProperties = {
       margin: "10px 0px",
       float: "right"
-    }    
+    }
     return (
       <>
         <Helmet>
@@ -30,7 +30,7 @@ class ListPage extends React.Component<IListPageProps & StyledComponentProps> {
             </Button>
           </div>
         )}
-        <DataTable resourceURL={this.props.resource} themeClass={this.props.classes.row} fields={this.props.fields} actions={this.props.actions} />
+        <DataTable filterFields={this.props.filterItems} resourceURL={this.props.resource} themeClass={this.props.classes.row} fields={this.props.fields} actions={this.props.actions} />
       </>
     );
   }

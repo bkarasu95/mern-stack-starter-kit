@@ -1,4 +1,4 @@
-import { FieldItem, IListActions, IResourceGetRequestParams } from "./form";
+import { FieldItem, FilterField, IListActions, IResourceGetRequestParams } from "./form";
 import { Message } from "./redux";
 
 export interface ILoginPageProps { }
@@ -19,24 +19,24 @@ export interface ICrudPageProps {
 }
 
 export interface ICrudPageState {
-  redirectURL: string | null
+
 }
 
 interface ICreatePageProps extends ICrudPageProps {
-  items: Array<FieldItem>;
+  items: Array<FieldItem>; // form input fields
 }
 
 interface ICreatePageState extends ICrudPageState {
-
+  redirectURL: string | null // TODO add this to app-wide system
 }
 
 interface IUpdatePageProps extends ICrudPageProps {
-  items: Array<FieldItem>;
-  id: string;
+  items: Array<FieldItem>; // form input fields
+  id: string; // id of resource
 }
 
 interface IUpdatePageState {
-  items: Array<FieldItem>; // we will modify this object for setting default value
+  items: Array<FieldItem>; // we will modify this object for setting initial input values. so pass items props to state
   fetching: boolean;
 }
 
@@ -44,15 +44,8 @@ interface IListPageProps extends ICrudPageProps {
   fields: Array<string>; // for showing data fields
   actions: IListActions;
   disableAdd?: boolean; // disables the Add button in list
+  filterItems?: Array<FilterField>
 }
-
-interface IListPageState {
-  items: Array<any>; // data from server
-  fetching: boolean;
-  requestParams: IResourceGetRequestParams
-}
-
-
 export interface IResourceRouteProps {
   resource: string
 }
