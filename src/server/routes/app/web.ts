@@ -10,7 +10,7 @@ export const appWebRouter = express.Router();
 /**
  * Middleware Setups
  */
-appWebRouter.use(helmet({ contentSecurityPolicy: false })); // we don't need content security policy right now
+appWebRouter.use(helmet({ contentSecurityPolicy: false })); // TODO check this why we set this false
 appWebRouter.use(cors());
 
 // all pages redirects to react

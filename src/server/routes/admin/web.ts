@@ -11,7 +11,7 @@ export const adminWebRouter = express.Router();
 /**
  * Middleware Setups
  */
-adminWebRouter.use(helmet({ contentSecurityPolicy: false }));
+adminWebRouter.use(helmet({ contentSecurityPolicy: false })); // TODO check this why we set this false
 adminWebRouter.use(cors());
 
 adminWebRouter.get("/*", (req: Request, res: Response) => {

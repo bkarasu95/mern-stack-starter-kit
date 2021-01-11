@@ -1,8 +1,8 @@
 # MERN Stack Web App Starter Kit
 
-This is starter kit for developing content based web apps fastly. I also added some examples for showing how to system works. More detailed documentation explained in docs folder.
+This is starter kit that helps the quick start to developing small-medium sized content based web apps. I just added some basic dependencies for MERN stack development with Typescript. More detailed documentation explained in docs folder about how to system works and file structures.
 
-**Caution:** This project hasn't finished yet. So some features may be buggy, project structure can change etc
+**Caution:** This project hasn't finished yet. So some features may be buggy.
 
 Additional integrations are provided:
 
