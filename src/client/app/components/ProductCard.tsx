@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+
+// TODO it will remove on lite version
 class ProductCard extends React.Component<IProductCardProps> {
   render() {
     return (

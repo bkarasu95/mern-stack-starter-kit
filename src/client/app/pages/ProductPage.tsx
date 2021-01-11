@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import ImageGallery from "react-image-gallery";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { Store } from "redux";
@@ -9,6 +8,7 @@ import { IProduct, IProductImage } from "../../../../@types/common/product";
 import { store } from "../store";
 import { fetchProduct } from "../store/products/actions";
 
+// TODO it will remove on lite version
 class ProductPage extends React.Component<
   RouteComponentProps<RouteParams> & IProductProps
   > {
@@ -55,12 +55,9 @@ class ProductPage extends React.Component<
               <Row style={style}>
                 <Col md="6">
                   {images.length > 0 ? (
-                    <ImageGallery
-                      showPlayButton={false}
-                      items={images}
-                      showNav={false}
-                      useBrowserFullscreen={false}
-                    />
+                    <>
+                      {/* TODO  */}
+                    </>
                   ) : null}
                 </Col>
                 <Col md="6">

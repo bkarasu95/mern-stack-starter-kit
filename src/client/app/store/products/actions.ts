@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import { appApiURL } from "../../../resources/strings/apiURL";
 import { FETCH_PRODUCT, FETCH_PRODUCTS } from "./types";
 

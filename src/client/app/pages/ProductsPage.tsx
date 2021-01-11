@@ -8,6 +8,8 @@ import { trans } from "../../../common/resources/lang/translate";
  import ProductCard from "../components/ProductCard";
 import { store } from "../store";
 import { fetchProducts } from "../store/products/actions";
+
+// TODO it will remove on lite version
 class ProductsPage extends React.Component<
   RouteConfigComponentProps<{}> & IProductsProps,
   IProductsState
