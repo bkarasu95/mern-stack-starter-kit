@@ -32,6 +32,8 @@ You can run the seed by using cli:
 
 Seed classes gets from server/database/seeds folder.
 
+If you fill empty collection. I recommend to use mongoose for first data adding, it creates the collection indexes etc., after that you can safely use mongodb functions directly.
+
 ## Model Structure
 
 By default some features would do its jobs automatically. But you have to follow some rules.

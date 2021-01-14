@@ -8,6 +8,7 @@ import CustomTextInput from "./CustomTextInput";
 import ImageUploader from "./ImageUploader";
 import SelectField from "./SelectField";
 import WYSIWYG from "./WYSIWYG";
+import WYSIWYG2 from "./WYSIWYG2";
 
 class FormFieldLoader extends React.Component<IFormFieldLoaderProps> {
 
@@ -21,7 +22,7 @@ class FormFieldLoader extends React.Component<IFormFieldLoaderProps> {
                 component = CustomTextInput;
                 break;
             case "wysiwyg":
-                component = WYSIWYG;
+                component = WYSIWYG2;
                 break;
             case "switch":
                 component = CustomSwitch;

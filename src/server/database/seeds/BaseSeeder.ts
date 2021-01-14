@@ -1,16 +1,16 @@
 const dotenv = require("dotenv");
-import { MongoClient } from 'mongodb';
+import { Db, MongoClient } from 'mongodb';
 dotenv.config();
 
 
 export default abstract class BaseSeeder {
-    private db?: MongoClient | null;
-    protected dbo?;
+    private db: MongoClient | null;
+    protected dbo: Db | null;
     constructor() {
         this.db = null;
         this.dbo = null;
     }
-    connectDB() {
+    connectDB(): Promise<boolean> {
         var self = this;
         return new Promise((resolve, reject) => {
             var url: string = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/`;
@@ -41,15 +41,16 @@ export default abstract class BaseSeeder {
      */
     seed(): Promise<string> {
         return new Promise((resolve, reject) => {
-            try {
-                this.run().then(seedResult => {
-                    if (seedResult) {
-                        resolve("Seed completed");
-                    }
-                })
-            } catch (error) {
-                reject(error);
-            }
+            this.run().then(seedResult => {               
+                if (seedResult) {
+                    resolve("Seed completed");
+                }else{
+                    resolve("Seed Failed");
+                }
+            }).catch(err =>{
+                console.log(err);
+                resolve("Seed Failed");
+            })
         });
     }
 }

@@ -8,6 +8,7 @@ import ApiRequest from "./libraries/ApiRequest";
 import Authenticated from "./pages/Authenticated";
 import LoginPage from "./pages/LoginPage";
 import { login } from "./store/authenticate/actions";
+import { IPanelUser } from './../../../@types/client/admin/user.d';
 
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
@@ -20,7 +21,7 @@ class App extends React.Component<IAppProps, IAppState> {
     const requester = new ApiRequest();
     requester
       .get("auth-token")
-      .then((res: AxiosResponse) => {
+      .then((res: any) => {
         if (res.status === 200) {
           store.dispatch(login(res.data.data.user));
         }
@@ -53,7 +54,7 @@ class App extends React.Component<IAppProps, IAppState> {
 }
 
 export interface IAppProps {
-  user?: IUser;
+  user?: IPanelUser;
 }
 
 export interface IAppState {

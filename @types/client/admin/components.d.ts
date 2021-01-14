@@ -16,12 +16,12 @@ export interface IFilterProps {
 }
 
 export interface IFilterState {
-    items: Array<any> // data from server
+    // items: Array<any> // TODO data from server
+    showFilter: boolean
 }
 
 export interface IDataTableProps {
     resourceURL: string // server get endpoint for fetching data
-    themeClass: string | null // 
     fields: Array<string> // for showing data fields
     actions: IListActions // Action menu for each row
     filterFields?: Array<FilterField>  // available filter fields
@@ -69,4 +69,9 @@ export interface ISidebarElement {
     label: string,
     url?: string,
     items?: Array<ISidebarElement> // change it
+}
+
+export interface IResourceRoute {
+    link: string
+    serverResource?: string
 }

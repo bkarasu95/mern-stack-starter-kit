@@ -66,7 +66,7 @@ class ProductPage extends React.Component<
                   <p>{this.props.product.price} ₺</p>
                 </Col>
               </Row>
-              <Row>
+              <Row className="content">
                 <div dangerouslySetInnerHTML={{ __html: this.props.product.content }}></div>
               </Row>
             </>

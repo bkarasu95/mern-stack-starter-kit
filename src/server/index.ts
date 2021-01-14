@@ -23,27 +23,23 @@ server.use("/api", appApiRouter);
 server.use("/*", appWebRouter);
 
 // Database connection
-if (process.env.DB_CONNECTION === "mongodb") {
-  mongoose
-    .connect(
-      "mongodb://" +
-        process.env.DB_HOST +
-        ":" +
-        process.env.DB_PORT +
-        "/" +
-        process.env.DB_DATABASE,
-      {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-      }
-    )
-    .catch((err) => {
-      console.log("DB Connection Error: " + err.message);
-    });
-} else {
-  throw new Error("Invalid DB Driver");
-}
+mongoose
+  .connect(
+    "mongodb://" +
+    process.env.DB_HOST +
+    ":" +
+    process.env.DB_PORT +
+    "/" +
+    process.env.DB_DATABASE,
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .catch((err) => {
+    console.log("DB Connection Error: " + err.message);
+  });
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 server.listen(PORT);

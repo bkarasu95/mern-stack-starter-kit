@@ -82,12 +82,11 @@ You can start the pm2 at the project's root directory:
 Project is close to completion, but I have some plans for better development.
 
 * ~~Database Seeding System~~
-* Changable Language System
+* Changable Language System -- canceled
 * Testing Tools integrations and samples
-* Error,system etc. logging and showing in admin panel
-* App monitoring in admin panel
+* ~~Error,system etc. logging and showing in admin panel~~
+* App monitoring in admin panel -- canceled
 * ~~Content Editor and Dynamic and Configurable Forms~~
-* Admin Full Theme Support
-* SEO support for contents
+* ~~Admin Full Theme Support~~
+* SEO support for contents -- canceled
 * Thumbnail Image Making
-* DB transaction support

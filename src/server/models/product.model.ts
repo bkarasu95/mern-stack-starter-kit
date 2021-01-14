@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import * as mongoose from "mongoose";
 import { ProductModel } from "../../../@types/server/models";
 
-const ProductSchema: Schema = new Schema(
+const ProductSchema: mongoose.Schema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -48,7 +48,7 @@ const ProductSchema: Schema = new Schema(
 
 );
 ProductSchema.pre<ProductModel>("save", function (next) {
-  this.createdAt = new Date();
+  this.createdAt = new Date(); 
   next();
 });
 ProductSchema.pre<ProductModel>("update", function (next) {
@@ -56,4 +56,4 @@ ProductSchema.pre<ProductModel>("update", function (next) {
   next();
 });
 // TODO add the deleted_at support generally
-export const Product = mongoose.model<ProductModel>("Product", ProductSchema);
+export  const Product = mongoose.model<ProductModel>("Product", ProductSchema);

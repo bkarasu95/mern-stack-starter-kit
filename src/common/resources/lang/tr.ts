@@ -16,8 +16,8 @@ export const localeTR: Language = {
   resource: {
     // useful for admin panel
     management: ":item Yönetimi",
-    add: ":item Ekle",
-    update: ":item Güncelle",
+    add: "Ekle",
+    update: "Güncelle",
     list: ":item Listesi",
     edit: "Düzenle",
     show: "Göster",

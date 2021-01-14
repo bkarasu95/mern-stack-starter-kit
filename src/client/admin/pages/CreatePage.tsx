@@ -54,16 +54,28 @@ class CreatePage extends React.Component<ICreatePageProps, ICreatePageState> {
     super(props);
     this.state = {
       // TODO make this redirecting global using redux.
-      redirectURL: null
+      items: [],
+      redirectURL: null,
+      fetching: true
     }
+  }
+  componentDidMount() {
+    this.getData();
+  }
+  getData() {
+    const requester = new ApiRequest();
+    requester.get(this.props.serverResource + "/create").then((res: any) => {
+      const data = res.data.data;
+      this.setState({ fetching: false, ...data });
+    });
   }
   submit = (values: object) => {
     const requester = new ApiRequest();
     let fd = jsonToFormData(values);
-    requester.post(this.props.resource, fd).then((res: any) => {
+    requester.post(this.state.resource, fd).then((res: any) => {
       if (res.status === 200) {
         store.dispatch(showServerResult('success', res.data.message));
-        this.setState({ redirectURL: "/" + this.props.resource })
+        this.setState({ redirectURL: "/" + this.state.resource + "/list" })
       } else if (res.status >= 400 && res.status <= 499) {
         store.dispatch(showServerResult('warning', res.data.message));
       } else if (res.status >= 500) {
@@ -76,11 +88,17 @@ class CreatePage extends React.Component<ICreatePageProps, ICreatePageState> {
       <>
         {this.state.redirectURL ? (<Redirect to={this.state.redirectURL} />) : (
           <>
-            <Helmet>
-              <title>{trans("resource.add", { item: this.props.name })}</title >
-            </Helmet >
-            <ResultMessageBox />
-            <CreateFormRedux onSubmit={this.submit} items={this.props.items} />
+            {this.state.fetching ? (
+              <p>Sayfa Yükleniyor...</p> // TODO localization support
+            ) : (
+                <>
+                  <Helmet>
+                    <title>{this.state.title}</title >
+                  </Helmet >
+                  <ResultMessageBox />
+                  <CreateFormRedux onSubmit={this.submit} items={this.state.items} />
+                </>
+              )}
           </>)
         }
       </>

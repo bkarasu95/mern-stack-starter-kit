@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import * as mongoose from "mongoose";
 import { LogModel } from "../../../@types/server/models";
 
-const LogsSchema: Schema = new Schema(
+const LogsSchema: mongoose.Schema = new mongoose.Schema(
     {
         type: {
             type: String,

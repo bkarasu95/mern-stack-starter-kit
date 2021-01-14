@@ -7,6 +7,7 @@ import path from "path";
 import { fileSystem } from "../../config/filesystem";
 import HttpException from "../../exceptions/api/http-exception";
 import AuthController from "../../http/controllers/admin/api/AuthController";
+import FileController from "../../http/controllers/admin/api/FileController";
 import LogController from "../../http/controllers/admin/api/LogController";
 import ProductController from "../../http/controllers/admin/api/ProductController";
 import { Auth } from "../../http/middlewares/api/admin_auth.middleware";
@@ -16,7 +17,7 @@ import { Restful } from "../../http/middlewares/api/restful.middleware";
 import "../../libraries/ApiResponse";
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, fileSystem.imagesPath + "/uploads");
+    cb(null, path.join(fileSystem.imagesPath, "uploads"));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
@@ -62,33 +63,31 @@ adminApiRouter.get("/auth-token", AuthController.getUserByToken);
 
 adminApiRouter.use(Auth);
 
-adminApiRouter
-  .route("/products")
-  .get(ProductController.list)
-  .post(
-    upload.any(),
-    ProductController.validate("create"),
-    ProductController.insert
-  );
+adminApiRouter.route('/uploadFile').post(upload.any(), FileController.uploadFile);
 
+
+adminApiRouter.route("/products/list").get(ProductController.all);
+adminApiRouter.route("/products/create").get(ProductController.create);
+adminApiRouter.route("/products/:id/edit").get(ProductController.edit);
 adminApiRouter
   .route("/products/:id")
   .get(ProductController.show)
-  .put(
-    upload.any(),
-    ProductController.validate("update"),
-    ProductController.update
-  );
-adminApiRouter.put(
-  "/products/:id",
-  ProductController.validate("update"),
-  ProductController.update
-);
-adminApiRouter.delete("/products/:id", ProductController.delete);
+  .put(upload.any(), ProductController.validate("update"), ProductController.update)
+  .delete(ProductController.delete);
+adminApiRouter
+  .route("/products")
+  .get(ProductController.list)
+  .post(upload.any(), ProductController.validate("create"), ProductController.insert);
+
+
+
+// adminApiRouter.route("/products/:id/create").get(ProductController.create);
 
 adminApiRouter
   .route("/logs")
   .get(LogController.list);
+adminApiRouter.route("/logs/list").get(LogController.all);
+
 /**
  * After Middleware
  */

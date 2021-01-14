@@ -1,11 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
+import { IFormProperties, IGridProperties } from "../../../../../../@types/server/admin/resource";
 import HttpException from "../../../../exceptions/api/http-exception";
 import { toURLConverter } from "../../../../helpers/route";
 import ModelService from "../../../../services/ModelService.service";
 
 abstract class ResourceController {
     protected abstract service: ModelService; // use the service layer for db proccesses. don't access db directly
+
+    protected abstract title: string;
+
+    protected abstract serviceURL: string;
 
     /**
      * 
@@ -17,13 +22,14 @@ abstract class ResourceController {
         try {
             let limitParam: string = typeof req.query.limit != "undefined" ? req.query.limit.toString() : "";
             let offsetParam: string = typeof req.query.start != "undefined" ? req.query.start.toString() : "";
-            let where: object = typeof req.query.search != "undefined" ? this.whereStringToObject(req.query.search.toString()) : {};            
+            let where: object = typeof req.query.search != "undefined" ? this.whereStringToObject(req.query.search.toString()) : {};
             let fields: object = typeof req.query.fields != "undefined" ? {} : {};
             let count = await this.service.count(where); // total data count, useful for pagination 
             let limit: number | null = Number.parseInt(limitParam);
             let offset: number | null = Number.parseInt(offsetParam);
             const data = await this.service.findAll(where, fields, limit, offset);
             res.setMessage("Records Fetched").customResponse({ items: data, total: count });
+            next();
         } catch (e) {
             next(e); // if you take an error, pass the function and go to middleware
         }
@@ -35,13 +41,15 @@ abstract class ResourceController {
      * @param res ExressJS Response object
      * @param next ExressJS Next function
      */
-    show = async (req: Request, res: Response, next: NextFunction) => {
+    get = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const item = await this.service.find({ _id: req.params.id });
             if (item.length === 0) {
                 throw new HttpException(400, "Record Not Found");
             }
             res.setMessage("Record Fetched").customResponse(item);
+            next();
+
         } catch (e) {
             next(e); // if you take an error, pass the function and go to middleware
         }
@@ -53,7 +61,7 @@ abstract class ResourceController {
      * @param res ExressJS Response object
      * @param next ExressJS Next function
      */
-    insert = async (req: Request, res: Response, next: NextFunction) => {
+    insert = async (req: Request, res: Response, next: NextFunction) => {       
         try {
             const validationError = validationResult(req);
             if (!validationError.isEmpty()) {
@@ -84,7 +92,7 @@ abstract class ResourceController {
      * @param res ExressJS Response object
      * @param next ExressJS Next function
      */
-    update = async (req: Request, res: Response, next: NextFunction) => {
+    update = async (req: Request, res: Response, next: NextFunction) => {       
         try {
             const validationError = validationResult(req);
             if (!validationError.isEmpty()) {
@@ -118,6 +126,50 @@ abstract class ResourceController {
             next(e);
         }
     };
+
+    all = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            res.setMessage("List Page Properties").customResponse({ ...this.grid(), title: this.title, resource: this.serviceURL });
+        } catch (e) {
+            next(e);
+        }
+    };
+
+    create = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            res.setMessage("Create Page Properties").customResponse({ ...this.form(), title: this.title, resource: this.serviceURL });
+        } catch (e) {
+            next(e);
+        }
+    };
+
+    edit = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const data = await this.service.find({ _id: req.params.id });
+            if (data.length === 0) {
+                throw new HttpException(400, "Record Not Found");
+            }
+            let form = this.form();
+            for (let key in data) {
+                for (let item in form.items) {
+                    if (form.items[item].name === key) {
+                        form.items[item].initialValue = data[key];
+                        break;
+                    }
+                }
+            }
+            res.setMessage("Edit Page Properties").customResponse({ ...form, title: this.title, resource: this.serviceURL });
+        } catch (e) {
+            next(e);
+        }
+    };
+
+    abstract grid(): IGridProperties;
+
+    abstract form(): IFormProperties;
+
+    abstract show(): void;
+
     /**
      * TODO make a structure that can impelemetable
      * @param method 
@@ -137,7 +189,7 @@ abstract class ResourceController {
      * @param where 
      */
     private whereStringToObject(where: string): object {
-        let whereObject = {};        
+        let whereObject = {};
         let whereFields = where.split(','); // split the query by ',' 
         if (whereFields.length > 1) {
             for (let key in whereFields) {
@@ -150,7 +202,7 @@ abstract class ResourceController {
             // TODO add the > , < etc. operators            
             let condition = where.split('='); // left side would field, right side would value            
             whereObject[condition[0]] = condition[1];
-        }       
+        }
         return whereObject;
     }
 }

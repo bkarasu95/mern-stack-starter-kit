@@ -3,23 +3,26 @@ import * as dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
 import jwt, { Secret, VerifyErrors } from "jsonwebtoken";
 import HttpException from "../../../../exceptions/api/http-exception";
-import * as AdminUserService from "../../../../services/admin_users.service";
+import { IPanelUser } from './../../../../../../@types/client/admin/user.d';
+import { AdminUser } from './../../../../models/admin_user.model';
+import ModelService from './../../../../services/ModelService.service';
 dotenv.config();
 
 class AuthController {
+  service: ModelService = new ModelService(AdminUser);
   async login(req: Request, res: Response, next: NextFunction) {
     try {
-      const adminUser = await AdminUserService.find(req.body.username);
+      const adminUser = await this.service.find({ username: req.body.username });
       if (
         adminUser == null ||
         !(await bcrypt.compare(req.body.password, adminUser.password))
       ) {
         throw new HttpException(400, "Admin Not Found");
       }
-      const user: object = {
+      const user: IPanelUser = {
         username: adminUser.username,
         name: adminUser.name,
-        admin: true,
+        role: "admin"
       };
       if (process.env.JWT_SECRET == null) {
         throw new HttpException(500, "JWT Secret Token Not Defined");

@@ -18,7 +18,6 @@ export async function fetchProduct(name: string) {
     };
   }).catch((err: AxiosError) => {
     if (typeof err.response !== "undefined") { // it means the error gets from server
-      console.log(err.response);
     } else {
       // TODO log the error
     }

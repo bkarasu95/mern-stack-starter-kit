@@ -53,9 +53,21 @@ class ActionMenu extends React.Component<
   }
 
   render() {
-    const LinkStyle: React.CSSProperties = {
-      textDecoration: "none",
-    };
+    const menuItemStyle: React.CSSProperties = {
+      width: "100%",
+      padding: "0"
+    }
+    const buttonStyle: React.CSSProperties = {
+      padding: "5px 10px",
+      width: "100%",
+    }
+    const linkStyle: React.CSSProperties = {
+      textDecoration: "none"
+    }
+    const deleteWrapperStyle: React.CSSProperties = {
+      padding: "0px",
+      width: "100%"
+    }
     return (
       <>
         <Button aria-controls="simple-menu" onClick={this.handleClick}>
@@ -71,23 +83,21 @@ class ActionMenu extends React.Component<
           {Object.values(this.props.actions).map(
             (action: string, index: number) => {
               return (
-                <MenuItem key={index}>
+                <MenuItem key={index} style={menuItemStyle}>
                   {action != "delete" // delete action dont have its page so it must be
                     ? (
-                      <Link
-                        className={this.props.classes.link}
-                        style={LinkStyle}
-                        to={"/" + this.props.url + "/" + action}
-                      >
-                        {trans("resource." + action)}
+                      <Link style={linkStyle} className={this.props.classes.link} to={"/" + this.props.url + "/" + action}>
+                        <Button style={buttonStyle}>{trans("resource." + action)}</Button>
                       </Link>
                     ) : (
-                      <div>
-                        <Button onClick={() => {
-                          // close the menu and show the confirmation dialog
-                          this.handleDialogShow();
-                          this.handleClose();
-                        }}>
+                      <div style={deleteWrapperStyle}>
+                        <Button
+                          style={buttonStyle}
+                          onClick={() => {
+                            // close the menu and show the confirmation dialog
+                            this.handleDialogShow();
+                            this.handleClose();
+                          }}>
                           {trans("resource." + action)}
                         </Button>
                         <ConfirmationDialog opened={this.state.dialogOpened} closeFunction={this.handleDialogClose} actionFunction={this.handleDelete} />

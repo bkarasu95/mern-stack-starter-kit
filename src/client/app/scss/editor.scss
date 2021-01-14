@@ -1,0 +1,25 @@
+.multi-preview {
+  img {
+    width: 100px;
+    margin: 0 10px;
+  }
+}
+
+.content {
+  max-width: 100%;
+}
+
+.content img {
+  max-width: 100%;
+}
+
+.content * {
+  white-space: -moz-pre-wrap !important;
+  white-space: -pre-wrap !important;
+  white-space: -o-pre-wrap !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  white-space: -webkit-pre-wrap;
+  word-break: break-all !important;
+  white-space: normal !important;
+}

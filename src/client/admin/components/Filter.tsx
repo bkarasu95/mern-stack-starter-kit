@@ -8,7 +8,7 @@ import { ITheme } from "../../../../@types/client/admin/theme";
 import { trans } from "../../../common/resources/lang/translate";
 import { setFilter } from "../store/filter/actions";
 import CustomForm from "./form/CustomForm";
-
+import FilterListIcon from '@material-ui/icons/FilterList';
 const styles = (theme: ITheme) => createStyles({
     resetButton: {
         backgroundColor: theme.palette.third.main,
@@ -31,7 +31,7 @@ class FilterFormFooter extends React.Component<StyledComponentProps>{
                             store.dispatch(setFilter({ fields: [] }));
                         }}
                     >
-                        {/* TODO */}
+                        {/* TODO localization */}
                     Filtreyi Temizle
                 </Button>
 
@@ -60,6 +60,15 @@ let FilterFormRedux: any = reduxForm({
 
 
 class Filter extends React.Component<IFilterProps, IFilterState>{
+    constructor(props) {
+        super(props);
+        this.state = {
+            showFilter: false
+        }
+    }
+    showFilter(filter: boolean) {
+        this.setState({ showFilter: !filter })
+    }
     submit = (requestFields: IFormPostRequestFields) => {
         let filters: Array<IFilter> = [];
         let count: number = 0;
@@ -74,11 +83,23 @@ class Filter extends React.Component<IFilterProps, IFilterState>{
     };
 
     render() {
+        const filterStyle: React.CSSProperties = {
+            margin: "20px 0px"
+        }
         return (
-            <>
-                {/* add "like" operator support */}
-                <FilterFormRedux onSubmit={this.submit} items={this.props.items} />
-            </>
+            <Grid container direction="column" style={filterStyle}>
+                <Grid item md={3}>
+                    <Button onClick={(e) => { this.showFilter(this.state.showFilter) }}><FilterListIcon />Filtrele</Button>
+                </Grid>
+                {this.state.showFilter && (
+                    <Grid item md={12} container justify="center">
+                        <Grid item md={9}>
+                            {/* TODO add "like" operator support */}
+                            <FilterFormRedux onSubmit={this.submit} items={this.props.items} />
+                        </Grid>
+                    </Grid>
+                )}
+            </Grid>
         );
     }
 }

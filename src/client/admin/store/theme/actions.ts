@@ -17,6 +17,10 @@ export function setTheme(theme: "dark" | "light") {
             third: {
                 main: theme === "dark" ? orange[900] : orange[500],
                 contrastText: "#eeeeee",
+            },
+            editor: {
+                main: theme === "dark" ? orange[900] : orange[500],
+                contrastText: theme === "dark" ? "#eeeeee" : "#000000",
             }
         },
     } as IThemeOptions);

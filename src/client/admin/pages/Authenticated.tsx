@@ -16,7 +16,7 @@ class Authenticated extends React.Component<RouteConfigComponentProps<{}> & IAut
   componentDidMount() {
     store.dispatch(setTheme(localStorage.getItem("admin:theme") === "dark" ? "dark" : "light")) // TODO fix this issue
   }
-  componentWillReceiveProps(prevProps) { // TODO change this method, deprecated
+  componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.props.result.showed) {
         store.dispatch(clearResult()) // TODO fix this issue

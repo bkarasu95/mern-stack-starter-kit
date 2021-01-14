@@ -15,7 +15,7 @@ export const localeEN: Language = {
   },
   resource: {
     management: ":item Management",
-    add: "Add :item",
+    add: "Add",
     list: ":item List",
     edit: "Edit :item",
     update: "Update",

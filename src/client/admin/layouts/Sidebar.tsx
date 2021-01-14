@@ -13,7 +13,7 @@ class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
       {
         name: "product_management",
         label: trans("resource.management", { item: "Ürün" }),
-        url: "/products",
+        url: "/products/list",
       },
       {
         name: "app_management",
@@ -22,7 +22,7 @@ class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
           {
             name: "logs",
             label: "Kayıtlar",
-            url: "/logs"
+            url: "/logs/list"
           }
         ],
       },

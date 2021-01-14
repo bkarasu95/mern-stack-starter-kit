@@ -45,11 +45,15 @@ class ModelService {
      * insert the item to collection
      * @param newItem item that will insert to collection
      */
-    insert = async (newItem: any) => {
+    insert = async (newItem: object): Promise<boolean> => {
         let model = new this.model(newItem);
-        await model.save().catch((err: Error) => {
-            throw new HttpException(400, err.message);
-        });
+        return await model.save()
+            .then((savedDoc: any) => {
+                return savedDoc === model;
+            }).catch((err: any) => {
+                console.log(err);
+                return false;
+            });
     };
     update = async (id: string, updatedModel: Document) => {
         await this.model.findByIdAndUpdate(id, updatedModel);

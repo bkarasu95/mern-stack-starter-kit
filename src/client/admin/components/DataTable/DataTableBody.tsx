@@ -1,10 +1,10 @@
-import { TableRow, TableCell, TableBody } from "@material-ui/core";
+import { TableRow, TableCell, TableBody, withStyles, StyledComponentProps } from "@material-ui/core";
 import React from "react";
 import { IDataTableBodyProps } from "../../../../../@types/client/admin/components";
 import { trans } from "../../../../common/resources/lang/translate";
 import ActionMenu from "../form/ActionMenu";
 
-class DataTableBody extends React.Component<IDataTableBodyProps> {
+class DataTableBody extends React.Component<IDataTableBodyProps & StyledComponentProps> {
     render() {
         return (
             <TableBody>
@@ -18,12 +18,12 @@ class DataTableBody extends React.Component<IDataTableBodyProps> {
                         ? this.props.items.map((item, key) => (
                             <TableRow
                                 key={key}
-                                className={key % 2 === 0 ? this.props.themeClass : null} // better coloring
+                                className={key % 2 === 0 ? this.props.classes.row : null} // better coloring
                             >
                                 <>
                                     {this.props.fields.map((field, index) => {
                                         return (
-                                            <TableCell key={index} align="center">
+                                            <TableCell key={index} align="center" className={key % 2 === 0 ? this.props.classes.row : null}>
                                                 {item[field] != null &&
                                                     !Array.isArray(item[field]) &&
                                                     typeof item[field] !== "object"
@@ -55,4 +55,14 @@ class DataTableBody extends React.Component<IDataTableBodyProps> {
     }
 }
 
-export default DataTableBody;
+const styles = (theme) => ({
+    row: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.third.contrastText,
+    },
+});
+
+export default withStyles(styles)(DataTableBody);
+
+
+// export default DataTableBody;

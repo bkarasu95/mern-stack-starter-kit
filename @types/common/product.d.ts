@@ -4,13 +4,17 @@ export interface IProductImage {
 
 // useful for client side
 export interface IProduct {
+  _id?: string;
   name: string;
   sku: string;
-  _id: string;
   slug: string;
   price: number;
   content: string;
+  status: boolean;
   brand?: number;
   discount?: number;
-  images?: Array<IProductImage>;
+  images: Array<IProductImage>;
+  createdAt: Date,
+  updatedAt: Date,
+  deletedAt: Date | null
 }

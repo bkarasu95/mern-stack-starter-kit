@@ -17,6 +17,6 @@
     "strict": true,
     "types": ["node", "express", "./@types/server"]
   },
-  "include": ["src/server/**/*"],
+  "include": ["src/server/**/*","@types/server/*.d.ts"],
   "exclude": ["node_modules"]
 }

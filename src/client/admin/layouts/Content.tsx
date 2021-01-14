@@ -1,14 +1,13 @@
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
 import React from "react";
 import { Row } from "react-bootstrap";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import AddProductPage from "../pages/crud/products/AddProductPage";
-import ListProductPage from "../pages/crud/products/ListProductPage";
-import UpdateProductPage from "../pages/crud/products/UpdateProductPage";
+import { IReduxUserProps } from "../../../../@types/client/admin/pages";
+import ResourceRoute from "../components/ResourceRoute";
 import HomePage from "../pages/HomePage";
-import ListLogsPage from './../pages/crud/logs/ListLogsPage';
 
-class Content extends React.Component {
+class Content extends React.Component<IReduxUserProps> {
   render() {
     const styles: CSSProperties = {
       padding: "0px 15px",
@@ -17,17 +16,24 @@ class Content extends React.Component {
     return (
       <>
         <Row style={styles}>
+          <ResourceRoute link="products" />
+          <ResourceRoute link="logs" />
           <Switch>
             <Route path="/dashboard" component={HomePage} />
-            <Route path="/products/create" component={AddProductPage} />
-            <Route path="/products/:id/edit" component={UpdateProductPage} />
-            <Route path="/products/:id/show" component={UpdateProductPage} />
-            <Route path="/products" component={ListProductPage} />
-            <Route path="/logs" component={ListLogsPage} />
+            {/* {this.props.user.role === "admin" && (
+              <Route path="/logs" component={ListLogsPage} />
+            )} */}
           </Switch>
         </Row>
       </>
     );
   }
 }
-export default Content;
+
+
+const mapStateToProps = (state: any) => {
+  return {
+    user: state.auth.user,
+  };
+};
+export default connect(mapStateToProps)(Content);
