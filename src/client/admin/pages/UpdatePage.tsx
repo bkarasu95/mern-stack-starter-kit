@@ -56,8 +56,6 @@ class UpdatePage extends React.Component<IUpdatePageProps & RouteComponentProps<
     submit(values: object) {
         const requester = new ApiRequest();
         let fd = jsonToFormData(values);
-        // console.log(this);
-
         requester.put(this.state.resource + "/" + this.props.match.params.id, fd);
     };
     render() {

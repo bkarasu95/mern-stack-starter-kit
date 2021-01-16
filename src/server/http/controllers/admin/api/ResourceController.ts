@@ -24,12 +24,15 @@ abstract class ResourceController {
             let offsetParam: string = typeof req.query.start != "undefined" ? req.query.start.toString() : "";
             let where: object = typeof req.query.search != "undefined" ? this.whereStringToObject(req.query.search.toString()) : {};
             let fields: object = typeof req.query.fields != "undefined" ? {} : {};
+            if (Object.keys(fields).length === 0) {
+                const fieldsFromClass = this.grid();
+                fields = fieldsFromClass.fields;
+            }
             let count = await this.service.count(where); // total data count, useful for pagination 
             let limit: number | null = Number.parseInt(limitParam);
             let offset: number | null = Number.parseInt(offsetParam);
             const data = await this.service.findAll(where, fields, limit, offset);
             res.setMessage("Records Fetched").customResponse({ items: data, total: count });
-            next();
         } catch (e) {
             next(e); // if you take an error, pass the function and go to middleware
         }
@@ -48,8 +51,6 @@ abstract class ResourceController {
                 throw new HttpException(400, "Record Not Found");
             }
             res.setMessage("Record Fetched").customResponse(item);
-            next();
-
         } catch (e) {
             next(e); // if you take an error, pass the function and go to middleware
         }
@@ -61,7 +62,7 @@ abstract class ResourceController {
      * @param res ExressJS Response object
      * @param next ExressJS Next function
      */
-    insert = async (req: Request, res: Response, next: NextFunction) => {       
+    insert = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const validationError = validationResult(req);
             if (!validationError.isEmpty()) {
@@ -92,7 +93,7 @@ abstract class ResourceController {
      * @param res ExressJS Response object
      * @param next ExressJS Next function
      */
-    update = async (req: Request, res: Response, next: NextFunction) => {       
+    update = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const validationError = validationResult(req);
             if (!validationError.isEmpty()) {

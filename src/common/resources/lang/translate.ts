@@ -13,9 +13,9 @@ let locale: LanguageGroup = {
 export const trans = (key: string, params?: LanguageParams, lang?: string): string => {
   if (lang == null) lang = app.lang; // if lang is not set, get the default lang in config
   let text: string = index(locale[lang], key);
-  if (text == null || text === "") return key;
+  if (text == null || text === "") return key; 
   for (const param in params) {
-    text = text.replace(":" + param, params[param]);
+    text = text.replace(":" + param, trans(params[param]));
   }
   return text;
 };

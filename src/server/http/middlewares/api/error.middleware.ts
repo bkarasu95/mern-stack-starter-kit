@@ -13,9 +13,7 @@ export const errorHandler = (error: HttpException, request: Request, response: R
     if (typeof request.files != 'undefined' && request.files.length > 0) { // delete the uploaded files at failed request that throws exception
         var files = Object.values(request.files);
         files.forEach((file: Express.Multer.File): void => {
-            unlinkAsync(file.path).catch(err => { // delete
-                // if (err) console.log(err);
-            });
+            unlinkAsync(file.path).catch(err => { }); // don't care the error (at least for now)
         })
     }
     // TODO add error logging

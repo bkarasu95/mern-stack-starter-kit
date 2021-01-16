@@ -98,8 +98,6 @@ class MyUploadAdapter {
       if (!response || response.error) {
         return reject(response && response.error ? response.error.message : genericErrorText);
       }
-      console.log(response);
-
       // If the upload is successful, resolve the upload promise with an object containing
       // at least the "default" URL, pointing to the image on the server.
       resolve({

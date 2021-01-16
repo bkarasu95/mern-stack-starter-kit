@@ -34,6 +34,11 @@ export interface Language {
     images: string;
     status: string;
   };
+  models?: {
+    product: string
+    logs: string
+    app:string
+  }
 
 }
 

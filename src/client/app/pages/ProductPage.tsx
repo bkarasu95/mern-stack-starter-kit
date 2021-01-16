@@ -9,9 +9,7 @@ import { store } from "../store";
 import { fetchProduct } from "../store/products/actions";
 
 // TODO it will remove on lite version
-class ProductPage extends React.Component<
-  RouteComponentProps<RouteParams> & IProductProps
-  > {
+class ProductPage extends React.Component<RouteComponentProps<RouteParams> & IProductProps> {
   componentDidUpdate(prevProps: any) {
     if (this.props.location !== prevProps.location) {
       loadData(store, this.props.match.params);
@@ -66,7 +64,7 @@ class ProductPage extends React.Component<
                   <p>{this.props.product.price} ₺</p>
                 </Col>
               </Row>
-              <Row className="content">
+              <Row className="content ck-content ck">
                 <div dangerouslySetInnerHTML={{ __html: this.props.product.content }}></div>
               </Row>
             </>

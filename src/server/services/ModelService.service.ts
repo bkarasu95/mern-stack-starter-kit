@@ -50,9 +50,6 @@ class ModelService {
         return await model.save()
             .then((savedDoc: any) => {
                 return savedDoc === model;
-            }).catch((err: any) => {
-                console.log(err);
-                return false;
             });
     };
     update = async (id: string, updatedModel: Document) => {
@@ -63,7 +60,7 @@ class ModelService {
      * hard/soft delete the document
      * @param id - delete the document by id
      */
-    delete = async (id: string) => {
+    delete = async (id: string): Promise<boolean> => {
         let model = await this.model.find({ _id: id, deletedAt: { $exists: true } }).catch((err) => { // check the deletedAt field for soft deleting
             if (err) throw new HttpException(500, err.message);
         });
@@ -86,7 +83,7 @@ class ModelService {
      * delete the document even there is deletedAt column
      * @param id - delete the document by id
      */
-    forceDelete = async (id: string) => { // force the deleting model even it has deletedAt field
+    forceDelete = async (id: string): Promise<boolean> => { // force the deleting model even it has deletedAt field
         await this.model.findOneAndDelete({ _id: id }).catch((err) => {
             if (err) throw new HttpException(500, err.message);
         });
@@ -94,17 +91,14 @@ class ModelService {
     }
 
 
-    count = async (where: object = {}) => {
+    count = async (where: object = {}): Promise<number> => {
         where['deletedAt'] = { $eq: null };
         return this.model.countDocuments(where, function (err) {
             if (err) throw new HttpException(500, err.message);
         })
     }
 
-    isExists = async (
-        key: string,
-        value: string
-    ): Promise<boolean> => {
+    isExists = async (key: string, value: string): Promise<boolean> => {
         let condition: any = {};
         condition[key] = value;
         return this.model.find(condition).then((result) => {
@@ -115,8 +109,6 @@ class ModelService {
             }
         });
     };
-
-
 }
 
 export default ModelService;

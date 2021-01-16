@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core"
 import { CSSProperties } from "react"
 import { FilterField, IListActions, IResourceGetRequestParams } from "./form"
 import { FieldItem } from './form.d'
@@ -34,6 +35,7 @@ export interface IDataTableState {
     requestParams: IResourceGetRequestParams, // request get params
     deleteResult: string | null
     dataCount: number // fetched data count
+    currentPage: number // current data page
 }
 export interface IDataTableComponentProps extends IDataTableProps {
     fetching?: boolean // we pass the fetching state from IDataTableState to this props
@@ -47,6 +49,10 @@ export interface IDataTableBodyProps extends IDataTableComponentProps {
 }
 export interface IDataTableFooterProps extends IDataTableComponentProps {
     dataCount: number // fetched data count
+    limit: number
+    currentPage: number // current data page
+    pageChange: (count: number) => void
+    dataLengthChange: (length: number) => void
 }
 
 export interface IConfirmationDialogProps {
@@ -68,10 +74,19 @@ export interface ISidebarElement {
     name: string,
     label: string,
     url?: string,
-    items?: Array<ISidebarElement> // change it
+    children?: Array<ISidebarElement> // change it
 }
 
 export interface IResourceRoute {
     link: string
     serverResource?: string
+}
+
+export interface ISliderButtonProps {
+    buttonCount: number
+    buttonClickHandler: (page: number) => void
+    currentPage: number
+}
+export interface ISliderButtonState {
+    activeButton: number
 }

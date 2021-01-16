@@ -41,16 +41,21 @@ export default abstract class BaseSeeder {
      */
     seed(): Promise<string> {
         return new Promise((resolve, reject) => {
-            this.run().then(seedResult => {               
-                if (seedResult) {
-                    resolve("Seed completed");
-                }else{
+            if (this.dbo != null) {
+                this.run().then(seedResult => {
+                    if (seedResult) {
+                        resolve("Seed completed");
+                    } else {
+                        resolve("Seed Failed");
+                    }
+                }).catch(err => {
+                    console.log(err);
                     resolve("Seed Failed");
-                }
-            }).catch(err =>{
-                console.log(err);
-                resolve("Seed Failed");
-            })
+                })
+            } else {
+                reject("DB is not there")
+            }
+
         });
     }
 }

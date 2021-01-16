@@ -4,33 +4,26 @@ import { ISidebarElement } from "../../../../@types/client/admin/components";
 import { IUser } from "../../../../@types/common/user";
 import { trans } from "../../../common/resources/lang/translate";
 import NestedList from "../components/NestedList";
+import ApiRequest from "../libraries/ApiRequest";
 
 class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
-  render() {
-    const items: Array<ISidebarElement> = [
-      // TODO get this on server via api
-      { name: "dashboard", label: "Dashboard", url: "/dashboard" },
-      {
-        name: "product_management",
-        label: trans("resource.management", { item: "Ürün" }),
-        url: "/products/list",
-      },
-      {
-        name: "app_management",
-        label: trans("resource.management", { item: "Uygulama" }),
-        items: [
-          {
-            name: "logs",
-            label: "Kayıtlar",
-            url: "/logs/list"
-          }
-        ],
-      },
-    ];
+  constructor(props) {
+    super(props);
+    this.state = {
+      listItems: [],
+    }
+  }
+  componentDidMount() {
+    const requester = new ApiRequest();
+    requester.get('admin-menu').then((res: any) => {
+      this.setState({ listItems: res.data.data });
+    });
+  }
+  render() {   
     return (
       <>
         <p>{trans("sidebar.greetings", { name: this.props.user.name })}</p>
-        <NestedList items={items} />
+        {this.state.listItems.length > 0 && <NestedList items={this.state.listItems} />}
       </>
     );
   }
@@ -40,7 +33,9 @@ export interface ISidebarProps {
   user: IUser;
 }
 
-export interface ISidebarState { }
+export interface ISidebarState {
+  listItems: Array<ISidebarElement>
+}
 
 const mapStateToProps = (state: any) => {
   return {

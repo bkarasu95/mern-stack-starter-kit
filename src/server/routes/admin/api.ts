@@ -1,11 +1,12 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import express, { Request, Response } from "express";
+import express from "express";
 import helmet from "helmet";
 import multer from "multer";
 import path from "path";
 import { fileSystem } from "../../config/filesystem";
 import HttpException from "../../exceptions/api/http-exception";
+import AdminMenuController from "../../http/controllers/admin/api/AdminMenuController";
 import AuthController from "../../http/controllers/admin/api/AuthController";
 import FileController from "../../http/controllers/admin/api/FileController";
 import LogController from "../../http/controllers/admin/api/LogController";
@@ -47,49 +48,35 @@ export const adminApiRouter = express.Router();
 /**
  * Middleware Setups
  */
-adminApiRouter.use(Restful);
+adminApiRouter.use(Restful); // our api middleware
 adminApiRouter.use(helmet());
 adminApiRouter.use(cors());
 adminApiRouter.use(bodyParser.json());
 
-adminApiRouter.get("/", (req: Request, res: Response) => {
-  res.render("admin", {
-    reactPath: fileSystem.publicUrl + "admin.js",
-  });
-});
-
 adminApiRouter.post("/login", AuthController.login);
 adminApiRouter.get("/auth-token", AuthController.getUserByToken);
 
-adminApiRouter.use(Auth);
+
+adminApiRouter.use(Auth); // admin authorize is required after that line
 
 adminApiRouter.route('/uploadFile').post(upload.any(), FileController.uploadFile);
-
 
 adminApiRouter.route("/products/list").get(ProductController.all);
 adminApiRouter.route("/products/create").get(ProductController.create);
 adminApiRouter.route("/products/:id/edit").get(ProductController.edit);
-adminApiRouter
-  .route("/products/:id")
+adminApiRouter.route("/products/:id")
   .get(ProductController.show)
   .put(upload.any(), ProductController.validate("update"), ProductController.update)
   .delete(ProductController.delete);
-adminApiRouter
-  .route("/products")
+adminApiRouter.route("/products")
   .get(ProductController.list)
   .post(upload.any(), ProductController.validate("create"), ProductController.insert);
 
-
-
-// adminApiRouter.route("/products/:id/create").get(ProductController.create);
-
-adminApiRouter
-  .route("/logs")
-  .get(LogController.list);
+adminApiRouter.route("/logs").get(LogController.list);
 adminApiRouter.route("/logs/list").get(LogController.all);
-
+adminApiRouter.route("/admin-menu").get(AdminMenuController.getList);
 /**
  * After Middleware
  */
-adminApiRouter.use(errorHandler);
-adminApiRouter.use(notFoundHandler);
+adminApiRouter.use(errorHandler); // handle the exception
+adminApiRouter.use(notFoundHandler); // handle the page not found

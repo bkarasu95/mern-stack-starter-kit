@@ -3,9 +3,10 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import { Link } from "react-router-dom";
+import { ISidebarElement } from "../../../../@types/client/admin/components";
 
-class SingleLevel extends React.Component<ListItemProps> {
-  render() {
+class SingleLevel extends React.Component<ISidebarElement> {
+  render() {   
     return (
       <ListItem
         key={this.props.name}  /** add the  multiple language support */
@@ -19,15 +20,8 @@ class SingleLevel extends React.Component<ListItemProps> {
   }
 }
 
-interface ListItemProps {
-  name: string;
-  label: string;
-  url?: string;
-  items?: any;
-}
-
-class MultiLevel extends React.Component<ListItemProps, MultiLevelState> {
-  constructor(props: ListItemProps) {
+class MultiLevel extends React.Component<ISidebarElement, MultiLevelState> {
+  constructor(props: ISidebarElement) {
     super(props);
     this.state = {
       opened: false,
@@ -52,7 +46,7 @@ class MultiLevel extends React.Component<ListItemProps, MultiLevelState> {
         </ListItem>
         <Collapse in={this.state.opened} timeout="auto" unmountOnExit>
           <List style={innerListStyle}>
-            {this.props.items.map((child: any, key: string) => (
+            {this.props.children.map((child: any, key: number) => (
               <MenuItem key={key} item={child} />
             ))}
           </List>
@@ -67,16 +61,16 @@ interface MultiLevelState {
 }
 
 class MenuItem extends React.Component<MenuItemProps> {
-  hasChildren(item: ListItemProps) {
-    if (item.items === undefined) {
+  hasChildren(item: ISidebarElement) {
+    if (item.children === undefined) {
       return false;
     }
 
-    if (item.items.constructor !== Array) {
+    if (item.children.constructor !== Array) {
       return false;
     }
 
-    if (item.items.length === 0) {
+    if (item.children.length === 0) {
       return false;
     }
 
@@ -87,7 +81,7 @@ class MenuItem extends React.Component<MenuItemProps> {
       <MultiLevel
         name={this.props.item.name}
         label={this.props.item.label}
-        items={this.props.item.items}
+        children={this.props.item.children}
       />
     ) : (
         <SingleLevel
@@ -100,20 +94,19 @@ class MenuItem extends React.Component<MenuItemProps> {
 }
 
 interface MenuItemProps {
-  key: string;
-  item: ListItemProps;
+  item: ISidebarElement;
 }
 
-function hasChildren(item: ListItemProps) {
-  if (item.items === undefined) {
+function hasChildren(item: ISidebarElement) {
+  if (item.children === undefined) {
     return false;
   }
 
-  if (item.items.constructor !== Array) {
+  if (item.children.constructor !== Array) {
     return false;
   }
 
-  if (item.items.length === 0) {
+  if (item.children.length === 0) {
     return false;
   }
 
@@ -124,7 +117,7 @@ class NestedList extends React.Component<INestedListProps, INestedListState> {
   render() {
     return (
       <List component="nav" aria-labelledby="nested-list-subheader">
-        {this.props.items.map((item: ListItemProps, key: string) => (
+        {this.props.items.map((item: ISidebarElement, key: string) => (
           <MenuItem key={key} item={item} />
         ))}
       </List>

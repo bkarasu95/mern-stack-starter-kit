@@ -22,7 +22,8 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
         orderBy: null
       },
       dataCount: null,
-      deleteResult: null
+      deleteResult: null,
+      currentPage: 1
     };
   }
   actionResult(result: boolean): void {
@@ -32,12 +33,27 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
   componentDidMount() {
     this.getData();
   }
-  componentDidUpdate(prevProps) {
+  handlePageChange = (page: number) => { // handle the page change, it is getting from footer.
+    let newParams = this.state.requestParams;
+    newParams.start = (page - 1) * this.state.requestParams.limit;
+    this.setState({ requestParams: newParams, currentPage: page })
+    this.getData();
+  }
+  handleDataLengthChange = (length: number) => { // handle the page change, it is getting from footer.
+    let newParams = this.state.requestParams;
+    newParams.limit = length;
+    this.setState({ requestParams: newParams })
+    this.getData();
+  }
+
+  componentDidUpdate(prevProps: IDataTableProps) {
     if (prevProps.resourceURL !== this.props.resourceURL || prevProps.filters.fields !== this.props.filters.fields) {
       if (this.props.filters.fields !== null) {
+        let newParams = this.state.requestParams;
+        newParams.start = 0;
+        this.setState({ requestParams: newParams })
         let search = "";
-        this.props.filters.fields.map((filter: IFilter, index: number) => {
-          // convert the server compatible query
+        this.props.filters.fields.map((filter: IFilter, index: number) => {  // convert the server compatible query
           search += filter.name + "=" + filter.value;
           if (this.props.filters.fields.length !== 1 && index < this.props.filters.fields.length - 1) {
             search += ",";
@@ -45,12 +61,15 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
         })
         let newRequestParams = this.state.requestParams;
         newRequestParams.search = search;
-        this.setState({ requestParams: newRequestParams, items: [], fetching: true })
+        this.setState({ requestParams: newRequestParams, items: [] })
       }
       this.getData();
     }
   }
+
   getData() {
+    this.setState({ fetching: true });
+    window.scrollTo(0, 0);
     const requester = new ApiRequest();
     requester.get(this.props.resourceURL, this.state.requestParams).then((res: any) => {
       this.setState({ items: res.data.data.items, dataCount: res.data.data.total, fetching: false });
@@ -65,8 +84,7 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
           <Table aria-label="simple table">
             <DataTableHead fetching={this.state.fetching} {...this.props} items={this.state.items} />
             <DataTableBody fetching={this.state.fetching} items={this.state.items} {...this.props} actionResult={this.actionResult.bind(this)} />
-            <DataTableFooter fetching={this.state.fetching} dataCount={this.state.dataCount} {...this.props} />
-            {/** TODO add paginator */}
+            <DataTableFooter currentPage={this.state.currentPage} dataLengthChange={this.handleDataLengthChange} pageChange={this.handlePageChange} fetching={this.state.fetching} dataCount={this.state.dataCount} {...this.props} limit={this.state.requestParams.limit} />
           </Table>
         </TableContainer>
         {/** TODO make it app-wide snackbar */}

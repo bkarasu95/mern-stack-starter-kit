@@ -19,8 +19,7 @@ class App extends React.Component<IAppProps, IAppState> {
   }
   componentDidMount() {
     const requester = new ApiRequest();
-    requester
-      .get("auth-token")
+    requester.get("auth-token")
       .then((res: any) => {
         if (res.status === 200) {
           store.dispatch(login(res.data.data.user));

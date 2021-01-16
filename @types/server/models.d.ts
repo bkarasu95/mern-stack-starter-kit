@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { LanguageParams } from "../common/lang";
 import { IProductImage } from "../common/product";
 
 export interface ProductModel extends Document {
@@ -41,4 +42,28 @@ export interface ILog {
   createdAt?: LogModel['createdAt']
   updatedAt?: LogModel['updatedAt']
   deletedAt?: LogModel['deletedAt']
+}
+
+
+export interface AdminMenuModel extends Document {
+  id: number,
+  name: string,
+  label: IAdminMenuLabel | string,
+  url?: string,
+  parentID: number
+}
+
+
+export interface IAdminMenu {
+  id: AdminMenuModel['id']
+  name: AdminMenuModel['name']
+  label: AdminMenuModel['label']
+  url?: AdminMenuModel['url']
+  parentID: AdminMenuModel['parentID']
+  children?: Array<IAdminMenu>
+}
+
+export interface IAdminMenuLabel {
+  key: string,
+  params: LanguageParams
 }

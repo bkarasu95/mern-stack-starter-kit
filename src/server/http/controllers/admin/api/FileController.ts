@@ -6,8 +6,6 @@ class FileController {
     uploadFile(req: Request, res: Response) {
         if (typeof req.files != "undefined") {
             let fileValue: Express.Multer.File = Object.values(req.files)[0];
-            console.log(fileValue);
-
             if (typeof fileValue != "undefined") {
                 const fileURL = fileValue.path.replace(fileSystem.uploadPath, fileSystem.assetUrl);
                 res.setMessage("Image uploaded").customResponse({

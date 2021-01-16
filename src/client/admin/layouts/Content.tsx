@@ -20,9 +20,6 @@ class Content extends React.Component<IReduxUserProps> {
           <ResourceRoute link="logs" />
           <Switch>
             <Route path="/dashboard" component={HomePage} />
-            {/* {this.props.user.role === "admin" && (
-              <Route path="/logs" component={ListLogsPage} />
-            )} */}
           </Switch>
         </Row>
       </>

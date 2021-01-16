@@ -37,4 +37,9 @@ export const localeTR: Language = {
     images: "Resimler",
     status: "Durum",
   },
+  models: {
+    product: "Ürün",
+    logs: "Kayıt",
+    app: "Uygulama"
+  }
 };
