@@ -7,7 +7,7 @@ import { setShowedResult } from '../../store/result/actions';
 
 class ResultMessageBox extends React.Component<IResultMessageBoxProps> {
     componentDidMount() {
-        if (this.props.result.type != null) {
+        if (this.props.result.type != null) { /** TODO what is it doing? */
             store.dispatch(setShowedResult(this.props.result.type, this.props.result.message));
         }
     }

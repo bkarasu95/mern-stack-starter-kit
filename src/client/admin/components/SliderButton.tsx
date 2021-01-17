@@ -7,7 +7,7 @@ class SliderButton extends React.Component<ISliderButtonProps, ISliderButtonStat
         this.props.buttonClickHandler(page);
         this.setState({ activeButton: page })
     }
-    constructor(props) {       
+    constructor(props) {
         super(props);
         this.state = {
             activeButton: props.currentPage
@@ -20,6 +20,7 @@ class SliderButton extends React.Component<ISliderButtonProps, ISliderButtonStat
                 case this.state.activeButton:
                     paginationButtons.push(<Button onClick={(e) => { this.triggerPageChange(i) }} color="primary" key={i}>{i}</Button>)
                     break;
+                // navigating buttons
                 case this.state.activeButton + 1:
                 case this.state.activeButton - 1:
                 case this.props.buttonCount:
@@ -29,8 +30,8 @@ class SliderButton extends React.Component<ISliderButtonProps, ISliderButtonStat
                 case this.state.activeButton + 2:
                     paginationButtons.push(<Button onClick={(e) => { this.triggerPageChange(i + 2) }} key={i}>...</Button>) // 
                     break;
-                default:
-                    paginationButtons.push(<Button onClick={(e) => { this.triggerPageChange(i) }} key={i} style={{ display: "none" }}>{i}</Button>)
+                default: // don't need other buttons
+                    // paginationButtons.push(<Button onClick={(e) => { this.triggerPageChange(i) }} key={i} style={{ display: "none" }}>{i}</Button>)
                     break;
             }
         }

@@ -8,7 +8,7 @@ export const builder = {
     }
 }
 
-export const handler = function (argv) {
+export const handler = function (argv: { name: string; }) { // argv gets from yargs
     const seedsPath = './src/server/database/seeds/';
     const seedName = argv.name.charAt(0).toUpperCase() + argv.name.slice(1); // seed that will create
     const template = `

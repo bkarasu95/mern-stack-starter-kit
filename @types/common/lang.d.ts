@@ -23,6 +23,7 @@ export interface Language {
     dataNotFound: string;
     recordDeleted: string;
     countRecordsFound: string;
+    actions: string;
     fetching: string;
   };
   db: { // db columns

@@ -4,14 +4,6 @@ import { FilterField, IListActions, IResourceGetRequestParams } from "./form"
 import { FieldItem } from './form.d'
 import { IFilterFields } from './redux'
 
-export interface INavbarProps {
-    style: CSSProperties
-}
-
-export interface INavbarState {
-    darkTheme: 'dark' | 'light'
-}
-
 export interface IFilterProps {
     items: Array<FilterField>
 }
@@ -22,10 +14,10 @@ export interface IFilterState {
 }
 
 export interface IDataTableProps {
-    resourceURL: string // server get endpoint for fetching data
-    fields: Array<string> // for showing data fields
-    actions: IListActions // Action menu for each row
-    filterFields?: Array<FilterField>  // available filter fields
+    resourceURL: string // server fetching data, gets from server
+    fields: Array<string> // for showing data fields, gets from server
+    actions: IListActions // Action menu for each row, gets from server
+    filterFields?: Array<FilterField>  // available filter fields, gets from server
     filters?: IFilterFields // active filters for fetching data
 }
 
@@ -70,13 +62,6 @@ export interface ISelectFieldState {
     value?: any
 }
 
-export interface ISidebarElement {
-    name: string,
-    label: string,
-    url?: string,
-    children?: Array<ISidebarElement> // change it
-}
-
 export interface IResourceRoute {
     link: string
     serverResource?: string
@@ -89,4 +74,24 @@ export interface ISliderButtonProps {
 }
 export interface ISliderButtonState {
     activeButton: number
+}
+
+interface IMenuItemProps {
+    item: ISidebarElementProps
+}
+
+
+export interface INestedListProps {
+    items: Array<ISidebarElementProps>
+}
+
+export interface ISidebarElementProps {
+    name: string
+    label: string
+    url?: string
+    children?: Array<ISidebarElementProps> // change it
+}
+
+interface IMultiLevelState {
+    opened: boolean
 }

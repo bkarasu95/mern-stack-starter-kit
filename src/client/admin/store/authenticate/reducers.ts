@@ -4,10 +4,7 @@ const initialState: Authenticate = {
   user: null,
 };
 
-export function authReducer(
-  state = initialState,
-  action: AuthenticateActionTypes
-): Authenticate {
+export function authReducer(state = initialState, action: AuthenticateActionTypes): Authenticate {
   switch (action.type) {
     case LOG_IN:
       return {

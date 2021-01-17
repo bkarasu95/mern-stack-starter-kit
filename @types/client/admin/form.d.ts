@@ -61,3 +61,8 @@ export interface IResourceGetRequestParams {
   orderBy?: string // server query order the data
   search?: string // server query where the data
 }
+
+
+interface IReduxFormProps {
+  input?: any;
+}

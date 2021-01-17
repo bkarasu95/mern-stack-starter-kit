@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ISidebarElement } from "../../../../@types/client/admin/components";
-import { IUser } from "../../../../@types/common/user";
+import { ISidebarProps, ISidebarState } from "../../../../@types/client/admin/layouts";
 import { trans } from "../../../common/resources/lang/translate";
 import NestedList from "../components/NestedList";
 import ApiRequest from "../libraries/ApiRequest";
@@ -19,7 +18,7 @@ class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
       this.setState({ listItems: res.data.data });
     });
   }
-  render() {   
+  render() {
     return (
       <>
         <p>{trans("sidebar.greetings", { name: this.props.user.name })}</p>
@@ -27,14 +26,6 @@ class Sidebar extends React.Component<ISidebarProps, ISidebarState> {
       </>
     );
   }
-}
-
-export interface ISidebarProps {
-  user: IUser;
-}
-
-export interface ISidebarState {
-  listItems: Array<ISidebarElement>
 }
 
 const mapStateToProps = (state: any) => {

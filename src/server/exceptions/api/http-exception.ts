@@ -1,8 +1,3 @@
-import { ILog } from "../../../../@types/server/models";
-import ModelService from "../../services/ModelService.service";
-import { Log } from './../../models/logs.model';
-
-
 export default class HttpException extends Error {
     statusCode: number;
     message: string;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 
-class HomePage extends React.Component {
+class Dashboard extends React.Component {
   render() {
     return (
       <>
@@ -14,4 +14,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+export default Dashboard;

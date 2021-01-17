@@ -5,7 +5,7 @@ import App from './App';
 import { configureStore } from './store';
 import { Provider } from 'react-redux';
 
-export const store = configureStore(); // store variable for using in whole admin panel app 
+export const store = configureStore(); // store variable for using in whole admin panel app , you can use dispatch via this object
 
 render(
     <BrowserRouter basename="/admin">

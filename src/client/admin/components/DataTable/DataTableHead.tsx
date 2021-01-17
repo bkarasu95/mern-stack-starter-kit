@@ -8,30 +8,24 @@ class DataTableHead extends React.Component<IDataTableHeadProps>{
         return (
             <TableHead>
                 <TableRow>
-                    {!this.props.fetching && (
+                    {!this.props.fetching && (/** only show the fields after fetching data from server completed */
                         <>
                             {this.props.items.length > 0 && (
                                 <>
                                     {this.props.fields.map((field: string) => {
-                                        return Object.keys(this.props.items[0]).includes(field) && (
+                                        return Object.keys(this.props.items[0]).includes(field) ? (  /** check the header field is really exists on data, if it is not, dont render this field */
                                             <TableCell key={field} align="center">
-                                                <strong>
-                                                    {trans("db." + field) != ""
-                                                        ? trans("db." + field)
-                                                        : field.toUpperCase()}
-                                                </strong>
+                                                <strong>{trans("db." + field) != "" ? trans("db." + field) : field.toUpperCase()}</strong>
                                             </TableCell>
-                                        )
+                                        ) : (null)
                                     })}
                                     <TableCell align="center" size="small" padding="none">
-                                        <strong>{"Aksiyonlar"}</strong>
-                                        {/* {trans("form.actions")} */}
+                                        <strong>{trans("resource.actions")}</strong>
                                     </TableCell>
                                 </>
                             )}
-                        </> 
+                        </>
                     )}
-
                 </TableRow>
             </TableHead>
 

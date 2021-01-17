@@ -14,5 +14,5 @@ import * as yargs from 'yargs';
   .commandDir('../server/database/seeds', {
     extensions: ['ts'] // adding ts file read support
   })
-  .version(false)
+  .version(false) // we don't need showing version
   .argv

@@ -3,7 +3,7 @@ import React from "react";
 import { store } from "..";
 import { trans } from "../../../common/resources/lang/translate";
 import { logout } from "../store/authenticate/actions";
-import { INavbarProps, INavbarState } from './../../../../@types/client/admin/components.d';
+import { INavbarProps, INavbarState } from './../../../../@types/client/admin/layouts.d';
 import LightThemeIcon from '@material-ui/icons/Brightness7';
 import DarkThemeIcon from '@material-ui/icons/Brightness4';
 import { setTheme } from './../store/theme/actions';
@@ -17,12 +17,12 @@ class Navbar extends React.Component<INavbarProps, INavbarState> {
     }
   }
   handleLogout() {
-    store.dispatch(logout());
+    store.dispatch(logout()); // trigger the admin logout
   }
 
   handleThemeChange() {
-    const theme = this.state.darkTheme === "dark" ? "light" : "dark" ;
-    this.setState({ darkTheme: theme});
+    const theme = this.state.darkTheme === "dark" ? "light" : "dark";
+    this.setState({ darkTheme: theme });
     store.dispatch(setTheme(theme))
   };
   render() {

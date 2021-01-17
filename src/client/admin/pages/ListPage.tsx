@@ -26,9 +26,9 @@ class ListPage extends React.Component<IListPageProps & StyledComponentProps & R
     }
   }
   componentDidMount() {
-    this.getData();
+    this.getInitData();
   }
-  getData() {
+  getInitData() {
     const requester = new ApiRequest();
     requester.get(this.props.serverResource + "/list").then((res: any) => {
       const data = res.data.data;

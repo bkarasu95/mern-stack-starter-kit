@@ -23,5 +23,7 @@ export const handler = function (argv: { class: string; }) {
         .then(result => {
             console.log(result);
             seedObject.closeDB();
+        }).catch(err => {
+            console.log(err);
         });
 }

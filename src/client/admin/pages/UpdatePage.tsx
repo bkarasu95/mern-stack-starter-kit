@@ -45,8 +45,7 @@ class UpdatePage extends React.Component<IUpdatePageProps & RouteComponentProps<
     }
     componentDidMount() {
         const requester = new ApiRequest();
-        requester
-            .get(this.props.serverResource + "/" + this.props.match.params.id + '/edit')
+        requester.get(this.props.serverResource + "/" + this.props.match.params.id + '/edit')
             .then((res: any) => {
                 const data = res.data.data;
                 this.setState({ fetching: false, ...data });
@@ -64,11 +63,9 @@ class UpdatePage extends React.Component<IUpdatePageProps & RouteComponentProps<
                 <Helmet>
                     <title>{trans("resource.update", { item: this.state.title })}</title>
                 </Helmet>
-                {this.state.fetching ? (
-                    <p>Yükleniyor... </p>
-                ) : (
-                        <UpdateFormRedux onSubmit={this.submit.bind(this)} items={this.state.items} />
-                    )}
+                {this.state.fetching ?
+                    (<p>Yükleniyor... </p>) :
+                    (<UpdateFormRedux onSubmit={this.submit.bind(this)} items={this.state.items} />)}
             </>
         );
     }

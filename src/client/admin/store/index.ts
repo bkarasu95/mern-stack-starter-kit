@@ -1,9 +1,9 @@
-import { authReducer } from "./authenticate/reducers";
 import { combineReducers, createStore } from "redux";
 import { reducer as formReducer } from "redux-form";
+import { authReducer } from "./authenticate/reducers";
+import { filterReducer } from './filter/reducers';
 import { resultReducer } from './result/reducers';
 import { themeReducer } from "./theme/reducers";
-import { filterReducer } from './filter/reducers';
 
 const rootReducer = combineReducers({
   auth: authReducer,

@@ -7,10 +7,7 @@ const initialState: Message = {
     showed: false,
 };
 
-export function resultReducer(
-    state = initialState,
-    action: ResultTypes
-): Message {
+export function resultReducer(state = initialState, action: ResultTypes): Message {
     switch (action.type) {
         case SERVER_RESULT:
         case CLEAR_RESULT:

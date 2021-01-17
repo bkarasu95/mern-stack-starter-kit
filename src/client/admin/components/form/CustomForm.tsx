@@ -16,11 +16,9 @@ class CustomForm extends React.Component<ICustomFormProps> {
     }
     return (
       <form style={formStyle} onSubmit={this.props.handleSubmit}>
-        {this.props.items.map((item: FieldItem) => {
-          // render the form input fields
-          return <FormFieldLoader style={fieldStyle} key={item.name} item={item} />
+        {this.props.items.map((item: FieldItem) => { // render the form input fields
+          return <FormFieldLoader style={fieldStyle} key={item.name} item={item} /> 
         })}
-        {/* TODO this grid shouldnt be here, think about there */}
         {this.props.footerComponent != null && (
           <Grid container direction="row" justify="space-between" alignContent="center" style={fieldStyle}>
             {this.props.footerComponent}

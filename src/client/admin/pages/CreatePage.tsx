@@ -21,19 +21,9 @@ class CreateFormFooter extends React.Component {
     return (
       <>
         {/** TODO add the functionality, it has no effect for now */}
-        <FormControlLabel
-          value="continue"
-          control={<Checkbox color="primary" checked={false} />}
-          label="Oluşturmaya Devam Et"
-          labelPlacement="start"
-        />
-        <Button
-          type="submit"
-          style={submitStyle}
-          variant="contained"
-          color="primary"
-        >
-          {trans("resource.add", { item: "Ürün" })}
+        <FormControlLabel value="continue" control={<Checkbox color="primary" checked={false} />} label="Oluşturmaya Devam Et" labelPlacement="start" />
+        <Button type="submit" style={submitStyle} variant="contained" color="primary"        >
+          {trans("resource.add", { item: "Ürün" }) /** TODO localization */}
         </Button>
       </>
     );
@@ -53,16 +43,15 @@ class CreatePage extends React.Component<ICreatePageProps, ICreatePageState> {
   constructor(props) {
     super(props);
     this.state = {
-      // TODO make this redirecting global using redux.
       items: [],
-      redirectURL: null,
+      redirectURL: null,// TODO make this redirecting global using redux.
       fetching: true
     }
   }
   componentDidMount() {
-    this.getData();
+    this.getInitData();
   }
-  getData() {
+  getInitData() {
     const requester = new ApiRequest();
     requester.get(this.props.serverResource + "/create").then((res: any) => {
       const data = res.data.data;
@@ -73,9 +62,10 @@ class CreatePage extends React.Component<ICreatePageProps, ICreatePageState> {
     const requester = new ApiRequest();
     let fd = jsonToFormData(values);
     requester.post(this.state.resource, fd).then((res: any) => {
+      // show the messages by server status code
       if (res.status === 200) {
         store.dispatch(showServerResult('success', res.data.message));
-        this.setState({ redirectURL: "/" + this.state.resource + "/list" })
+        this.setState({ redirectURL: "/" + this.state.resource + "/list" }) // redirect if the request is success
       } else if (res.status >= 400 && res.status <= 499) {
         store.dispatch(showServerResult('warning', res.data.message));
       } else if (res.status >= 500) {
@@ -89,7 +79,7 @@ class CreatePage extends React.Component<ICreatePageProps, ICreatePageState> {
         {this.state.redirectURL ? (<Redirect to={this.state.redirectURL} />) : (
           <>
             {this.state.fetching ? (
-              <p>Sayfa Yükleniyor...</p> // TODO localization support
+              <p>Sayfa Yükleniyor...</p> // TODO localization
             ) : (
                 <>
                   <Helmet>

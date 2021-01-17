@@ -1,15 +1,8 @@
-// MyCustomInput.js
 import { TextField, TextFieldProps } from "@material-ui/core";
 import React from "react";
-import {
-  FieldItem,
-  IFieldItemState,
-} from "../../../../../@types/client/admin/form";
+import { FieldItem, ICustomTextInputProps, IFieldItemState } from "../../../../../@types/client/admin/form";
 
-class CustomTextInput extends React.Component<
-  TextFieldProps & ICustomTextInputProps & FieldItem,
-  IFieldItemState
-> {
+class CustomTextInput extends React.Component<TextFieldProps & ICustomTextInputProps & FieldItem, IFieldItemState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,13 +11,13 @@ class CustomTextInput extends React.Component<
     const {
       input: { onChange },
     } = this.props;
-    onChange(this.state.value);
+    onChange(this.state.value); // required for redux-form handler
   }
   handleChange(e) {
     const {
       input: { onChange },
     } = this.props;
-    onChange(e.target.value);
+    onChange(e.target.value); // required for redux-form handler
     this.setState({ value: e.target.value });
   }
   render() {
@@ -37,10 +30,6 @@ class CustomTextInput extends React.Component<
       ></TextField>
     );
   }
-}
-
-interface ICustomTextInputProps {
-  input?: any;
 }
 
 export default CustomTextInput;

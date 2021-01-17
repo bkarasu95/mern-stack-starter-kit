@@ -9,13 +9,6 @@ import { trans } from "../../../common/resources/lang/translate";
 import { setFilter } from "../store/filter/actions";
 import CustomForm from "./form/CustomForm";
 import FilterListIcon from '@material-ui/icons/FilterList';
-const styles = (theme: ITheme) => createStyles({
-    resetButton: {
-        backgroundColor: theme.palette.third.main,
-        color: theme.palette.third.contrastText,
-    },
-});
-
 
 class FilterFormFooter extends React.Component<StyledComponentProps>{
     render() {
@@ -46,7 +39,7 @@ class FilterFormFooter extends React.Component<StyledComponentProps>{
     }
 }
 
-const HOCFilterFormFooter = withStyles(styles)(FilterFormFooter);
+const HOCFilterFormFooter = withStyles(styles)(FilterFormFooter); // themed Filter Footer
 
 
 const filterForm = (props) => {
@@ -63,7 +56,7 @@ class Filter extends React.Component<IFilterProps, IFilterState>{
     constructor(props) {
         super(props);
         this.state = {
-            showFilter: false
+            showFilter: false // filter form showing
         }
     }
     showFilter(filter: boolean) {
@@ -74,8 +67,8 @@ class Filter extends React.Component<IFilterProps, IFilterState>{
         let count: number = 0;
         for (const key in requestFields) {
             filters[count] = {
-                name: key,
-                value: requestFields[key]
+                name: key, // column name
+                value: requestFields[key] // value that looking for
             }
             count++;
         }
@@ -89,6 +82,7 @@ class Filter extends React.Component<IFilterProps, IFilterState>{
         return (
             <Grid container direction="column" style={filterStyle}>
                 <Grid item md={3}>
+                    {/* TODO localization */}
                     <Button onClick={(e) => { this.showFilter(this.state.showFilter) }}><FilterListIcon />Filtrele</Button>
                 </Grid>
                 {this.state.showFilter && (
@@ -103,5 +97,12 @@ class Filter extends React.Component<IFilterProps, IFilterState>{
         );
     }
 }
+
+const styles = (theme: ITheme) => createStyles({
+    resetButton: {
+        backgroundColor: theme.palette.third.main,
+        color: theme.palette.third.contrastText,
+    },
+});
 
 export default Filter;

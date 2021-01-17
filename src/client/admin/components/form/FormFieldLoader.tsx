@@ -8,21 +8,20 @@ import CustomTextInput from "./CustomTextInput";
 import ImageUploader from "./ImageUploader";
 import SelectField from "./SelectField";
 import WYSIWYG from "./WYSIWYG";
-import WYSIWYG2 from "./WYSIWYG2";
 
 class FormFieldLoader extends React.Component<IFormFieldLoaderProps> {
 
     render() {
-        let component = null;
-        let children = null;
+        let component = null; // component that will render
+        let children = null; // component children items
 
-        switch (this.props.item.type) {
+        switch (this.props.item.type) { // load the component by item type
             case "text":
             case "number":
                 component = CustomTextInput;
                 break;
             case "wysiwyg":
-                component = WYSIWYG2;
+                component = WYSIWYG;
                 break;
             case "switch":
                 component = CustomSwitch;

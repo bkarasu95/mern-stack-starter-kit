@@ -25,6 +25,7 @@ export const localeEN: Language = {
     dataNotFound: "Data Not Found",
     recordDeleted: ":data Deleted",
     countRecordsFound: ":count Record Found",
+    actions: "Actions",
     fetching: "Data Fetching"
   },
   db: {

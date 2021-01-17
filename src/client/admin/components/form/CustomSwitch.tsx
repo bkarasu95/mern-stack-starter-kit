@@ -1,15 +1,7 @@
-// MyCustomInput.js
 import { Switch, SwitchProps } from "@material-ui/core";
 import React from "react";
-import {
-  FieldItem,
-  IFieldItemState,
-} from "../../../../../@types/client/admin/form";
-
-class CustomSwitch extends React.Component<
-  SwitchProps & ICustomSwitchProps & FieldItem,
-  IFieldItemState
-  > {
+import { FieldItem, IFieldItemState, IReduxFormProps } from "../../../../../@types/client/admin/form";
+class CustomSwitch extends React.Component<SwitchProps & IReduxFormProps & FieldItem, IFieldItemState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,13 +12,13 @@ class CustomSwitch extends React.Component<
     const {
       input: { onChange },
     } = this.props;
-    onChange(this.state.value);
+    onChange(this.state.value); // required for redux-form handler
   }
-  handleChange(e) {
+  handleChange() {
     const {
       input: { onChange },
     } = this.props;
-    onChange(!this.state.value);
+    onChange(!this.state.value);  // required for redux-form handler
     this.setState({ value: !this.state.value });
   }
   render() {
@@ -40,15 +32,12 @@ class CustomSwitch extends React.Component<
               ? this.state.value
               : this.state.value == "true"
           }
-          onChange={(e) => this.handleChange(e)}
+          onChange={() => this.handleChange()}
         />
       </>
     );
   }
 }
 
-interface ICustomSwitchProps {
-  input?: any;
-}
 
 export default CustomSwitch;

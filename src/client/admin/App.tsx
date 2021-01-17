@@ -1,14 +1,12 @@
-import { AxiosResponse } from "axios";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { store } from ".";
-import { IUser } from "../../../@types/common/user";
+import { IPanelUser } from './../../../@types/client/admin/user.d';
 import ApiRequest from "./libraries/ApiRequest";
 import Authenticated from "./pages/Authenticated";
 import LoginPage from "./pages/LoginPage";
 import { login } from "./store/authenticate/actions";
-import { IPanelUser } from './../../../@types/client/admin/user.d';
 
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props: IAppProps) {
@@ -37,13 +35,9 @@ class App extends React.Component<IAppProps, IAppState> {
           <div className="min-vh-100 d-flex">
             {this.props.user == null ? <Redirect to="/" /> : null}
             <Switch>
-              {this.props.user == null ? (
-                <Route exact path="/" component={LoginPage} />
-              ) : (
-                  <>
-                    <Route exact path="/*" component={Authenticated} />
-                  </>
-                )}
+              {this.props.user == null ?
+                (<Route exact path="/" component={LoginPage} />) :
+                (<Route exact path="/*" component={Authenticated} />)}
             </Switch>
           </div>
         )}

@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import { InputLabel, MenuItem, Select } from "@material-ui/core";
 import React from "react";
 
 // TODO make ts compatible

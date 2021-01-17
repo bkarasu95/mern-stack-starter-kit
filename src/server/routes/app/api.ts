@@ -3,7 +3,6 @@ import cors from 'cors';
 import * as dotenv from "dotenv";
 import express from "express";
 import helmet from 'helmet';
-
 import ProductController from "../../http/controllers/app/api/ProductController";
 import { errorHandler } from '../../http/middlewares/api/error.middleware';
 import { notFoundHandler } from '../../http/middlewares/api/notFound.middleware';

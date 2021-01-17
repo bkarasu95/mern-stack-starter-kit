@@ -9,7 +9,7 @@ class DataTableFooter extends React.Component<IDataTableFooterProps>{
         const paginationButtonCount = Math.ceil(this.props.dataCount / this.props.limit);
         return (
             <TableFooter>
-                {this.props.fetching ? (
+                {this.props.fetching ? ( /** only show the fetching text when data fetching from server */
                     <TableRow>
                         <TableCell>
                             <strong>{trans('resource.fetching')}</strong>
@@ -27,7 +27,7 @@ class DataTableFooter extends React.Component<IDataTableFooterProps>{
                                             <Select value={this.props.limit} style={{ width: "100%" }} onChange={(e) => {
                                                 const selectedLength = parseInt(e.target.value.toString());
                                                 if (this.props.limit !== selectedLength) {
-                                                    this.props.dataLengthChange(selectedLength);
+                                                    this.props.dataLengthChange(selectedLength); // trigger the length change event for parent component
                                                 }
                                             }}>
                                                 <MenuItem value="30" key="30">30</MenuItem>

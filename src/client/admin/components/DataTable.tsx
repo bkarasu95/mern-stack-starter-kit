@@ -15,14 +15,14 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
     super(props);
     this.state = {
       items: [],
-      fetching: true,
-      requestParams: {
-        limit: 30,
-        start: 0,
-        orderBy: null
+      fetching: true, // data fetching state from server
+      requestParams: { // request to server params
+        limit: 30, // data limit
+        start: 0, // data skip
+        orderBy: null // data order by
       },
-      dataCount: null,
-      deleteResult: null,
+      dataCount: null, // total data from server (not only limitted data count)
+      deleteResult: null, // data delete result
       currentPage: 1
     };
   }
@@ -35,7 +35,7 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
   }
   handlePageChange = (page: number) => { // handle the page change, it is getting from footer.
     let newParams = this.state.requestParams;
-    newParams.start = (page - 1) * this.state.requestParams.limit;
+    newParams.start = (page - 1) * this.state.requestParams.limit; // you should use page - 1 for better accurate
     this.setState({ requestParams: newParams, currentPage: page })
     this.getData();
   }
@@ -47,16 +47,16 @@ class DataTable extends React.Component<IDataTableProps, IDataTableState>{
   }
 
   componentDidUpdate(prevProps: IDataTableProps) {
-    if (prevProps.resourceURL !== this.props.resourceURL || prevProps.filters.fields !== this.props.filters.fields) {
+    if (prevProps.resourceURL !== this.props.resourceURL || prevProps.filters.fields !== this.props.filters.fields) { // check these for preventing unnecessary data getting
       if (this.props.filters.fields !== null) {
         let newParams = this.state.requestParams;
-        newParams.start = 0;
-        this.setState({ requestParams: newParams })
-        let search = "";
+        newParams.start = 0; // if the filter is set, reset the page state 
+        this.setState({ requestParams: newParams, currentPage: 1 });
+        let search = ""; // request search param
         this.props.filters.fields.map((filter: IFilter, index: number) => {  // convert the server compatible query
           search += filter.name + "=" + filter.value;
           if (this.props.filters.fields.length !== 1 && index < this.props.filters.fields.length - 1) {
-            search += ",";
+            search += ","; // seperate the fields
           }
         })
         let newRequestParams = this.state.requestParams;

@@ -22,21 +22,12 @@ server.use("/admin", adminWebRouter);
 server.use("/api", appApiRouter);
 server.use("/*", appWebRouter);
 
-// Database connection
-mongoose
-  .connect(
-    "mongodb://" +
-    process.env.DB_HOST +
-    ":" +
-    process.env.DB_PORT +
-    "/" +
-    process.env.DB_DATABASE,
-    {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    }
-  )
+// MongoDB Database connection
+mongoose.connect("mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT + "/" + process.env.DB_DATABASE, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+})
   .catch((err) => {
     console.log("DB Connection Error: " + err.message);
   });

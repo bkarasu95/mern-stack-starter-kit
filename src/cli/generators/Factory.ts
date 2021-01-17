@@ -8,9 +8,9 @@ export const builder = {
     }
 }
 
-export const handler = function (argv) {
+export const handler = function (argv: { name: string; }) { // argv gets from yargs
     const factoryPath = './src/server/database/factories/';
-    const factoryName = argv.name.charAt(0).toUpperCase() + argv.name.slice(1); // seed that will create
+    const factoryName = argv.name.charAt(0).toUpperCase() + argv.name.slice(1); // factory that will create
     const template = `
 import * as faker from "faker";
 import { BaseFactory } from "./BaseFactory";
@@ -30,6 +30,6 @@ export default ${factoryName};
         flag: 'wx'
     }, function (err) {
         if (err) return console.log(err);
-        console.log(factoryName + " command created");
+        console.log(factoryName + " factory created");
     });
 }

@@ -9,7 +9,7 @@ export function login(user: Authenticate): AuthenticateActionTypes {
 }
 
 export function logout(): AuthenticateActionTypes {
-  // TODO expire the token
+  // TODO expire the token on server side
   localStorage.removeItem("admin:accessToken");  
   return {
     type: LOG_OUT,

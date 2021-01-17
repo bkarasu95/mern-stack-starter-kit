@@ -26,6 +26,7 @@ export const localeTR: Language = {
     dataNotFound: "Veri Bulunamadı",
     recordDeleted: ":data Silindi",
     countRecordsFound: ":count Kayıt Bulundu",
+    actions: "Aksiyonlar",
     fetching: "Veri Getiriliyor..."
   },
   db: {

@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { IReduxUserProps } from "../../../../@types/client/admin/pages";
 import ResourceRoute from "../components/ResourceRoute";
-import HomePage from "../pages/HomePage";
+import Dashboard from "../pages/Dashboard";
 
+// main area of panel, you can define your routes in here, and define your component in this route.
 class Content extends React.Component<IReduxUserProps> {
   render() {
     const styles: CSSProperties = {
@@ -19,7 +20,7 @@ class Content extends React.Component<IReduxUserProps> {
           <ResourceRoute link="products" />
           <ResourceRoute link="logs" />
           <Switch>
-            <Route path="/dashboard" component={HomePage} />
+            <Route path="/dashboard" component={Dashboard} />
           </Switch>
         </Row>
       </>

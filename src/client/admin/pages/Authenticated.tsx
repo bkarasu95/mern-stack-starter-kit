@@ -14,12 +14,12 @@ import { IAuthenticatedPageProps } from './../../../../@types/client/admin/pages
 import { setTheme } from './../store/theme/actions';
 class Authenticated extends React.Component<RouteConfigComponentProps<{}> & IAuthenticatedPageProps> {
   componentDidMount() {
-    store.dispatch(setTheme(localStorage.getItem("admin:theme") === "dark" ? "dark" : "light")) // TODO fix this issue
+    store.dispatch(setTheme(localStorage.getItem("admin:theme") === "dark" ? "dark" : "light"))
   }
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.props.result.showed) {
-        store.dispatch(clearResult()) // TODO fix this issue
+        store.dispatch(clearResult()) // remove the ResultMessageBox
       }
     }
   }
@@ -29,8 +29,6 @@ class Authenticated extends React.Component<RouteConfigComponentProps<{}> & IAut
       padding: "20px 10px"
     };
     return (
-      // TODO add redirect support via redux
-
       typeof this.props.theme.palette !== "undefined" &&
       <ThemeProvider theme={this.props.theme}>
         <CssBaseline />

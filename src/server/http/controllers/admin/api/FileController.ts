@@ -8,9 +8,7 @@ class FileController {
             let fileValue: Express.Multer.File = Object.values(req.files)[0];
             if (typeof fileValue != "undefined") {
                 const fileURL = fileValue.path.replace(fileSystem.uploadPath, fileSystem.assetUrl);
-                res.setMessage("Image uploaded").customResponse({
-                    "url": fileURL
-                });
+                res.setMessage("Image uploaded").customResponse({ "url": fileURL });
             } else {
 
             }

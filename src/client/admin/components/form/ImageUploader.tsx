@@ -1,10 +1,9 @@
 import { StyledComponentProps, withStyles } from "@material-ui/core";
 import React from "react";
+import { IReduxFormProps } from "../../../../../@types/client/admin/form";
+import { ITheme } from "../../../../../@types/client/admin/theme";
 
-class ImageUploader extends React.Component<
-  IImageUploaderProps & StyledComponentProps,
-  IImageUploaderState
-> {
+class ImageUploader extends React.Component<IReduxFormProps & StyledComponentProps> {
   fileObj = [];
   fileArray = [];
 
@@ -13,16 +12,16 @@ class ImageUploader extends React.Component<
     this.uploadMultipleFiles = this.uploadMultipleFiles.bind(this);
   }
 
-  uploadMultipleFiles(e) {
+  uploadMultipleFiles(e: React.ChangeEvent<HTMLInputElement>) {
     this.fileObj = [];
-    this.fileArray = [];
+    this.fileArray = []; // preview images
     this.fileObj.push(e.target.files);
     for (let i = 0; i < this.fileObj[0].length; i++) {
       this.fileArray.push(URL.createObjectURL(this.fileObj[0][i])); // image preview
     }
   }
 
-  openFileDialog() {
+  openFileDialog() { // default file dialog
     document.getElementById("upload-images").click();
   }
 
@@ -52,28 +51,17 @@ class ImageUploader extends React.Component<
             <img src={url} alt="..." key={key} />
           ))}
         </div>
-
         <div className="form-group">
-          {/* <label>{this.props.lab}</label> */}
-          <div
-            id="btnUploadImage"
-            style={buttonStyle}
-            className={this.props.classes.imageUploader}
-            onClick={this.openFileDialog}
-          >
+          <div style={buttonStyle} className={this.props.classes.imageUploader} onClick={this.openFileDialog}>
             Resim Yükleyin
           </div>
 
           <div style={inputStyle}>
-            <input
-              id="upload-images"
-              type="file"
-              className="form-control"
+            <input id="upload-images" type="file" className="form-control" multiple
               onChange={(e) => {
                 this.uploadMultipleFiles(e);
                 onChange(e.target.files);
               }}
-              multiple
             />
           </div>
         </div>
@@ -82,13 +70,7 @@ class ImageUploader extends React.Component<
   }
 }
 
-interface IImageUploaderProps {
-  input?: any;
-}
-
-interface IImageUploaderState {}
-
-const styles = (theme) => ({
+const styles = (theme: ITheme) => ({
   imageUploader: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
