@@ -2,7 +2,7 @@
 
 This is starter kit that helps the quick start to developing small-medium sized content based web apps. I just added some basic dependencies for MERN stack development with Typescript. More detailed documentation explained in docs folder about how to system works and file structures.
 
-**Caution:** This project hasn't finished yet. So some features may be buggy.
+**Caution:** This project isn't fully completed. So some features may be buggy. You can send pull request and fix the bugs.
 
 Additional integrations are provided:
 
@@ -12,35 +12,44 @@ Additional integrations are provided:
 * React Redux
 * CLI
 
-Install all dependencies
+Some extra features:
 
-```shellscript
+* Database Seeding
+* Theme Supported Admin Panel (CMS)
+* Securing API and error logging
+* Multi Language Support
+
+## Installation
+
+1. Install all dependencies
+
+    ```shellscript
     npm install  
-```
+    ```
 
-Required npm packages globally for every environments:
+1. Required npm packages globally for every environments:
 
-1. migrate-mongo - migrating data for mongodb
-2. pm2 - deploying nodejs application
+   * migrate-mongo - migrating data for mongodb
+   * pm2 - deploying nodejs application
 
-For development environment, we use some npm packages globally that helps the development:
+    For development environment, we use some npm packages globally that helps the development:
 
-1. nodemon
+   * nodemon
 
-Migrate the database:
+1. Copy the .env.example file to .env and set your environment variables.
 
-```shellscript
+1. (OPTIONAL) Migrate the database:
+
+    ```shellscript
     migrate-mongo up
-```
+    ```
 
-Copy the .env.example file to .env and set your environment variables.
-
-## DEVELOPMENT
+## Development
 
 You can easily start the web app. Start the listeners
 
 ```shellscript
-    npm run dev  
+npm run dev  
 ```
 
 ## CLI
@@ -50,43 +59,37 @@ This kit includes its cli system.
 You may execute with:
 
 ```shellscript
-    node cli <command>
+node cli <command>
 ```
 
 To view a list of all available commands, you may use the list command:
 
 ```shellscript
-    node cli --help
+node cli --help
 ```
 
 You may generate your own commands. For more detail, see the cli.md file in docs folder.
 
-## DEPLOYMENT
+## Deployment
 
-Run the build command
+1. (OPTIONAL) If you will deploy on production environment, set your NODE_ENV as production in .env file.
 
-```shellscript
+2. Run the build command
+
+    ```shellscript
     npm run build
-```
+    ```
 
-This will generate the js files for both client and server side separately.
+    This will generate the js files for both client and server side separately.
 
-You can start the pm2 at the project's root directory:
+3. You can start the pm2 at the project's root directory:
 
-```shellscript
+    ```shellscript
     pm2 start
-```
+    ```
 
 ## Roadmap
 
 Project is close to completion, but I have some plans for better development.
 
-* ~~Database Seeding System~~
-* Changable Language System -- canceled
 * Testing Tools integrations and samples
-* ~~Error,system etc. logging and showing in admin panel~~
-* App monitoring in admin panel -- canceled
-* ~~Content Editor and Dynamic and Configurable Forms~~
-* ~~Admin Full Theme Support~~
-* SEO support for contents -- canceled
-* Thumbnail Image Making
