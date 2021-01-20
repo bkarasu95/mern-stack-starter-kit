@@ -16,7 +16,7 @@ Some extra features:
 
 * Database Seeding
 * Theme Supported Admin Panel (CMS)
-* Securing API and error logging
+* Entry Level Secured API and Error Logging
 * Multi Language Support
 
 ## Installation
