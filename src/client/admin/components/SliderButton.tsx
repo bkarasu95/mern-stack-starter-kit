@@ -10,7 +10,7 @@ class SliderButton extends React.Component<ISliderButtonProps, ISliderButtonStat
     constructor(props) {
         super(props);
         this.state = {
-            activeButton: props.currentPage
+            activeButton: props.activeButton
         }
     }
     render() {

@@ -41,10 +41,10 @@ export interface IDataTableBodyProps extends IDataTableComponentProps {
 }
 export interface IDataTableFooterProps extends IDataTableComponentProps {
     dataCount: number // fetched data count
-    limit: number
+    limit: number // limit the fetch data
     currentPage: number // current data page
-    pageChange: (count: number) => void
-    dataLengthChange: (length: number) => void
+    pageChange: (count: number) => void // handle the page change
+    dataLengthChange: (length: number) => void // handle the limit change
 }
 
 export interface IConfirmationDialogProps {
@@ -58,40 +58,35 @@ export interface IFormFieldLoaderProps {
     style?: React.CSSProperties // component style
 }
 
-export interface ISelectFieldState {
-    value?: any
-}
-
 export interface IResourceRoute {
     link: string
     serverResource?: string
 }
 
 export interface ISliderButtonProps {
-    buttonCount: number
-    buttonClickHandler: (page: number) => void
-    currentPage: number
+    buttonCount: number // total button count
+    buttonClickHandler: (page: number) => void // handle the click for every button
+    activeButton: number // current button
 }
 export interface ISliderButtonState {
-    activeButton: number
+    activeButton: number // current button, it can manipulated by its props.
 }
 
 interface IMenuItemProps {
     item: ISidebarElementProps
 }
 
-
 export interface INestedListProps {
     items: Array<ISidebarElementProps>
 }
 
 export interface ISidebarElementProps {
-    name: string
-    label: string
-    url?: string
-    children?: Array<ISidebarElementProps> // change it
+    name: string // unique name of element
+    label: string // this will show on ui 
+    url?: string // page url
+    children?: Array<ISidebarElementProps> // children elements
 }
 
 interface IMultiLevelState {
-    opened: boolean
+    opened: boolean // is dropdown opened
 }

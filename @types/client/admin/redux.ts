@@ -1,4 +1,4 @@
-import { FilterField, IFilter } from "./form";
+import { IFilter } from "./form";
 
 export const SERVER_RESULT = "server_result";
 export const CLEAR_RESULT = "clear_result";
@@ -22,12 +22,12 @@ export interface Message {
     showed: boolean
 }
 
-export interface ServerResult {
+export interface ServerResult { // server result for result message box
     type: typeof SERVER_RESULT;
     payload: Message;
 }
 
-export interface ClearResult {
+export interface ClearResult { // clear the result for result message box
     type: typeof CLEAR_RESULT;
     payload: Message;
 }

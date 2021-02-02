@@ -36,7 +36,7 @@ class DataTableFooter extends React.Component<IDataTableFooterProps>{
                                             </Select>
                                         </Grid>
                                         <Grid item md={10} container justify="flex-end">
-                                            <SliderButton currentPage={this.props.currentPage} buttonClickHandler={(page) => { this.props.pageChange(page) }} buttonCount={paginationButtonCount} />
+                                            <SliderButton activeButton={this.props.currentPage} buttonClickHandler={(page) => { this.props.pageChange(page) }} buttonCount={paginationButtonCount} />
                                         </Grid>
                                     </Grid>
                                 </Grid>
