@@ -70,9 +70,9 @@ You can generate your own commands. For more detail, see the cli.md file in docs
 
 ## Deployment
 
-1. (OPTIONAL) If you will deploy on production environment, set your NODE_ENV as production in .env file.
+1. (OPTIONAL) If you will deploy on production environment, set your NODE_ENV to "production" in .env file.
 
-2. Run the build command
+1. Run the build command
 
     ```shellscript
     npm run build
@@ -80,7 +80,7 @@ You can generate your own commands. For more detail, see the cli.md file in docs
 
     This will generate the js files for both client and server side separately.
 
-3. You can start the pm2 at the project's root directory:
+1. You can start the pm2 at the project's root directory:
 
     ```shellscript
     pm2 start

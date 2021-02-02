@@ -39,6 +39,13 @@ class FilterFormFooter extends React.Component<StyledComponentProps>{
     }
 }
 
+const styles = (theme: ITheme) => createStyles({
+    resetButton: {
+        backgroundColor: theme.palette.third.main,
+        color: theme.palette.third.contrastText,
+    },
+});
+
 const HOCFilterFormFooter = withStyles(styles)(FilterFormFooter); // themed Filter Footer
 
 
@@ -97,12 +104,5 @@ class Filter extends React.Component<IFilterProps, IFilterState>{
         );
     }
 }
-
-const styles = (theme: ITheme) => createStyles({
-    resetButton: {
-        backgroundColor: theme.palette.third.main,
-        color: theme.palette.third.contrastText,
-    },
-});
 
 export default Filter;
