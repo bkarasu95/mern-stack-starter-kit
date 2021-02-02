@@ -53,7 +53,7 @@ adminApiRouter.use(helmet());
 adminApiRouter.use(cors());
 adminApiRouter.use(bodyParser.json());
 
-adminApiRouter.post("/login", AuthController.login);
+adminApiRouter.post("/login", AuthController.login.bind(AuthController));
 adminApiRouter.get("/auth-token", AuthController.getUserByToken);
 
 
