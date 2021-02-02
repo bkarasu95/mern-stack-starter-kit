@@ -1,6 +1,6 @@
 # MERN Stack Web App Starter Kit
 
-This is starter kit that helps the quick start to developing small-medium sized content based web apps. I just added some basic dependencies for MERN stack development with Typescript. More detailed documentation explained in docs folder about how to system works and file structures.
+This is starter kit that helps the quick start to developing small-medium sized content based web apps. I included only some basic dependencies for MERN stack development with Typescript. More detailed documentation explained in docs folder about how to system works and file structures.
 
 **Caution:** This project isn't fully completed. So some features may be buggy. You can send pull request and fix the bugs.
 
@@ -16,7 +16,7 @@ Some extra features:
 
 * Database Seeding
 * Theme Supported Admin Panel (CMS)
-* Securing API and error logging
+* Entry Level Secured API and Error Logging
 * Multi Language Support
 
 ## Installation
@@ -56,8 +56,6 @@ npm run dev
 
 This kit includes its cli system.
 
-You may execute with:
-
 ```shellscript
 node cli <command>
 ```
@@ -68,7 +66,7 @@ To view a list of all available commands, you may use the list command:
 node cli --help
 ```
 
-You may generate your own commands. For more detail, see the cli.md file in docs folder.
+You can generate your own commands. For more detail, see the cli.md file in docs folder.
 
 ## Deployment
 
