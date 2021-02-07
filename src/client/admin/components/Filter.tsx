@@ -19,6 +19,7 @@ class FilterFormFooter extends React.Component<StyledComponentProps>{
         return (
             <>
                 <Grid >
+                    {/* TODO reset the filter fields */}
                     <Button type="button" style={submitStyle} variant="contained" className={this.props.classes.resetButton}
                         onClick={(): void => {
                             store.dispatch(setFilter({ fields: [] }));

@@ -1,5 +1,6 @@
 import { FieldItem, FilterField, IListActions } from "./form";
 import { Message } from "./redux";
+import { ITheme } from "./theme";
 import { IPanelUser } from './user.d';
 
 export interface ILoginPageProps { }
@@ -15,7 +16,7 @@ export interface ILoginPageState {
 
 export interface IAuthenticatedPageProps {
   result: Message | null
-  theme: any
+  theme: ITheme
 }
 
 export interface ICrudPageProps {

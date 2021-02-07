@@ -31,7 +31,7 @@ export const errorHandler = (error: HttpException, request: Request, response: R
         statusCode: status,
         endpoint: request.originalUrl,
         type: "rest",
-        status: "error",
+        status: status === 422 ? "warning" : "error",
         createdAt: new Date()
     })
     return response.status(status).setMessage(message).customResponse(data);

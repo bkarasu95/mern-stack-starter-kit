@@ -65,15 +65,17 @@ adminApiRouter.route("/products/list").get(ProductController.all);
 adminApiRouter.route("/products/create").get(ProductController.create);
 adminApiRouter.route("/products/:id/edit").get(ProductController.edit);
 adminApiRouter.route("/products/:id")
-  .get(ProductController.show)
+  .get(ProductController.detail)
   .put(upload.any(), ProductController.validate("update"), ProductController.update)
   .delete(ProductController.delete);
 adminApiRouter.route("/products")
   .get(ProductController.list)
   .post(upload.any(), ProductController.validate("create"), ProductController.insert);
 
-adminApiRouter.route("/logs").get(LogController.list);
 adminApiRouter.route("/logs/list").get(LogController.all);
+adminApiRouter.route("/logs/:id").get(LogController.detail);
+adminApiRouter.route("/logs").get(LogController.list);
+
 adminApiRouter.route("/admin-menu").get(AdminMenuController.getList);
 /**
  * After Middleware

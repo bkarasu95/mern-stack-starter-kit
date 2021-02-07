@@ -15,6 +15,8 @@ class SliderButton extends React.Component<ISliderButtonProps, ISliderButtonStat
     }
     render() {
         let paginationButtons = [];
+        // TODO previous button 1 ... 4 5 not working
+        // TODO handle the page length change active button
         for (let i = 1; i <= this.props.buttonCount; i++) {
             switch (i) {
                 case this.state.activeButton:

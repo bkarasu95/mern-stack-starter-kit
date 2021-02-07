@@ -21,13 +21,9 @@ class DataTableBody extends React.Component<IDataTableBodyProps & StyledComponen
                                 <>
                                     {this.props.fields.map((field, index) => {
                                         return (
-                                            <>
-                                                {item[field] != null && !Array.isArray(item[field]) && typeof item[field] !== "object" ? ( /** check the header field is really exists on data, if it is not, dont render this field */
-                                                    <TableCell key={index} align="center" className={key % 2 === 0 ? this.props.classes.row : null}>
-                                                        {item[field]}
-                                                    </TableCell>
-                                                ) : null}
-                                            </>
+                                            <TableCell key={index} align="center" className={key % 2 === 0 ? this.props.classes.row : null}>
+                                                {item[field] != null && !Array.isArray(item[field]) && typeof item[field] !== "object" && item[field]}
+                                            </TableCell>
                                         );
                                     })}
                                     <TableCell align="center" size="small" padding="none">

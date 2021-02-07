@@ -9,6 +9,7 @@ import "../../../../libraries/ApiResponse";
 import { Product } from "../../../../models/product.model";
 import ModelService from "../../../../services/ModelService.service";
 import ResourceController from "./ResourceController";
+import { IShowProperties } from './../../../../../../@types/server/admin/resource.d';
 
 class ProductController extends ResourceController {
 
@@ -74,8 +75,23 @@ class ProductController extends ResourceController {
       ]
     }
   }
-  show(): void {
-    throw new Error("Method not implemented.");
+  show(): IShowProperties {
+    return {
+      items: [
+        {
+          name: "name",
+          type: "text",
+        },
+        {
+          name: "slug",
+          type: "text",
+        },
+        {
+          name: "price",
+          type: "text",
+        }
+      ]
+    }
   }
 
   processImages(req: Request): Array<IProductImage> {

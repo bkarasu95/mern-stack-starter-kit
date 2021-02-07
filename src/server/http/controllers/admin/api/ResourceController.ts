@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { IFormProperties, IGridProperties } from "../../../../../../@types/server/admin/resource";
+import { IFieldItem, IFormProperties, IGridProperties, IShowProperties } from "../../../../../../@types/server/admin/resource";
 import HttpException from "../../../../exceptions/api/http-exception";
 import { toURLConverter } from "../../../../helpers/route";
 import ModelService from "../../../../services/ModelService.service";
@@ -144,6 +144,31 @@ abstract class ResourceController {
         }
     };
 
+    detail = async (req: Request, res: Response, next: NextFunction) => {
+        let fields = this.show();
+        let selectFields: string[] = [];
+        fields.items.forEach((item: IFieldItem) => {
+            selectFields.push(item.name);
+        })
+        try {
+            const model = await this.service.find({ _id: req.params.id }, selectFields);
+            if (model.length === 0) {
+                throw new HttpException(400, "Record Not Found");
+            }
+            fields.items.map((item: IFieldItem) => {
+                if (item.type === "object") {
+                    item.initialValue = JSON.stringify(model[item.name])
+                } else {
+                    item.initialValue = model[item.name]
+                }
+                return item;
+            })
+            res.setMessage("Show Page Properties").customResponse({ items: fields.items, title: this.title, resource: this.serviceURL });
+        } catch (e) {
+            next(e);
+        }
+    };
+
     edit = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const data = await this.service.find({ _id: req.params.id });
@@ -169,7 +194,7 @@ abstract class ResourceController {
 
     abstract form(): IFormProperties;
 
-    abstract show(): void;
+    abstract show(): IShowProperties;
 
     /**
      * TODO make a structure that can impelemetable

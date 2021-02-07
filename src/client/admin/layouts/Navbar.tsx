@@ -10,26 +10,18 @@ import { setTheme } from './../store/theme/actions';
 import { connect } from "react-redux";
 
 class Navbar extends React.Component<INavbarProps, INavbarState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      darkTheme: localStorage.getItem("admin:theme") === "dark" ? "dark" : "light"
-    }
-  }
   handleLogout() {
     store.dispatch(logout()); // trigger the admin logout
   }
 
   handleThemeChange() {
-    const theme = this.state.darkTheme === "dark" ? "light" : "dark";
-    this.setState({ darkTheme: theme });
-    store.dispatch(setTheme(theme))
+    store.dispatch(setTheme(this.props.theme.palette.type === "dark" ? "light" : "dark"))
   };
   render() {
     return (
       <nav style={this.props.style}>
         <Button onClick={this.handleThemeChange.bind(this)}>
-          {this.state.darkTheme === "dark" ? <DarkThemeIcon /> : <LightThemeIcon />}
+          {this.props.theme.palette.type === "dark" ? <DarkThemeIcon /> : <LightThemeIcon />}
         </Button>
         <Button onClick={this.handleLogout}>{trans("forms.logout")}</Button>
       </nav>

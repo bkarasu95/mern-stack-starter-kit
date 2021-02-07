@@ -31,7 +31,7 @@ class ModelService {
      * @param where 
      * @param select 
      */
-    find = (where?: any, select?: any): DocumentQuery<any, any, {}> => {
+    find = (where?: any, select?: Array<string>): DocumentQuery<any, any, {}> => {
         where['deletedAt'] = { $eq: null };
         const item = this.model.findOne(where, select, (error: Error) => {
             if (error) {

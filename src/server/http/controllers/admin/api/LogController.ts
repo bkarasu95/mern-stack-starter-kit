@@ -3,6 +3,7 @@ import "../../../../libraries/ApiResponse";
 import ModelService from "../../../../services/ModelService.service";
 import { Log } from './../../../../models/logs.model';
 import ResourceController from "./ResourceController";
+import { IShowProperties } from './../../../../../../@types/server/admin/resource.d';
 
 class LogController extends ResourceController {
     protected serviceURL: string = "logs";
@@ -23,8 +24,27 @@ class LogController extends ResourceController {
     form(): IFormProperties {
         throw new Error("Method not implemented.");
     }
-    show(): void {
-        throw new Error("Method not implemented.");
+    show(): IShowProperties {
+        return {
+            items: [
+                {
+                    name: "type",
+                    type: "text",
+                },
+                {
+                    name: "createdAt",
+                    type: "text",
+                },
+                {
+                    name: "endpoint",
+                    type: "text",
+                },
+                {
+                    name: "log",
+                    type: "object",
+                }
+            ]
+        }
     }
     /**
       * 

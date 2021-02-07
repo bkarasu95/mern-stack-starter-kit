@@ -17,6 +17,7 @@ class Content extends React.Component<IReduxUserProps> {
     return (
       <>
         <Row style={styles}>
+          {/* TODO get the resources from server */}
           <ResourceRoute link="products" />
           <ResourceRoute link="logs" />
           <Switch>
